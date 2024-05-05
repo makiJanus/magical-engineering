@@ -1,0 +1,35 @@
+.ai-dialogue-container {
+    max-width: 800px;
+    margin: auto;
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.user-message {
+    background-color: #26292a3d;
+}
+
+.ai-message {
+    background-color: #26292a3d;
+}
+
+.message p {
+    margin: 0;
+}
+
+.message.user-message p {
+    margin-left: 20px;
+}
+
+.message.ai-message p {
+    margin-right: 20px;
+}

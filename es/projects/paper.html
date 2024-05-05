@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es ">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Personal website about robotics, deep learning and philosophy" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Investigación publicada: Robótica móvil
+          autónoma</h1>
+        <p class="categories">
+          <span class="category">Investigación</span>
+          <span class="category">AI</span>
+          <span class="category">Robótica</span>
+        </p>
+
+        <h2 class="subtitle"><a
+            href="https://www.mdpi.com/2076-3417/12/17/8429">Investigación
+            Académica</a>
+          de una librería de Python para generar estrategias de navegación
+          para diferentes tipos
+          de robots móviles con Deep Reinforcement Learning en Nvidia
+          Isaac
+          Sim.</h2>
+        <h3 class="under-subtitle-link"><a
+            href="https://www.mdpi.com/2076-3417/12/17/8429">¡Lee el artículo
+            aquí!</a></h3>
+
+        <img class="gif" src="/src/project_posts/project1/DQN-Gif.gif"
+          alt="Isaac Sim Deep Learning simmulation with Kaya">
+        <h3>El Problema</h3>
+        <p>Los robots móviles están volviéndose cada vez más populares para
+          diversas aplicaciones personales e industriales. Para desarrollar y
+          probar estos robots, los ingenieros a menudo confían en simuladores
+          avanzados de robots como Isaac Sim, que ofrecen gráficos de alta
+          calidad y simulaciones realistas. Sin embargo, cuando se trata de
+          entrenar robots móviles utilizando deep reinforcement learning puede
+          ser desafiante y consumir mucho
+          tiempo, especialmente cuando se diseñan experimentos
+          personalizados. Este proceso generalmente requiere una comprensión
+          profunda de múltiples bibliotecas y APIs para garantizar que se
+          utilicen juntas correctamente.</p>
+
+        <p>En este estudio, propongo una solución para abordar estas
+          dificultades
+          creando una librería fácil de usar. Simplificando el proceso de
+          configuración para crear robots, entornos y escenarios de
+          entrenamiento, reduciendo significativamente el tiempo dedicado a la
+          programación. Cada método desarrollado en esta librería corresponde
+          a un máximo de sesenta y cinco líneas de código, o incluso, tan solo
+          cinco líneas. Al aprovechar esta biblioteca, los investigadores y
+          profesionales pueden ahorrar tiempo valioso durante los experimentos
+          simulados y la recolección de datos. En consecuencia, este enfoque
+          acelera la producción y prueba de algoritmos efectivos para robots
+          móviles tanto en entornos industriales como personales.</p>
+
+        <img src="/src/project_posts/project1/isaac_assets.png"
+          alt="Isaac Sim robots and environments">
+
+        <h3>Haciendo el proceso más rápido y fácil</h3>
+        <p>La solución presentada se centra en la composición e integración de
+          diversas tecnologías para agilizar el proceso de entrenamiento. Se
+          emplearon múltiples herramientas como componentes fundamentales en
+          este proceso. Una de las más importantes es Isaac Sim, un simulador
+          fotorrealista impulsado por el motor de física de Nvidia. Destaca como
+          uno de los simuladores más completos y avanzados disponibles para la
+          robótica en la actualidad, ganando cada vez más relevancia en la
+          industria. Este software ofrece una amplia variedad de robots y
+          entornos, así como una flexibilidad de software que permite la
+          creación de código personalizado para ejecutar dentro del simulador.
+          Para complementar estas capacidades, se utilizaron librerías de
+          Python como Gym y Stable Baselines 3 (SB3). Gym proporciona la
+          estructura del código de entrenamiento, mientras que SB3 ofrece
+          Agentes de Aprendizaje por Refuerzo Profundo como DQN o PPO,
+          permitiendo el uso de variables asociadas con estos agentes. Para la
+          creación de las Redes Neuronales, que actúan como el cerebro de los
+          agentes, se empleó PyTorch.</p>
+
+        <img src="/src/project_posts/project1/Complete-lib-diagramV3.png"
+          alt="Isaac Sim research diagram">
+
+        <h3>Detalles significativos</h3>
+        <p>La Red Neuronal utilizada aquí es multimodal, lo que significa que
+          toma múltiples entradas para aprender la estrategia navegación. Estas
+          entradas
+          incluyen la propiocepción (posición y velocidades del chasis del
+          robot), información del entorno (posición y orientación del objetivo)
+          e información de interacción en forma de datos RGB, RGB-D y/o Lidar.
+          La Red Neuronal produce dos valores de salida: velocidad lineal a lo
+          largo del eje X y velocidad angular a lo largo del eje Z del chasis
+          del robot.
+          Este diseño permite que la Red Neuronal se generalice tanto para la
+          locomoción diferencial (dos ruedas) como para la holonómica (tres
+          ruedas). Esta versatilidad mejora la reproducibilidad y acelera las
+          pruebas al buscar estrategias de navegación utilizando el Aprendizaje
+          Profundo por Refuerzo. Además, el proceso de entrenamiento se puede
+          realizar sin renderizar imágenes, lo que aumenta aún más la
+          velocidad de entrenamiento, y al ser fotorrealista, facilita el
+          traspaso de la red neuronal a los robots reales.</p>
+
+        <img src="/src/project_posts/project1/DH_draw.png"
+          alt="Isaac Sim robots and Kaya and Jetson">
+
+        <h3>Resultados de la investigación</h3>
+        <p>Se presenta un estudio de caso para resumir y explicar el
+          funcionamiento y las interacciones de los componentes de la biblioteca
+          con entidades externas. La configuración general del experimento
+          implica un robot diferencial Jetbot que actúa como agente, con una
+          escena personalizada que sirve como entorno y la función de
+          recompensa. Inicialmente, la pose del robot se aleatoriza y se genera
+          un nuevo mapa de obstáculos dentro de la escena (aunque también está
+          disponible un mapa de obstáculos fijo personalizado). Posteriormente,
+          se ejecuta la lógica y el comportamiento del entorno utilizando
+          funciones correspondientes, centrándose particularmente en las
+          velocidades de las ruedas del robot. El agente DQN de SB3 estima los
+          valores de recompensa para cada conjunto de acciones posibles, y se
+          selecciona una acción. El controlador diferencial luego traduce la
+          velocidad angular y lineal de la base del robot en movimientos de las
+          ruedas.</p>
+
+        <img src="/src/project_posts/project1/trayectories.png"
+          alt="Isaac Sim research outcome paths">
+
+        <p>Entre los pasos 800k y 1400k, la recompensa promedio muestra un
+          aumento significativo, lo que indica la progresión de la política
+          hacia un óptimo local. Sin embargo, esto por sí solo no es suficiente
+          para demostrar la capacidad del robot para navegar hacia el punto
+          objetivo. Para complementar este análisis, se considera la longitud
+          promedio del episodio. La disminución de esta
+          indica que el robot ha aprendido a llegar con éxito al objetivo,
+          confirmando así la adquisición de una estrategia de navegación.</p>
+
+        <img src="/src/project_posts/project1/DQN24V2.png"
+          alt="Isaac Sim research learning curves">
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>
