@@ -161,6 +161,9 @@ body {
 .project1 {
     background: url(/src/project_posts/project1/paper.png) center center/cover;
 }
+.project1V2 {
+    background: url(/src/project_posts/project1/trayectories.png) center center/cover;
+}
 
 /* Project 2 */
 .project2 {
