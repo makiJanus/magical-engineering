@@ -197,7 +197,7 @@ body {
 .project {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-auto-rows: minmax(500px, auto); */
+  grid-auto-rows: minmax(650px, auto);
   grid-gap: 0.9rem;
 }
 

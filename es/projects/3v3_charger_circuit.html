@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Personal website about robotics, deep learning and philosophy" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Hacer que todos los dispositivos 3v3 sean
+          recargables</h1>
+        <p class="categories">
+          <span class="category">Electrónica </span>
+        </p>
+
+        <h2 class="subtitle">Este es un circuito diseñado para cargar una
+          batería lipo de 3.7V y, si es necesario,
+          actuar como una fuente de alimentación, en ambos
+          casos la salida de voltaje es de 3.3V.</h2>
+        <h3 class="under-subtitle-link"><a
+            href="https://hackaday.io/project/171723-2020-make-every-3v3-device-rechargeable">¡Descarga
+            los archivos aquí!</a></h3>
+
+        <img class="gif" src="/src/project_posts/project4/circuit_eagle_3.png"
+          alt="Isaac Sim Deep Learning simmulation with Kaya">
+
+        <h3>El Circuito y Cómo Funciona</h3>
+        <p>Para este diseño, quería abordar los siguientes requisitos:</p>
+
+        <ol>
+          <li>Cargar una batería Li-Ion/Li-Po de 3.7V a un máximo de 4.2V por
+            medio de USB.</li>
+          <li>Poder utilizar un dispositivo con el circuito mientras está
+            recargando la batería.</li>
+          <li>El circuito debe tener una salida de 3.3V.</li>
+        </ol>
+
+        <p>El siguiente esquema es el circuito final:</p>
+
+        <img src="/src/project_posts/project4/circuit_eagle.png"
+          alt="Isaac Sim robots and environments">
+
+        <p>El corazón del diseño es el MCP73838, este circuito integrado es un
+          controlador de
+          gestión de carga de batería, el cual requiere algunos elementos
+          adicionales para
+          funcionar, el circuito de aplicación típico (disponible en la hoja de
+          datos) es:</p>
+
+        <img src="/src/project_posts/project4/mcp73838_typlical_application.png"
+          alt="Isaac Sim robots and environments">
+
+        <p>Dado que mi intención es cargar a través de USB, simplemente ignoré
+          toda la configuración de corriente alterna, o sea, el diodo doble con
+          cátodo común y la
+          conexión Vc; los pines 3 y 4 indican el estado actual del proceso de
+          carga y las fallas:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Modo</td>
+              <td>STAT 1 (Pin 3)</td>
+              <td>STAT 2 (Pin 2)</td>
+            </tr>
+            <tr>
+              <td>Espera</td>
+              <td>Alta Resistencia</td>
+              <td>Alta Resistencia</td>
+            </tr>
+            <tr>
+              <td>Preacondicionamiento</td>
+              <td>LOW</td>
+              <td>Alta Resistencia</td>
+            </tr>
+            <tr>
+              <td>Carga Rápida</td>
+              <td>LOW</td>
+              <td>Alta Resistencia</td>
+            </tr>
+            <tr>
+              <td>Carga Completa</td>
+              <td>Alta Resistencia</td>
+              <td>LOW</td>
+            </tr>
+            <tr>
+              <td>Fallo de Temperatura</td>
+              <td>Alta Resistencia</td>
+              <td>Alta Resistencia</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Como puedes ver, la información proporcionada por los LEDs puede ser
+          malinterpretada, como en el caso de "espera" y "fallo de temperatura",
+          pero es fácil ver en qué estado realmente se encuentra porque "espera"
+          ocurre cuando la batería no está conectada. En mi diseño, el pin STAT2
+          está conectado a un LED verde y el pin STAT1 está conectado a un LED
+          azul (¿por qué no rojo? No lo recuerdo, todavía me lo pregunto
+          xD).</p>
+
+        <p>El pin TE se establece en low para activar el temporizador de
+          seguridad integrado de cuatro, seis u ocho horas (dependiendo del
+          modelo) que pone al circuito integrado de carga en espera. El pin ROG2
+          también se
+          establece en bajo porque las funcionalidades de corriente alterna no
+          se utilizan.
+          PROG1 está conectado a una resistencia para establecer la corriente
+          que se suministra a la batería. En este caso, se seleccionó un valor
+          de 2K ohmios para proporcionar 500 mA (recomendado 0.5C de la
+          batería). La ecuación utilizada es la ecuación 4.1 disponible en la
+          hoja de datos:</p>
+
+        <p style="text-align: center;"><b><i> I<sub>REG</sub> =
+              1000V/R<sub>PROG</sub> </i></b></p>
+
+        <p>La otra parte del circuito está destinada a ser un sistema de
+          carga compartida (más información detallada está disponible en la
+          nota de aplicación, algunas imágenes presentadas son de ella). El VBUS
+          (suministro de voltaje desde el USB) debe suministrar la carga cuando
+          esté presente. Si no, la batería energiza la carga:</p>
+
+        <img src="/src/project_posts/project4/application_note_1.png"
+          alt="Isaac Sim robots and environments">
+
+        <p>Es importante seguir el esquema en la imagen anterior porque si
+          conectas la carga directamente a la batería, surge un problema muy
+          importante. El cargador de batería puede confundirse y seguir
+          recargando la batería incluso si ya está completamente cargada. Esto
+          es muy peligroso. El fenómeno ocurre porque el MCP73838 termina
+          automáticamente el proceso de carga en un valor de corriente
+          específico, no de tensión.</p>
+
+        <img src="/src/project_posts/project4/application_note_2.png"
+          alt="Isaac Sim robots and environments">
+
+        <p>Por lo tanto, se diseña un circuito basado en PMOS para evitar
+          cualquier problema de corriente:</p>
+        <img src="/src/project_posts/project4/circuit_eagle_2.png"
+          alt="Isaac Sim robots and environments">
+
+        <p>La compuerta PMOS se establece en 0V a través de una resistencia de
+          pull-down (R5). Esto asegura que el MOS se encienda cuando VBUS esté
+          ausente. En esta situación, la batería energiza la carga. Debido a que
+          el transistor no es ideal, tiene una caída de voltaje máxima de 1.1V
+          (típicamente 750mV). Este es uno de mis principales problemas porque
+          en el peor de los casos, el suministro de voltaje máximo para el
+          regulador de 3.3V es de 3.6V (3.95V máximo), pero en la
+          práctica nunca lo he notado. En el ejemplo mencionado, el dispositivo
+          funciona muy bien durante una semana o más hasta que se descarga (con
+          el ejemplo de la siguiente sección).
+          Continuando con el circuito, si el VBUS está a 5V (máximo 6V debido a
+          las especificaciones del sistema de gestión de baterías del circuito
+          integrado), el
+          PMOS se apaga y la carga es energizada por USB. El diodo
+          tiene un voltaje directo máximo de 520mV, por lo que el voltaje en el
+          pin IN del regulador de 3.3V es de 4.48V. Realmente no importa porque
+          es un voltaje constante. Otro factor por el cual este diodo es útil es
+          evitar un flujo de corriente desde la fuente hasta la compuerta o
+          desde VBATT hasta VBUS. Sin embargo, todavía hay una fuga de 50uA (en
+          el peor de los casos), lo que genera un voltaje a través de R5 de
+          500mV. Es un valor seguro porque no apaga el MOS. Finalmente, el
+          regulador de 3.3V tiene una caída de voltaje máxima de 400mV, por lo
+          que la entrada debe estar por encima de 3.7V (típicamente, es de
+          250mV, lo que implica un Vin de 3.55V). La corriente máxima permitida
+          es de 600mA, así que tenlo en cuenta si deseas utilizarlo.</p>
+
+        <h3>Ejemplo de Uso: Conversión de un Ratón Inalámbrico de 2.4MHz
+          Económico a Recargable</h3>
+        <p>Como ejemplo, se utiliza un ratón inalámbrico económico. La idea es
+          reemplazar las pilas AAA con una recargable. No encontré la hoja de
+          datos del circuito integrado del ratón, pero dado que usa 3V, asumí
+          que un Vin de
+          3.3V estaría bien. Entonces, simplemente desmonté el porta pilas y
+          coloqué el circuito con la nueva batería en ese espacio.</p>
+
+        <img src="/src/project_posts/project4/mouse_1.JPG"
+          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_2.JPG"
+          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_3.JPG"
+          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_4.JPG"
+          alt="Isaac Sim robots and environments">
+
+        <p>El ratón consume 25 mA a 3.0V, y la batería puede proporcionar 250
+          mAh. Idealmente, con esta configuración, el ratón puede ser usado
+          durante aproximadamente 10 horas con una sola carga. Para mejorar el
+          diseño, el estuche del ratón puede ser modificado para facilitar el
+          acceso al puerto de carga USB. Para esto, se recomendaría
+          una carcasa impresa en 3D a medida, esto
+          permitiría una integración perfecta del puerto de carga mientras se
+          mantiene la ergonomía y estética del ratón.</p>
+
+        <p>Si bien la conversión inicial demuestra la viabilidad de convertir un
+          dispositivo de batería desechable en uno recargable, mejoras
+          adicionales a través de modificaciones en la caracas pueden mejorar
+          significativamente la experiencia de usuario y la funcionalidad
+          general del ratón inalámbrico recargable. Sin embargo, para los
+          propósitos de este ejemplo, la demostración concluye con la exitosa
+          integración de la batería recargable y el circuito de carga en la
+          caracasa del ratón actual.</p>
+
+        <img src="/src/project_posts/project4/mouse_gif.gif"
+          alt="Isaac Sim robots and environments">
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>

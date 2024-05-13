@@ -111,6 +111,30 @@ body {
     margin: 0 auto;
 }
 
+table {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: 0 auto 3em;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+/*   
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #e6e6e6;
+  } */
 
 
 /* Responsive Styles */
@@ -157,7 +181,7 @@ body {
     background: url(/src/blog_posts/blog1/placeholder.png) center center/cover;
 }
 
-/* Project 1 */
+/* Project paper */
 .project1 {
     background: url(/src/project_posts/project1/paper.png) center center/cover;
 }
@@ -165,12 +189,17 @@ body {
     background: url(/src/project_posts/project1/trayectories.png) center center/cover;
 }
 
-/* Project 2 */
+/* Project iter */
 .project2 {
     background: url(/src/project_posts/project2/iter_placeholder.jpg) center center/cover;
 }
 
-/* Project 2 */
+/* Project pdf chat */
 .project3 {
     background: url(/src/project_posts/project3/pdf-chat.jpg) center center/cover;
+}
+
+/* Project 3v3 charger */
+.project4 {
+    background: url(/src/project_posts/project4/circuit.jpg) center center/cover;
 }
