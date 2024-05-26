@@ -116,13 +116,15 @@ table {
     border-collapse: collapse;
     font-family: Arial, sans-serif;
     margin: 0 auto 3em;
-  }
-  
-  th, td {
+}
+
+th,
+td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-  }
+}
+
 /*   
   th {
     background-color: #f2f2f2;
@@ -136,6 +138,31 @@ table {
     background-color: #e6e6e6;
   } */
 
+.resized-image {
+    max-width: 50vw;
+    /* or any other desired width value */
+    height: auto;
+    /* maintain aspect ratio */
+}
+
+
+.video-container {
+    position: relative;
+    width: 80%;
+    padding-bottom: 45%;
+    /* 16:9 aspect ratio */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 3rem;
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -165,6 +192,13 @@ table {
         padding-bottom: 5%;
     }
 
+    .resized-image {
+        max-width: 100%;
+        /* or any other desired width value */
+        height: auto;
+        /* maintain aspect ratio */
+    }
+
     #content-blog img,
     #content-blog .gif {
         width: 100%;
@@ -176,6 +210,8 @@ table {
     }
 }
 
+
+
 /* Blog 1 */
 .blog1 {
     background: url(/src/blog_posts/blog1/placeholder.png) center center/cover;
@@ -185,6 +221,7 @@ table {
 .project1 {
     background: url(/src/project_posts/project1/paper.png) center center/cover;
 }
+
 .project1V2 {
     background: url(/src/project_posts/project1/trayectories.png) center center/cover;
 }
@@ -202,4 +239,9 @@ table {
 /* Project 3v3 charger */
 .project4 {
     background: url(/src/project_posts/project4/circuit.jpg) center center/cover;
+}
+
+/* Aina humanoid robot */
+.project5 {
+    background: url(/src/project_posts/project5/aina.png) center center/cover;
 }
