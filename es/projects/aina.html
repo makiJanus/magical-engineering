@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Personal website about robotics, deep learning and philosophy" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Aina - Plataforma de robot humanoide
+          basada en ROS</h1>
+        <p class="categories">
+          <span class="category">Robótica</span>
+          <span class="category">Electrónica</span>
+        </p>
+
+        <h2 class="subtitle">Explorando las interacciones sociales
+          a través de Aina, mi primera experiencia como desarrollador de robots
+          humanoides de código abierto</h2>
+
+        <img class="gif" src="/src/project_posts/project5/diagram.png"
+          alt="Isaac Sim Deep Learning simmulation with Kaya">
+        <h3>Diseño</h3>
+        <p>Aina es una plataforma de robot humanoide de código abierto diseñada
+          para interacciones sociales entre humanos y máquinas, desarrollada
+          para mi tesis de universidad. Para lograr este objetivo, me enfoqué en
+          la modularidad, dividiendo al robot en tres subsistemas clave: Cabeza,
+          Brazos y Base Móvil.</p>
+        <p>El subsistema de la Cabeza es responsable de transmitir emociones a
+          través de expresiones faciales. Esto incluye los ojos, las cejas y,
+          ocasionalmente, el cuello. Deliberadamente opté por no incluir una
+          boca en el diseño de Aina para minimizar las distracciones cuando el
+          robot se comunique. Las expresiones faciales pueden ser tan poderosas
+          como las señales verbales para expresar inteligencia emocional.</p>
+        <p>Los Brazos están diseñados con características antropomórficas para
+          facilitar movimientos naturales como los humanos. Debido a las
+          limitaciones financieras, tuve que priorizar la eficiencia sobre la
+          fuerza bruta y opté por motores NEMA 14 emparejados con engranajes
+          cicloidales impresos en 3D. Si bien esta configuración puede no
+          proporcionar un gran torque, le permite a Aina gesticular y agarrar
+          objetos muy livianos.</p>
+        <p>La Base Móvil está equipada con un sistema SLAM (Localización
+          y Mapeo Simultáneos) que utiliza un sensor Kinect V1. Esto permite que
+          Aina navegue y mapee su entorno, permitiendo un posicionamiento y
+          movimiento sin problemas dentro del mundo.</p>
+        <img src="/src/project_posts/project5/aina_modules_overview.png"
+          alt="Isaac Sim robots and environments">
+
+        <p>También se aplicó la estrategia de "Divide y Vencerás" al software de
+          Aina mediante Docker. Esto me permitió crear programas distintos
+          para cada subsistema en contenedores, dándome la flexibilidad de
+          hacer cambios o actualizaciones sin afectar a los demás. Por ejemplo,
+          puedo modificar cómo la Base Móvil percibe su entorno sin impactar el
+          resto de la funcionalidad del robot.</p>
+        <p>Al agrupar el software en contenedores separados, otros
+          desarrolladores pueden acceder y adaptar fácilmente el código de Aina
+          para sus propios proyectos. Con contenedores ROS Melodic ejecutándose
+          en un Jetson Nano, puedo integrar de manera fluida redes de
+          Aprendizaje Profundo con algoritmos robóticos, evitando posibles
+          problemas de compatibilidad entre bibliotecas y versiones de
+          Python.</p>
+        <p>Creo que Aina tiene el potencial de ser más que un simple robot
+          acompañante debido a su enfoque en el diseño de interacción social.
+          Además, el uso de ROS y la arquitectura basada en Docker facilita la
+          adición de nuevas funcionalidades, como integrarlo con Google Calendar
+          o un sistema de hogar inteligente para administrar horarios,
+          iluminación y otros aspectos. El hardware también está diseñado con la
+          modularidad en mente, lo que permite modificaciones y actualizaciones
+          rápidas.</p>
+        <img src="/src/project_posts/project5/aina_real_design.png"
+          alt="Isaac Sim research diagram">
+
+        <p>Creo que este robot puede ser un buen compañero debido a sus
+          habilidades faciales y conversacionales. Las posibilidades tal vez no
+          sean infinitas, pero ciertamente son muchas. Tiene una cámara web en
+          la cabeza y también en la base (la parte RGB del Kinect), por lo que
+          puede, por ejemplo, seguir a una persona, o mediante su proceso SLAM,
+          revisar la casa e informar si está ocurriendo algo fuera de lo común
+          (las redes neuronales pueden hacer que la parte de detección funcione
+          solo con imágenes). También puede recordarte cosas (reuniones para el
+          calendario, tal vez). Mi objetivo es crear una versión económica y
+          fácil de modificar del robot humanoide Pepper, así que sigue el
+          proyecto si estás interesado y cualquier comentario es bienvenido a mi
+          correo.</p>
+        <h3>Control de Brazos</h3>
+        <p>Con respecto al aspecto de control de Aina, implementé con éxito el
+          algoritmo FABRIK en MATLAB para probar su capacidad de producir
+          movimientos coherentes espacial y temporalmente. El objetivo es
+          asegurar que el efector final siga una trayectoria suave y predecible
+          a medida que se mueve a través del espacio.</p>
+        <p>Para lograrlo, especifiqué una serie de puntos a lo largo de una
+          curva circunferencial en el espacio 3D, que puede representarse
+          paramétricamente mediante las Ecuaciones 1, 2, 3 y 4. Esto me permite
+          evaluar el rendimiento del algoritmo para generar movimientos con
+          diferencias angulares mínimas entre las configuraciones del brazo en
+          cada momento.</p>
+
+        $$Curve_{A} =
+        \begin{cases}
+        x_{t}=1.5*\cos(\pi_{t}) \\
+        y_{t}=1.5*\sin(\pi_{t}) \\
+        z_{t}=ones(1, length(\pi_{t})) + 0.25*\sin(6*\pi_{t})
+        \end{cases} [1]$$
+
+        $$Curve_{B} =
+        \begin{cases}
+        x_{t}=1.5*\cos(\pi_{t}) \\
+        y_{t}=1.5*\sin(\pi_{t}) \\
+        z_{t}=ones(1, length(\pi_{t})) + 0.25*\sin(2*\pi_{t})
+        \end{cases} [2]$$
+
+        $$Curve_{C} =
+        \begin{cases}
+        x_{t}=1.5*\cos(\pi_{t}) \\
+        y_{t}=ones(1, length(\pi_{t})) + 0.25*\sin(4*\pi_{t}) \\
+        z_{t}=1.5*\sin(\pi_{t})
+        \end{cases} [3]$$
+
+        $$Curve_{D} =
+        \begin{cases}
+        x_{t}=1.5*\cos(\pi_{t}) \\
+        y_{t}=1.5*\sin(\pi_{t}) \\
+        z_{t}=0.75
+        \end{cases} [4]$$
+
+        <img src="/src/project_posts/project5/equations_curves.PNG"
+          alt="Isaac Sim robots and Kaya and Jetson">
+
+        <p>FABRIK no fue diseñado específicamente para mecanismos robóticos, por
+          lo que requiere varias modificaciones para restringir el movimiento de
+          cada grado de libertad en el brazo. Si bien el autor sugiere limitar
+          los movimientos mediante proyecciones de cono o planos 3D, los
+          detalles de implementación no están claros, lo que puede generar
+          confusión.</p>
+        <p>Sin embargo, dada la estructura de Aina, propongo una solución más
+          simple e igualmente eficiente: limitar el desarrollo de FABRIK a un
+          plano 2D (Figura A). Para lograrlo, roto el punto objetivo a lo largo
+          del eje x para llevarlo al plano ZY. Además, traslado los vectores del
+          brazo hacia el mismo plano (Figura B) para evitar que las
+          articulaciones se muevan libremente en el espacio 3D.</p>
+        <p>Este enfoque permite una variante 2D de FABRIK (Figura C), que se
+          adapta bien al diseño robótico de Aina. Al restringir el movimiento a
+          un plano 2D, me aseguro de que el algoritmo genere movimientos de
+          brazo coherentes y predecibles.</p>
+
+        <img src="/src/project_posts/project5/fabrik_mod.PNG"
+          alt="Isaac Sim research outcome paths">
+
+        <p>Entonces, ¿cómo produce el algoritmo un resultado en el espacio
+          3D a pesar de ser procesado en 2D? La respuesta reside en el paso de
+          rotación inversa. Después de calcular los ángulos correspondientes a
+          los grados de libertad del eje y, realizo una rotación inversa tanto
+          en el punto objetivo como en los vectores que representan el brazo. De
+          esta manera, no solo recuperamos el punto objetivo 3D original, sino
+          que también se preservan los ángulos que conducen a ese punto,
+          permitiendo que el brazo de Aina se mueva de manera coherente
+          espacialmente. Este ingenioso truco nos permite cerrar la brecha entre
+          el procesamiento 2D y los resultados 3D.</p>
+        <p>Para verificar que mis
+          modificaciones no introducen un comportamiento errático, probé el
+          algoritmo estableciendo una elipse inclinada en el espacio cartesiano
+          3D como la trayectoria objetivo. Los resultados se presentan en la
+          siguiente Figura, mostrando la efectividad de este enfoque.</p>
+
+        <img src="/src/project_posts/project5/fabrik_mod_check.PNG"
+          alt="Isaac Sim research outcome paths" class="resized-image">
+
+        <p>El Arduino Mega es responsable de ejecutar
+          comandos de control para los diversos motores servo-actuados. Para
+          cerrar esta brecha entre el microcontrolador y el Jetson Nano,
+          aproveché el paquete Rosserial de ROS, que permite una comunicación
+          fluida entre ellos a través de temas.</p>
+        <p>Con todos los componentes implementados y programados, realicé una
+          prueba de movimiento para validar la funcionalidad de Aina. Sin
+          embargo, encontré problemas debido a un ruido significativo en las
+          lecturas del potenciómetro utilizadas para el control en bucle
+          cerrado. Específicamente, las mediciones de posición angular tenían un
+          nivel de ruido lo suficientemente alto que afectaba el rendimiento del
+          sistema. Para resolver este problema, procesé la señal con un filtro
+          paso bajo digital. En la Figura de abajo, el gráfico azul es la señal
+          cruda, mientras que el rojo es el filtrado.</p>
+
+        <img src="/src/project_posts/project5/filtered signal.PNG"
+          alt="Isaac Sim research outcome paths" class="resized-image">
+
+        <p>Donde la ecuación de diferencia utilizada es:</p>
+        $$y(n) = 0.1x(n) + 0.9y(n-1)$$
+        <h3>Base móvil</h3>
+        <p>La base del robot está diseñada para ser modular tanto en los
+          aspectos de software como de hardware, lo que presenta un desafío a la
+          hora de programarla. Con numerosos parámetros y nodos que deben estar
+          interconectados y configurados correctamente, puede resultar abrumador
+          para los desarrolladores sin una comprensión clara de la arquitectura
+          del sistema.</p>
+        <p>En la Figura de abajo, puedes visualizar cómo se conectan los nodos
+          de ROS, lo que ilustra la complejidad del diseño de Aina de una manera
+          más amigable. Este enfoque modular permite flexibilidad y
+          personalización, pero requiere una planificación cuidadosa y atención
+          al detalle para garantizar una comunicación fluida entre todos los
+          componentes.</p>
+
+        <img src="/src/project_posts/project5/diagram_base_overview.png"
+          alt="Isaac Sim research outcome paths">
+        <p>Para navegar a Aina a través de su entorno, diseñé una serie de nodos
+          ROS que trabajan juntos de manera fluida. Permítanme desglosarlos para
+          ustedes:</p>
+        <ol>
+          <li><b>Rosserial</b>: Este paquete permite que la
+            computadora se comunique con microcontroladores como Arduino y
+            ESP8226, permitiendo el intercambio de datos en tiempo real entre el
+            Jetson Nano y el hardware integrado de Aina.</li>
+          <li><b>Freenect</b>: Como un paquete de ROS, Freenect proporciona los
+            archivos necesarios para conectar la PC con un Kinect V1. Cuando se
+            inicia, publica varios temas que contienen mensajes de nube RGB,
+            nube de profundidad, nube de puntos registrada y control de
+            inclinación, proporcionando datos valiosos para crear mapas de
+            navegación.</li>
+          <li><b>Depth_to_laserscan</b>: Este nodo simula un
+            sensor de escaneo láser (como un lidar) utilizando datos de nube de
+            profundidad del Kinect V1. Esto es crucial, ya que los mensajes de
+            laserscan son necesarios para crear mapas 2D.</li>
+          <li><b>Odom_tf</b>: Un nodo hecho a medida que conecta el marco de
+            referencia del Kinect V1 con el marco de referencia de la base móvil
+            del robot. Esto asegura que el sistema tenga una comprensión
+            unificada de la posición de la cámara y ajuste los puntos de la nube
+            en consecuencia.</li>
+          <li><b>Mov_base</b>: Responsable de controlar
+            la base móvil de Aina en tiempo real, dado un objetivo específico.
+            Combina mapas globales y locales, así como planificadores, para
+            adaptar el movimiento del robot a su entorno y evitar
+            obstáculos.</li>
+          <li><b>RTAB-map</b>:Algoritmo de Mapeo Basado en Tiempo Real, que
+            permite
+            SLAM visual (Localización y Mapeo Simultáneos) utilizando datos
+            RGB-D del Kinect V1. Esto permite que Aina genere un mapa 3D de sus
+            alrededores en tiempo real.</li>
+          <li><b>RVIZ</b>: Una herramienta de
+            visualización 3D para ROS, utilizada para monitorear la información
+            del sensor y cómo cada paquete la procesa. Con RVIZ, se puede ver el
+            progreso del robot y refinar sus capacidades de navegación.</li>
+        </ol>
+
+        <p>En la siguiente Figura se pueden observar los paquetes y sus
+          conexiones
+          tal cual se representan en el Stack de navegación de ROS.</p>
+        <img src="/src/project_posts/project5/navigation_ros_diagram.png"
+          alt="Isaac Sim research outcome paths">
+        <p>Todos los nodos implementados en el Stack de Navegación son parte del
+          paquete <b>mov_base</b>, pero para que funcionen juntos sin problemas,
+          necesité configurar varios parámetros clave. Para navegar de manera
+          eficaz, Aina crea tres mapas esenciales: Mapa de Ocupación, Mapa de
+          Costo Global y Mapa de Costo Local.</p>
+
+        <ol>
+          <li><b>Occupancy Map:</b> representa elementos estáticos en el
+            entorno</li>
+          <li><b>global Cost Map:</b> genera un área alrededor de los
+            objetos para 'decirle' al planificador de ruta global que no se
+            mueva allí, asegurando que el robot esté a salvo de colisiones</li>
+          <li><b>Local Cost Map:</b> crea una zona de seguridad en tiempo
+            real alrededor del robot, evitando obstáculos dinámicos locales como
+            personas o animales</li>
+        </ol>
+
+        <p>Para entender cómo interactúan estos mapas entre sí y con el sistema
+          de navegación, es esencial conocer los siguientes parámetros de
+          configuración:</p>
+
+        <ol>
+          <li><b>Obstacle_range:</b> rango máximo para detectar objetos.</li>
+          <li><b>Raytrace_range:</b> rango máximo para detectar espacio libre
+            alrededor del robot.</li>
+          <li><b>Footprint:</b> coordenadas en metros que contienen el área de
+            la base del robot.</li>
+          <li><b>Footprint_inflation:</b> área segura alrededor del robot.</li>
+          <li><b>Inflation_radius:</b> distancia máxima de un obstáculo para
+            generar un área de seguridad.</li>
+          <li><b>Max_obstacle_height:</b> altura máxima de un obstáculo.</li>
+          <li><b>Min_obstacle_height:</b> altura mínima de un obstáculo.</li>
+          <li><b>Observation_sources:</b> especifica los sensores utilizados
+            para generar los mapas y sus características.</li>
+        </ol>
+
+        <p>Los parámetros que impactan el Mapa de Costa Global son:</p>
+
+        <ol>
+          <li><b>Global_frame:</b> define el sistema de coordenadas para los
+            mapas.</li>
+          <li><b>Robot_base_frame:</b> establece el marco de referencia para la
+            posición base del robot.</li>
+          <li><b>Update_frequency:</b> controla la frecuencia de actualización
+            del mapa en hercios.</li>
+          <li><b>Static_map:</b> determina si se deben cargar nuevos mapas de
+            costa basados en los anteriores.</li>
+        </ol>
+
+        <p>Los parámetros que influyen en el Mapa de Costo Local son:</p>
+
+        <ol>
+          <li><b>Rolling_window:</b> indica si el mapa local permanece centrado
+            alrededor del robot o no.</li>
+          <li><b>Width:</b> define el tamaño del mapa,, en metros.</li>
+          <li><b>Height:</b> define la altura del mapa, en metros.</li>
+          <li><b>Resolution:</b> especifica la resolución de la cuadrícula, en
+            metros.</li>
+          <li><b>Origen_x:</b> establece la coordenada x de origen para el
+            mapa.</li>
+          <li><b>Origen_y:</b> establece la coordenada y de origen para el
+            mapa.</li>
+          <li><b>Obstacle_layer:</b> especifica la capa del mapa que contiene
+            los datos
+            de obstáculos.</li>
+          <li><b>Inflation_layer:</b> especifica la capa del mapa que contiene
+            los datos
+            del área de seguridad.</li>
+        </ol>
+
+        <p>En la siguiente Figura, puedes ver el mapa de costa global en azul
+          claro, el mapa de costa local en el área púrpura y el mapa de
+          ocupación como todo el suelo en gris. Además, todos los objetos están
+          representados en negro.</p>
+        <img src="/src/project_posts/project5/maps_navigation.PNG"
+          alt="Isaac Sim research outcome paths">
+
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/ygayD2Gxvkw?si=2lWvQ0-9dLZ0Shjc"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+
+        <p>Los valores que usé son:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>Parámetros</td>
+              <td>Valores</td>
+            </tr>
+            <tr>
+              <td>Footprint</td>
+              <td>$$\left[\begin{array}{cc}
+                0.2 m & 0.2 m \\
+                -0.2 m & 0.2 m \\
+                0.2 m & -0.2 m \\
+                -0.2 m & -0.2 m
+                \end{array}\right]$$</td>
+            </tr>
+            <tr>
+              <td>Footprint padding</td>
+              <td>$$0.02$$</td>
+            </tr>
+            <tr>
+              <td>Inflation radius</td>
+              <td>$$0.5[m]$$</td>
+            </tr>
+            <tr>
+              <td>Raytrace range</td>
+              <td>$$2.5[m]$$</td>
+            </tr>
+            <tr>
+              <td>Obstalce range</td>
+              <td>$$3.0[m]$$</td>
+            </tr>
+            <tr>
+              <td>Max obstacle range</td>
+              <td>$$1.0[m]$$</td>
+            </tr>
+            <tr>
+              <td>Track unknown space</td>
+              <td>$$True$$</td>
+            </tr>
+            <tr>
+              <td>Observation sources</td>
+              <td>$$Laser scan sensor$$</td>
+            </tr>
+            <tr>
+              <td>Sensor frame</td>
+              <td>$$Camera link$$</td>
+            </tr>
+            <tr>
+              <td>Data type</td>
+              <td>$$laserScan$$</td>
+            </tr>
+            <tr>
+              <td>Topic</td>
+              <td>$$scan$$</td>
+            </tr>
+            <tr>
+              <td>Global frame</td>
+              <td>$$Odom$$</td>
+            </tr>
+            <tr>
+              <td>Robot base link</td>
+              <td>$$Base_link$$</td>
+            </tr>
+            <tr>
+              <td>Update frecuency</td>
+              <td>$$2[Hz]$$</td>
+            </tr>
+            <tr>
+              <td>Publish frequency</td>
+              <td>$$2[Hz]$$</td>
+            </tr>
+            <tr>
+              <td>Static map</td>
+              <td>$$False$$</td>
+            </tr>
+            <tr>
+              <td>Rolling windows</td>
+              <td>$$True$$</td>
+            </tr>
+            <tr>
+              <td>Width</td>
+              <td>$$10[m]$$</td>
+            </tr>
+            <tr>
+              <td>Height</td>
+              <td>$$10[m]$$</td>
+            </tr>
+            <tr>
+              <td>Resolution</td>
+              <td>$$0.05[m/cell]$$</td>
+            </tr>
+            <tr>
+              <td>Origin x</td>
+              <td>$$-5[m]$$</td>
+            </tr>
+            <tr>
+              <td>Origin y</td>
+              <td>$$-5[m]$$</td>
+            </tr>
+            <tr>
+              <td>Obstacle layer</td>
+              <td>$$Costmap_2d:ObstacleLayer$$</td>
+            </tr>
+            <tr>
+              <td>Inflation layer</td>
+              <td>$$Costmap_2d::InflationLAyer$$</td>
+            </tr>
+            <tr>
+              <td>Global frame</td>
+              <td>$$Map$$</td>
+            </tr>
+            <tr>
+              <td>Robot base frame</td>
+              <td>$$Base link$$</td>
+            </tr>
+            <tr>
+              <td>Update frequency</td>
+              <td>$$2[Hz]$$</td>
+            </tr>
+            <tr>
+              <td>Static map</td>
+              <td>$$False$$</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Aquí presento tres temas clave: Modelo CAD, Piezas Impresas en 3D y
+          Electrónica. Para el primer tema, Modelo CAD, utilicé Fusion360 (con
+          una licencia para estudiantes) para crear todos los diseños. Para
+          facilitar a otros la modificación y personalización del diseño de
+          Aina, diseñé intencionalmente la base con piezas intercambiables.</p>
+
+        <p>Este enfoque modular permite a los usuarios agregar o quitar
+          componentes sin modificaciones complicadas. Por ejemplo, si desea
+          incorporar características adicionales que requieran espacio extra
+          dentro de la carcasa, el proceso debería ser sencillo. Del mismo modo,
+          toda la electrónica está fijada utilizando una plataforma
+          estandarizada con agujeros pre-perforados para una fácil instalación y
+          reconfiguración. Puede ver el diseño, la electrónica y el resultado en
+          las siguientes Figuras.</p>
+
+        <img src="/src/project_posts/project5/base_model_1.png"
+          alt="Isaac Sim research outcome paths">
+        <img src="/src/project_posts/project5/base_model_2.png"
+          alt="Isaac Sim research outcome paths">
+        <img src="/src/project_posts/project5/base_model_3.png"
+          alt="Isaac Sim research outcome paths">
+        <img src="/src/project_posts/project5/base_electronics.png"
+          alt="Isaac Sim research outcome paths">
+        <img src="/src/project_posts/project5/base_model_outcome.png"
+          alt="Isaac Sim research outcome paths">
+
+        <p>En cuanto a la electrónica, hay varias consideraciones clave a tener
+          en cuenta. En la base móvil se alojan todos los componentes
+          principales para la regulación y distribución de energía, asegurando
+          que cada parte de Aina reciba la potencia necesaria.</p>
+
+        <p>Para lograr esto, diseñé un banco de baterías con 16.4V@17000 mAh, 
+          compuesto por 20 celdas NCR18650. Esta configuración
+          proporciona aproximadamente una hora y media de autonomía, teniendo en
+          cuenta los ciclos de recarga y las recomendaciones del fabricante.
+          Específicamente, la corriente recomendada para la carga es 0.5 veces
+          la capacidad de la batería, lo que significa que el BMS (Sistema
+          de Gestión de Batería) regula la carga en etapas, dividiéndola entre
+          cuatro celdas NCR18650 a la vez según los niveles de voltaje.</p>
+
+        <p>También utilizo un convertidor reductor basado en el XL4016 para
+          limitar la corriente junto con el voltaje, asegurando que la corriente
+          máxima permitida para el BMS (1A) nunca se exceda. El propio BMS opera
+          dentro de un rango seguro de 16.8V.</p>
+
+        <p>Dado que varios componentes requieren diferentes niveles de voltaje
+          para funcionar, investigué opciones de regulación adecuadas. Un
+          enfoque utiliza reguladores de la serie LM78XX, que pueden
+          proporcionar voltajes entre 5V y 24V (dependiendo del modelo). Estos
+          reguladores mantienen una tolerancia de salida del 4% e incluyen
+          protección contra sobrecarga. Sin embargo, su manejo de corriente está
+          limitado a 1A.</p>
+
+        <p>Encontré una solución más efectiva en los convertidores Buck
+          basados en LM2596S, que operan a 400 kHz con un rango de salida de
+          1.2V a 34V (también con una tolerancia del 4%). Estos módulos soportan
+          corrientes constantes de hasta 3A y tienen regulación interna de
+          disipación de energía, haciéndolos altamente eficientes a pesar de
+          generar algo de calor.</p>
+
+        <h3>Conclusión</h3>
+        <p>En este proyecto, desarrollé con éxito una plataforma de robot
+          humanoide de código abierto llamada Aina, diseñada para interacciones
+          sociales entre humanos y robots. Al enfocarme en la modularidad y
+          descomponer el robot en tres subsistemas clave - Cabeza, Brazos y Base
+          Móvil - pude crear un sistema que puede ser fácilmente modificado y
+          personalizado por otros desarrolladores. El uso de ROS y una
+          arquitectura basada en Docker permite una integración fluida con
+          varios sensores y algoritmos, facilitando la adición de nuevas
+          funcionalidades.</p>
+        <p>También implementé el algoritmo FABRIK en MATLAB para controlar los
+          movimientos de los brazos de Aina, lo que demostró movimientos
+          coherentes en el espacio y el tiempo. La Base Móvil está equipada con
+          un sistema de SLAM visual utilizando un sensor Kinect V1, permitiendo
+          la navegación y mapeo de su entorno.</p>
+        <p>Este robot tiene el potencial de ser más que solo un compañero debido
+          a su enfoque en el diseño de interacción social y expresiones
+          faciales. El Arduino Mega y el Jetson Nano funcionan juntos sin
+          problemas a través del paquete Rosserial de ROS, permitiendo el
+          control en tiempo real e intercambio de datos.</p>
+        <p>El resultado del proyecto incluye una base modular impresa en 3D con
+          partes intercambiables, un banco de baterías personalizado y
+          electrónica diseñada para la regulación y distribución de energía.
+          Además, la implementación de varios nodos ROS, como Rosserial,
+          Freenect, Depth_to_laserscan, Odom_tf, Mov_base y RTAB-map, permite a
+          Aina navegar de manera efectiva y crear mapas 2D y 3D de su
+          entorno.</p>
+        <p>Creo que este proyecto ha mostrado el potencial de crear un robot
+          humanoide capaz de interacción social y navegación usando ROS. El
+          diseño modular permite una fácil personalización y modificación por
+          otros desarrolladores, haciéndolo un punto de partida ideal para
+          investigaciones futuras en la interacción entre humanos y robots.</p>
+        <p>Espero que hayan disfrutado explorando Aina, mi primera experiencia
+          como desarrollador de robots humanoides de código abierto, y estoy
+          emocionado de compartir más sobre sus capacidades y aplicaciones
+          potenciales.</p>
+
+        <img src="/src/project_posts/project5/heads.png"
+          alt="Isaac Sim research outcome paths">
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>
