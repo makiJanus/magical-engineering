@@ -217,6 +217,11 @@ td {
     background: url(/src/blog_posts/blog1/placeholder.png) center center/cover;
 }
 
+/* Blog 2 */
+.blog2 {
+    background: url(/src/blog_posts/blog2/cyberlover_placehilder.png) center center/cover;
+}
+
 /* Project paper */
 .project1 {
     background: url(/src/project_posts/project1/paper.png) center center/cover;
