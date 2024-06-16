@@ -110,9 +110,20 @@ body {
   font-weight: var(--weight-semibold);
 }
 
-.navbar #logo img {
+/* .navbar #logo img {
   display: block;
   width: 50px;
+} */
+
+.navbar #logo {
+  display: block;
+  width: 70px;
+  height: 70px; /* Adjust as needed */
+  background-color: var(--text-color); /* Default color */
+  -webkit-mask: url('/src/assets/logo2.png') no-repeat center;
+  mask: url('/src/assets/logo2.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
 .navbar .btn {
