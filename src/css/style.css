@@ -126,6 +126,10 @@ body {
   mask-size: contain;
 }
 
+#logo-link {
+  display: inline-block;
+}
+
 .navbar .btn {
   margin-right: 1.5rem;
 }
