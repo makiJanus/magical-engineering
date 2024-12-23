@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Researching a Python library to generate navigation strategies for various mobile robots using Deep Reinforcement Learning in Nvidia Isaac Sim." />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Published research: Autonomous mobile
+          robotics</h1>
+        <p class="categories">
+          <span class="category">Research</span>
+          <span class="category">AI</span>
+          <span class="category">Robotics</span>
+        </p>
+
+        <h2 class="subtitle"><a
+            href="https://www.mdpi.com/2076-3417/12/17/8429">Academic
+            Research</a>
+          of a python library to generate navigation strategies for different
+          types
+          of mobile robots with Deep Reinforcement Learning in Nvidia Isaac
+          Sim.</h2>
+        <h3 class="under-subtitle-link"><a
+            href="https://www.mdpi.com/2076-3417/12/17/8429">Read the paper
+            here!</a></h3>
+
+        <img class="gif" src="/src/project_posts/project1/DQN-Gif.gif"
+          alt="Isaac Sim Deep Learning simmulation with Kaya">
+        <h3>The Problem</h3>
+        <p>Mobile robots are becoming increasingly popular for various personal
+          and industrial applications. To develop and test these robots,
+          engineers often rely on advanced robot simulators like Isaac Sim,
+          which offer high-quality graphics and realistic simulations. However,
+          when it comes to training mobile robots using deep reinforcement
+          learning, it can be challenging and time-consuming, especially when
+          designing custom experiments. This process typically requires a deep
+          understanding of multiple libraries and APIs to ensure they are used
+          together correctly.</p>
+
+        <p>In this study, I propose a solution to address these difficulties by
+          creating a user-friendly library. By simplifying the setup process for
+          creating robots, environments, and training scenarios, significantly
+          reducing the time spent on programming. Each method developed in this
+          library corresponds to a maximum of sixty-five lines of code, or even
+          just five lines. By leveraging this library, researchers and
+          professionals can save valuable time during simulated experiments and
+          data collection. Consequently, this approach accelerates the
+          production and testing of effective algorithms for mobile robots in
+          both industrial and personal environments.</p>
+
+        <img src="/src/project_posts/project1/isaac_assets.png"
+          alt="Isaac Sim robots and environments">
+
+        <h3>Makingn the process faster and easy</h3>
+        <p>The presented solution focuses on the composition and integration of
+          various technologies to streamline the training process. Multiple
+          tools were employed as fundamental components in this endeavor. One of
+          the most significant is Isaac Sim, a photorealistic simulator powered
+          by Nvidia's physics engine. It stands out as one of the most
+          comprehensive and advanced simulators available for robotics today,
+          gaining increasing relevance in the industry. This software offers a
+          wide variety of robots and environments, as well as software
+          flexibility that allows for the creation of custom code to execute
+          within the simulator. To complement these capabilities, Python
+          libraries such as Gym and Stable Baselines 3 (SB3) were utilized. Gym
+          provides the structure of the training code, while SB3 offers Deep
+          Reinforcement Learning Agents like DQN or PPO, enabling the use of
+          variables associated with these agents. For the creation of Neural
+          Networks, which serve as the brain of the agents, PyTorch was
+          employed.</p>
+
+        <img src="/src/project_posts/project1/Complete-lib-diagramV3.png"
+          alt="Isaac Sim research diagram">
+
+        <h3>Meaningful details</h3>
+        <p>The Neural Network utilized here is multimodal, meaning it takes
+          multiple inputs to learn navigation strategy. These inputs include
+          proprioception (position and velocities of the robot chassis),
+          environmental information (goal position and orientation), and
+          interaction information in the form of RGB, RGB-D, and/or Lidar data.
+          The Neural Network produces two output values: linear velocity along
+          the X-axis and angular velocity along the Z-axis of the robot chassis.
+          This design allows the Neural Network to be generalized for both
+          differential (two wheels) and holonomic (three wheels) types of robot
+          locomotion. This versatility enhances reproducibility and accelerates
+          testing when searching for navigation strategies using Deep
+          Reinforcement Learning. Additionally, the training process can be
+          performed without rendering images, further increasing training speed.
+          Moreover, being photorealistic, it facilitates the transfer of the
+          neural network to real robots.</p>
+
+        <img src="/src/project_posts/project1/DH_draw.png"
+          alt="Isaac Sim robots and Kaya and Jetson">
+
+        <h3>Project outcomes</h3>
+        <p>A case study is presented to summarize and explain the workings and
+          interactions of the library's components with external entities. The
+          experiment's general configuration involves a differential robot
+          Jetbot serving as the agent, with a custom scene serving as the
+          environment and the reward function. Initially, the robot's pose is
+          randomized, and a new obstacle map is generated within the scene
+          (although a custom fixed obstacle map is also available).
+          Subsequently, the logic and environment behavior are executed using
+          corresponding functions, particularly focusing on the robot's wheel
+          velocities. The DQN agent from SB3 estimates reward values for each
+          set of possible actions, and one action is selected. The differential
+          controller then translates the angular and linear velocity of the
+          robot's base into wheel movements.</p>
+        <img src="/src/project_posts/project1/trayectories.png"
+          alt="Isaac Sim research outcome paths">
+
+        <p>Between steps 800k and 1400k, the average reward shows a significant
+          increase, indicating the policy's progression towards a local optimum.
+          However, this alone does not suffice to demonstrate the robot's
+          ability to navigate to the target point. To complement this analysis,
+          the average episode length is considered. The decrease in episode
+          length indicates that the robot has learned how to successfully reach
+          the goal, thereby confirming the acquisition of a navigation
+          strategy.</p>
+        <img src="/src/project_posts/project1/DQN24V2.png"
+          alt="Isaac Sim research learning curves">
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Making a digital clone of the robot Mini Vizca 400 of Maquintel" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Mini Vizca 400: Digital Twin</h1>
+        <p class="categories">
+          <span class="category">Isaac Sim</span>
+          <span class="category">Robotics</span>
+        </p>
+
+        <h2 class="subtitle">
+          Once I tried to get a job on 
+          <a href="https://www.maquintel.com/">Maquintel Robotic Services</a>,
+          but they didn't hired me, so I cloned their main robot 
+          <a href="https://www.maquintel.com/tecnologia/mini-vizca-400-inspeccion-tuberias/">Mini Vizca 400</a>
+        </h2>
+
+        <img class="gif" src="/src/project_posts/project6/vizca_moving_forward.gif"
+          alt="Isaac Sim Mini Vizca 400 demo">
+        <h3>The Problem</h3>
+        <p>Maquintel Robotic Services focuses on analize tubular and sluice channels worn using mobile robots.
+          A while back I applied for a job at that company, but I wasn't selected. However, I'm still curious to 
+          learn more about their robots and how they works, sadly I do not have access to them, so let's do 
+          some reverse engineering together.
+        </p>
+
+        <p>In this project, I design a digital twin to address the immeasurable 
+          weight of my curiosity by analyzing public information about Maquintel's robots. 
+        </p>
+
+        <img src="/src/project_posts/project6/vizca_real.jpg"
+          alt="Mini Vizca 400 real robot">
+
+        <h3>Maquintel's robots overview</h3>
+        <p>If we navigate the Maquintel website, we can see that they have five robots at their disposal.  
+          These can be divided into two main categories: those based on tracks and those based on wheels. 
+          Where all focus on solving the same problem, but in different environments.</p>
+
+        <img src="/src/project_posts/project6/robots_per_class.png"
+          alt="Maquintel's robots diagram">
+
+        <p>
+          Based on what can be observed in the images, by class, the robots tend towards the same design concept. 
+          In those with tracks, the basic form appears to be the ORG-7. The one which if two are joined together 
+          with a camera forms the ORG-S7. While if two are used at the bottom with the camera on top, there's the 
+          ORG-DP7. As for the robots based on wheels, if we leave aside capacity and size, the Vizca D400 and the 
+          Mini Vizca 400 are equal.
+        </p>
+
+        <p>
+          In this case study, we will focus on the Mini Vizca 400, which is more than enough to represent all the 
+          wheel-based robots by Maquintel. As I mentioned earlier, we only have the information that Maquintel has 
+          shared on their website and social media, which we will use as a basis for creating a digital replica of 
+          their robot. First, we need to understand the functions of the robot. We know that it is intended to be 
+          used for tunnel and sluice channel inspections to measure their level of wear with lidar and profilometers. 
+        </p>
+
+        <img src="/src/project_posts/project6/canvas_1.png"
+          alt="First canvas analyzing Mini Vizca 400">
+
+        <img src="/src/project_posts/project6/canvas_2.png"
+          alt="Second canvas analyzing Mini Vizca 400">
+
+        <img src="/src/project_posts/project6/canvas_3.png"
+          alt="Third canvas analyzing Mini Vizca 400">
+
+        <p>
+          After reviewing videos and images of the robot, we can see that it has a front sensor which could or not be 
+          present in all the images. It seems to be a lidar that can be on both the front and rear parts. 
+          The profilometer is always on one of the sides. As for the cameras, they are only located in the upper front 
+          part and generally there are between 2 and 3 of them accompanied by some lights.
+        </p>
+
+        <p>
+          The number and position of these elements vary from image to image, which indicates how the concept of 
+          modularity is expressed in the robot. Beyond that, we can divide it into conceptual modules to better 
+          organize our virtual replica: locomotion, vision, sensorial, and structure.
+        </p>
+
+        <ol>
+          <li><b>Locomotion:</b> 4 motors + encoders + wheels.</li>
+          <li><b>Vision:</b> 2 lateras cameras + 2 lights, one front camera without light.</li>
+          <li><b>Sensors:</b> Lidar, IMU.</li>
+          <li><b>Structure:</b> Aluminum chasis with modular capabilities, connectors + emergency button on back, 4 flying wheels to guide the robot movement.</li>
+        </ol>
+
+        <h3>Mini Vizca 400 digital twin</h3>
+        <p>
+          Maquintel provides us with the robot's measurements in a vague way, but it is enough for us. 
+          There is a way to get more precise measurements if only one of them is correct: keep the 
+          proportions and measure with the Fusion 360 ruler, of course, all in the good old milimeters.
+        </p>
+
+        <img src="/src/project_posts/project6/vizca_cad_1.png"
+          alt="Mini Vizca 400 cad with drawings">
+        
+        <img src="/src/project_posts/project6/vizca_cad_2.jpg"
+          alt="Mini Vizca 400 cad">
+
+        <img src="/src/project_posts/project6/digital_twin.jpg"
+          alt="Mini Vizca 400 usd">
+
+        <p>We now have the design. Now we will import it into Onshape to configure the joints. 
+          Then, we will configure the sensors and lights of the robot in Isaac Sim so that they 
+          work correctly. Once we've done this, we'll save it as USD and we're ready to test it.</p> 
+
+        <h3>Project outcomes</h3>
+
+        <img src="/src/project_posts/project6/circuit.png"
+          alt="Isaac Sim circuit for Mini Vizca 400">
+
+        <p>There are two things happening, the lidar emits a laser and, through how long it takes to return, 
+          is able to measure the distance from this to an object. Now, if we repeat this process while the 
+          laser spins around, we can obtain the perimeter of what surrounds the lidar in a plane. If we also 
+          calculate the robot's position quickly enough, we can acquire successive perimeter plans to form a 
+          3D representation of the space around the robot.</p>
+
+        <img class="gif" src="/src/project_posts/project6/vizca_moving_forward_2.gif"
+          alt="Isaac Sim Mini Vizca 400 demo">
+
+        <p>Finally we have the point cloud formed by the lidar. This is basically what Maquintel does 
+          to generate 3D profiles of pipes and channels, where with little additional effort you can 
+          measure the wear level by comparing which points exceed a certain threshold.</p>
+
+
+        <img src="/src/project_posts/project6/cloud_point.jpg"
+          alt="Isaac Sim research learning curves">
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>
