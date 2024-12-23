@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Réplica digital del robot Mini Vizca 400 de Maquintel" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Mini Vizca 400: Gemelo Digital</h1>
+        <p class="categories">
+          <span class="category">Isaac Sim</span>
+          <span class="category">Robotics</span>
+        </p>
+
+        <h2 class="subtitle">
+          Una vez que intenté obtener un puesto de trabajo en 
+          <a href="https://www.maquintel.com/">Maquintel Robotic Services</a>,
+          pero no me contrataron, por lo que decí clonar su robot principal 
+          <a href="https://www.maquintel.com/tecnologia/mini-vizca-400-inspeccion-tuberias/">Mini Vizca 400</a>
+        </h2>
+        
+        <img class="gif" src="/src/project_posts/project6/vizca_moving_forward.gif"
+        alt="Demostración de Isaac Sim Mini Vizca 400">
+        <h3>El Problema</h3>
+        <p>Maquintel se enfoca en analizar tubos y canales de relave usando robots móviles.
+          Hace un tiempo postulé a un puesto de trabajo en esa empresa, pero no fui seleccionado. 
+          Sin embargo, todavía tengo curiosidad por conocer más sobre sus robots y cómo funcionan, 
+          lamentablemente no tengo acceso a ellos, así que hagámos un poco de ingeniería inversa juntos.
+        </p>
+        
+        <p>En este proyecto diseñé una réplica digital para aliviar el peso inmensurable de mi curiosidad, 
+          analizando la información pública sobre los robots de Maquintel. 
+        </p>
+        
+        <img src="/src/project_posts/project6/vizca_real.jpg"
+          alt="Robot Mini Vizca 400 real">
+      
+          <h3>Resumen de los robots de Maquintel</h3>
+            <p>Si navegamos por el sitio web de Maquintel podemos ver que tienen seis robots a su disposición.  
+              Estos se pueden dividir en dos categorías principales: aquellos basados en orugas y aquellos basados en ruedas. 
+              Donde todos se enfocan en resolver el mismo problema, pero en entornos distintos.
+            </p>
+          
+          <img src="/src/project_posts/project6/robots_per_class.png"
+            alt="Diagrama de los robots de Maquintel">
+          
+          <p>
+            Basándonos en lo que podemos observar en las imágenes, por clase, los robots tienden hacia un mismo concepto de diseño. 
+            En aquellos con orugas, la forma base parece ser el ORG-7. El cual si se unen dos en conjunto con una cámara, forma el 
+            ORG-S7. Mientras que si se usan dos en la parte inferior se pone al camara arriba, se tiene el ORG-DP7. En lo que 
+            respecta los robots basados en ruedas, si dejamos de lado la capacidad de carga y el tamaño, el Vizca D400 y el Mini 
+            Vizca 400 son iguales.
+          </p>
+          
+          <p>
+            En este caso de estudio, vamos a enfocarnos en el Mini Vizca 400, lo que es más que suficiente para representar a todos 
+            los robots con ruedas de Maquintel. Como mencioné anteriormente, solo tenemos la información que Maquintel ha 
+            compartido en su sitio web y redes sociales, las cuales usaremos como base para crear una réplica digital. 
+            Primero debemos entender las funciones a replicar. Sabemos que está destinado a ser utilizado en 
+            inspecciones de túneles y canales de relave para medir su nivel de desgaste con lidar y perfilómetros. 
+          </p>
+          
+          <img src="/src/project_posts/project6/canvas_1_es.png"
+            alt="Primera canvás analizando Mini Vizca 400">
+          
+          <img src="/src/project_posts/project6/canvas_2_es.png"
+            alt="Segunda canvás analizando Mini Vizca 400">
+          
+          <img src="/src/project_posts/project6/canvas_3_es.png"
+            alt="Tercera canvás analizando Mini Vizca 400">
+          
+          <p>
+            Observando vídeos e imágenes del robot, podemos ver que tiene un sensor frontal que podría o no estar presente en 
+            todas las imágenes. Parece ser un lidar que puede estar tanto en la parte delantera como trasera. 
+            El perfilómetro siempre está en uno de los lados. En cuanto a las cámaras, estas solo están ubicadas en la parte 
+            superior frontal y generalmente son entre 2 y 3, acompañadas por algunos focos.
+          </p>
+          
+          <p>
+            La cantidad y posición de estos elementos varía de imagen a imagen, lo cual nos indica cómo se expresa el 
+            concepto de modularidad en el robot. Más allá de eso, podemos dividirlo en módulos conceptuales para 
+            organizar mejor nuestra réplica virtual: locomoción, visión, sensorial y estructura.
+          </p>
+          
+          <ol>
+            <li><b>Locomoción:</b> 4 motores + encoders + ruedas.</li>
+            <li><b>Vision:</b> 2 cámaras laterales + 2 luces, una cámara frontal sin luz.</li>
+            <li><b>Sensores:</b> Lidar, IMU.</li>
+            <li><b>Estructura:</b> Eje de aluminio con capacidades modulares, conectores + botón de emergencia en la parte posterior, 4 ruedas voladoras para guiar el movimiento del robot.</li>
+          </ol>
+          
+        <h3>Gemelo digital</h3>
+        <p>
+          Maquintel nos proporciona las mediciones del robot de manera vaga, pero hay una forma de obtener medidas más precisas 
+          si solo una de ellas está correcta: mantener las proporciones y medir con la regla de Fusion 360.
+        </p>
+          
+        <img src="/src/project_posts/project6/vizca_cad_1.png"
+          alt="Mini Vizca 400 cad con dibujos">
+          
+        <img src="/src/project_posts/project6/vizca_cad_2.jpg"
+          alt="Mini Vizca 400 cad">
+          
+        <img src="/src/project_posts/project6/digital_twin.jpg"
+          alt="Mini Vizca 400 usd">
+          
+        <p>Ya tenemos el diseño. Ahora lo importaremos a Onshape para agregar las uniones. 
+          Luego, configuraremos los sensores y luces del robot en Isaac Sim para que funcionen correctamente. 
+          Una vez hecho esto, guardamos como USD y listo para probarlo.</p>
+          
+
+        <h3>Resultados</h3>
+
+        <img src="/src/project_posts/project6/circuit.png"
+          alt="Circuito de Isaac Sim para Mini Vizca 400">
+          
+        <p>Hay dos cosas que están sucediendo, el lidar emite un laser y, a través de cuánto tiempo tarda en retornar, es capaz de 
+          medir la distancia desde este a un objeto. Ahora, si repetimos este proceso mientras el laser gira alrededor, 
+          podemos obtener el perímetro de lo que rodea al lidar en un plano. Si también calculamos la posición del robot 
+          lo suficientemente rápido, podemos adquirir planos perimetrales sucesivos para formar una representación 3D del 
+          espacio alrededor del robot.</p>
+          
+        <img class="gif" src="/src/project_posts/project6/vizca_moving_forward_2.gif"
+          alt="Demostración de Isaac Sim Mini Vizca 400">
+          
+        <p>Finalmente tenemos la nube de puntos formada por el lidar. Esto es básicamente lo que hace Maquintel para 
+          generar perfiles 3D de tubos y canales, donde con poco esfuerzo adicional se puede medir el nivel de desgaste 
+          comparando qué puntos sobrepasan cierto umbral.</p>
+          
+          
+        <img src="/src/project_posts/project6/cloud_point_es.jpg"
+          alt="Curvas de aprendizaje de Isaac Sim">
+          
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>
