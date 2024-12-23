@@ -59,11 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const langSwitcherButton = document.getElementById("langSwitcher");
         const langIcon = document.getElementById("langIcon");
 
-        const initialLang = localStorage.getItem("lang") || "en";
+        const initialLang = localStorage.getItem("lang") || "es";
         updateLangIcon(initialLang);
 
         langSwitcherButton.addEventListener("click", () => {
-            const newLang = initialLang === "en" ? "es" : "en";
+            const newLang = initialLang === "es" ? "en" : "es";
             // Get the current page URL
             let currentPage = window.location.pathname;
             // Remove any existing language prefix from the current page URL
