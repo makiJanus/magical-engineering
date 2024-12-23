@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Get the base URL based on the environment
             const baseURL = window.location.hostname === "127.0.0.1" ? "http://127.0.0.1:5501" : "https://magical-engineering.com";
             // Construct the new URL by adding the language prefix for Spanish version
-            const newURL = `${baseURL}${newLang === "es" ? `/${newLang}` : ""}${currentPage}`;
+            const newURL = `${baseURL}${newLang === "en" ? `/${newLang}` : ""}${currentPage}`;
             // Redirect to the new URL
             window.location.href = newURL;
             localStorage.setItem("lang", newLang);
