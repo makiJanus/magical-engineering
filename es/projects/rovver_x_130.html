@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Réplica digital del robot Rovver X 130 de Envirosight" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Rovver X 130: Gemelo Digital</h1>
+        <p class="categories">
+          <span class="category">Isaac Sim</span>
+          <span class="category">Robotics</span>
+        </p>
+
+        <h2 class="subtitle">
+          Una empresa me contacto para hacer un robot de inspección de tuberías, pero dejaron repentinamente de hablarme, 
+          por lo que decí investigar la industria y clonar el robot más popular, el 
+          <a href="https://envirosight.com/products/rovver-x/">Rovver X 130</a>.
+        </h2>
+        
+        <img src="/src/project_posts/project7/intro_gif.gif"
+            alt="Gif robot teleoperado Rovver X 130 con acceosrios en simulación">
+
+        <h3>El Problema</h3>
+        <p>
+          La inspección de tuberías municipales es un sector en constante evolución, donde el mantenimiento de infraestructuras de saneamiento 
+          y agua potable se encuentra en el centro del interés. Esta industira posee desafíos tales como: las condiciones operativas adversas, costos 
+          elevados, capacitación del personal y cumplimiento normativo, los cuales crean un entorno competitivo.
+        </p>
+        
+        <p>
+          Bajo este contexto, un día se me acercó una empresa con interés en crear un robot que posea las mismas características de otros productos 
+          existentes en otros países. Después de una reunión y varios correos electrónicos, nos quedamos en contactarnos pero desde entonces han 
+          pasado varios días sin saber nada de ellos.
+        </p>
+
+        <p>
+          Por curiosidad empecé a investigar sobre los robots de inspección y comprender mejor el contexto de la industria. Al finalizar mi investigación, 
+          tenía todo lo necesario para crear una propuesta, pero no tenía a quién presentársela, por lo que, ya con algo de entusiamsmo, decidí a seguir 
+          adelante y hacer un clon digital del Rovver X 130.
+        </p>
+        
+        <img src="/src/project_posts/project7/pipe_clean_ssample_img.png"
+            alt="A picture of someone cleanning a pipe">
+      
+          <h3>Una mirada hacia el Rovver X 130</h3>
+            <p>
+              El ROVVER X 130 es un sistema de inspección robótica de alcantarillas desarrollado por Envirosight, el cuál es tan versatil como robusto, espcialmente en entornos subterráneos. 
+              Puede desplazarse hasta 1640 pies (o alrededor de 500 metros para los amigos del sistema métrico) a través de sistemas tuberías, cuenta con agilidad gracias a un sistema de tracción de seis ruedas, 
+              y es capaz de inspeccionar tuberías de diámetros entre 6 y 96 pulgadas, o de alrededor 15 a 244 centímetros respectivamente.
+            </p>
+          
+          <img src="/src/project_posts/project7/rvx_sizes_s.png"
+            alt="Rovver X 130 Simple">
+          
+          <p>
+            El enfoque del diseño es la adaptabilidad, por lo que cuenta con ruedas intercambiables para adaptarse a diferentes tipos y condiciones en tuberías. La cámara puede inclinarse y girar, 
+            proporcionando un campo visual amplio con zoom óptico de 10x y digital de 12x. En general este robot es teleoperado y es capaz de codificar las observaciones directamente en la interfaz de 
+            control utilizando catálogos PACP, MACP y LACP, facilitando la identificación de reparaciones necesarias y generación de informes.
+          </p>
+          
+          <p>
+            El ROVVER X 130 se utiliza en diversas industrias, incluyendo inspección municipal para evaluar el estado de las alcantarillas y sistemas pluviales, inspecciones críticas en sistemas subterráneos nucleares 
+            y validación del estado interno de las tuberías en plantas químicas y farmacéuticas.
+          </p>
+          
+          <img src="/src/project_posts/project7/rovver_modules.png"
+            alt="Rovver and its accesories">
+          
+        <h3>Gemelo digital</h3>
+        <p>
+          Envirosight proporciona información sobre las dimensiones del robot, pero no especifica exactamente qué parte del este abarcan. Sin embargo, se puede sortear este problema de manera precisa al usar una imagen 
+          plana del robot en Fusion 360. En esta herramienta, se puede medir con precisión la imagen y ajustarla a las medidas oficiales del rovver en la forma más lógica posible. A partir de esto se puede generar 
+          el modelo CAD.
+        </p>
+          
+        <img src="/src/project_posts/project7/rovver_cad_1.png"
+          alt="Rovver inverse engineering measurements">
+          
+        <img src="/src/project_posts/project7/rovver_real_1.jpeg"
+          alt="Rovver real">
+          
+        <img src="/src/project_posts/project7/rpvver_cad_2.png"
+          alt="Rovver cad model">
+          
+        <p>Ya tenemos el diseño. Ahora lo importaremos a Onshape para agregar las uniones. 
+          Luego, configuraremos los sensores y luces del robot en Isaac Sim para que funcionen correctamente. 
+          Una vez hecho esto, guardamos como USD y listo para probarlo.</p>
+
+        <img src="/src/project_posts/project7/rovver_cad_3.png"
+          alt="Rovver digital twin basic">
+          
+        <p>Por supuesto, este es solo el proceso del modelo básico, sin accesorios, utilizado para tuberías pequeñas. Sin embargo, en 
+          entornos más grandes se necesitan mayores requerimientos de tracción, altura y capacidad de iluminación. Para satisfacer estas 
+          necesidades, Envirosight ofrece accesorios que se pueden acoplar fácilmente al modelo base siguiendo el mismo procedimiento utilizado 
+          anteriormente:
+        </p>
+
+        <img src="/src/project_posts/project7/rovver_extended_cad_1.png"
+          alt="Rovver digital twin basic">
+
+        <img src="/src/project_posts/project7/rovver_extended_cad_2.png"
+          alt="Rovver digital twin basic">
+
+        <h3>Resultados</h3>
+          
+        <p>
+          Para evaluar la simulación y el desempeño de los modelos digitales del ROVVER X 130, he creado circuitos de prueba que replican tuberías 
+          reales tanto en apariencia como forma. Estos circuitos permiten evaluar la capacidad de ambos robots para navegar a través de entornos simulados 
+          con precisión y eficiencia.
+        </p>
+
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1.png"
+          alt="DCircuito de prueba 1">
+          
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1A.gif"
+          alt="Circuito de prueba 1A gif">
+        
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1B.gif"
+          alt="Circuito de prueba 1B gif">
+          
+        <p>Estas pruebas sirven también para validar el concepto del robot antes de construirlo, lo que reduce costos significativamente al ahorrar recursos en errores 
+          y posibles correcciones. Además, el proceso de desarrollo e investigación se vuelve más rápido, ya que los fallos pueden ser identificados temprano en la fase 
+          de simulación.
+        </p>
+          
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2.png"
+          alt="DCircuito de prueba 1">
+          
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2A.gif"
+          alt="Circuito de prueba 1A gif">
+        
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2B.gif"
+          alt="Circuito de prueba 1B gif">
+          
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>

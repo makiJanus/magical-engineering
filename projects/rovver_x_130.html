@@ -9,7 +9,7 @@
     <meta name="title" content="Magical Enginering" />
     <meta
       name="description"
-      content="Researching a Python library to generate navigation strategies for various mobile robots using Deep Reinforcement Learning in Nvidia Isaac Sim." />
+      content="Making a digital clone of the robo Rovver X 130 from Envirosight" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -25,120 +25,130 @@
       <div id="navbar-placeholder"></div>
 
       <div id="content-blog">
-        <h1 class="massiveHeading">Published research: Autonomous mobile
-          robotics</h1>
+        <h1 class="massiveHeading">Rovver X 130: Digital Twin</h1>
         <p class="categories">
-          <span class="category">Research</span>
-          <span class="category">AI</span>
+          <span class="category">Isaac Sim</span>
           <span class="category">Robotics</span>
         </p>
 
-        <h2 class="subtitle"><a
-            href="https://www.mdpi.com/2076-3417/12/17/8429">Academic
-            Research</a>
-          of a python library to generate navigation strategies for different
-          types
-          of mobile robots with Deep Reinforcement Learning in Nvidia Isaac
-          Sim.</h2>
-        <h3 class="under-subtitle-link"><a
-            href="https://www.mdpi.com/2076-3417/12/17/8429">Read the paper
-            here!</a></h3>
+        <h2 class="subtitle">
+          A company contacted me to make a pipe inspection robot, but they suddenly stopped talking to me,
+          so I decided to investigate the industry and clone the most popular robot, the
+          <a href="https://envirosight.com/products/rovver-x/">Rovver X 130</a>.
+        </h2>
+        
+        <img src="/src/project_posts/project7/intro_gif.gif"
+          alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
 
-        <img class="gif" src="/src/project_posts/project1/DQN-Gif.gif"
-          alt="Isaac Sim Deep Learning simmulation with Kaya">
         <h3>The Problem</h3>
-        <p>Mobile robots are becoming increasingly popular for various personal
-          and industrial applications. To develop and test these robots,
-          engineers often rely on advanced robot simulators like Isaac Sim,
-          which offer high-quality graphics and realistic simulations. However,
-          when it comes to training mobile robots using deep reinforcement
-          learning, it can be challenging and time-consuming, especially when
-          designing custom experiments. This process typically requires a deep
-          understanding of multiple libraries and APIs to ensure they are used
-          together correctly.</p>
+          <p>
+            The inspection of municipal pipes is a constantly evolving sector, where the maintenance of sanitation and drinking water infrastructure 
+            is at the center of interest. This industry has challenges such as: adverse operating conditions, high costs, personnel training, and regulatory 
+            compliance, which create a competitive environment.
+          </p>
+        
+          <p>
+            In this context, one day a company approached me with an interest in creating a robot that has the same characteristics as other existing products 
+            in other countries. After a meeting and several emails, we agreed to stay in touch, but several days have passed without hearing from them.
+          </p>
 
-        <p>In this study, I propose a solution to address these difficulties by
-          creating a user-friendly library. By simplifying the setup process for
-          creating robots, environments, and training scenarios, significantly
-          reducing the time spent on programming. Each method developed in this
-          library corresponds to a maximum of sixty-five lines of code, or even
-          just five lines. By leveraging this library, researchers and
-          professionals can save valuable time during simulated experiments and
-          data collection. Consequently, this approach accelerates the
-          production and testing of effective algorithms for mobile robots in
-          both industrial and personal environments.</p>
+          <p>
+            Out of curiosity, I started researching inspection robots and better understanding the industry context. By the end of my research, 
+            I had everything I needed to create a proposal, but I had no one to present it to, so, with some enthusiasm, I decided to go ahead 
+            and make a digital clone of the Rovver X 130.
+          </p>
+        
+        <img src="/src/project_posts/project7/pipe_clean_ssample_img.png"
+            alt="A picture of someone cleanning a pipe">
+      
+          <h3>Looking into the Rovver X 130</h3>
+            <p>
+              The ROVVER X 130 is a sewer inspection robotic system developed by Envirosight, which is as versatile as it is robust, especially in underground environments. 
+              It can travel up to 1640 feet (or around 500 meters for our metric system friends) through pipe systems, has agility thanks to a six-wheel drive system, 
+              and is capable of inspecting pipes with diameters between 6 and 96 inches, or around 15 to 244 centimeters respectively.
+            </p>
+          
+          <img src="/src/project_posts/project7/rvx_sizes_s.png"
+            alt="Rovver X 130 Simple">
+          
+            <p>
+              The design focus is adaptability, so it has interchangeable wheels to adapt to different types and conditions in pipes. The camera can tilt and rotate, 
+              providing a wide field of view with 10x optical zoom and 12x digital zoom. Overall, this robot is teleoperated and can encode observations directly into the control interface 
+              using PACP, MACP, and LACP catalogs, facilitating the identification of necessary repairs and report generation.
+            </p>
+            
+            <p>
+              The ROVVER X 130 is used in various industries, including municipal inspection to assess the condition of sewers and stormwater systems, critical inspections in underground nuclear systems, 
+              and validation of the internal condition of pipes in chemical and pharmaceutical plants.
+            </p>
+          
+          <img src="/src/project_posts/project7/rovver_modules.png"
+            alt="Rovver and its accesories">
+          
+        <h3>Digital twin</h3>
+        <p>
+          Envirosight provides information about the robot's dimensions, but does not specify exactly which part of it they cover. However, this problem can be accurately circumvented by using a flat image 
+          of the robot in Fusion 360. In this tool, the image can be precisely measured and adjusted to the official measurements of the Rovver in the most logical way possible. From this, the CAD model can be generated.
+        </p>
+          
+        <img src="/src/project_posts/project7/rovver_cad_1.png"
+          alt="Rovver inverse engineering measurements">
+          
+        <img src="/src/project_posts/project7/rovver_real_1.jpeg"
+          alt="Rovver real">
+          
+        <img src="/src/project_posts/project7/rpvver_cad_2.png"
+          alt="Rovver cad model">
+          
+          <p>We already have the design. Now we will import it into Onshape to add the joints. 
+            Then, we will configure the robot's sensors and lights in Isaac Sim to make them work correctly. 
+            Once this is done, we save it as USD and it is ready to be tested.</p>
 
-        <img src="/src/project_posts/project1/isaac_assets.png"
-          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project7/rovver_cad_3.png"
+          alt="Rovver digital twin basic">
+          
+          <p>Of course, this is just the process of the basic model, without accessories, used for small pipes. However, in 
+            larger environments, greater traction, height, and lighting capacity are needed. To meet these 
+            needs, Envirosight offers accessories that can be easily attached to the base model. Following the same procedure used 
+            previously:
+          </p>
 
-        <h3>Makingn the process faster and easy</h3>
-        <p>The presented solution focuses on the composition and integration of
-          various technologies to streamline the training process. Multiple
-          tools were employed as fundamental components in this endeavor. One of
-          the most significant is Isaac Sim, a photorealistic simulator powered
-          by Nvidia's physics engine. It stands out as one of the most
-          comprehensive and advanced simulators available for robotics today,
-          gaining increasing relevance in the industry. This software offers a
-          wide variety of robots and environments, as well as software
-          flexibility that allows for the creation of custom code to execute
-          within the simulator. To complement these capabilities, Python
-          libraries such as Gym and Stable Baselines 3 (SB3) were utilized. Gym
-          provides the structure of the training code, while SB3 offers Deep
-          Reinforcement Learning Agents like DQN or PPO, enabling the use of
-          variables associated with these agents. For the creation of Neural
-          Networks, which serve as the brain of the agents, PyTorch was
-          employed.</p>
+        <img src="/src/project_posts/project7/rovver_extended_cad_1.png"
+          alt="Rovver digital twin basic">
 
-        <img src="/src/project_posts/project1/Complete-lib-diagramV3.png"
-          alt="Isaac Sim research diagram">
+        <img src="/src/project_posts/project7/rovver_extended_cad_2.png"
+          alt="Rovver digital twin basic">
 
-        <h3>Meaningful details</h3>
-        <p>The Neural Network utilized here is multimodal, meaning it takes
-          multiple inputs to learn navigation strategy. These inputs include
-          proprioception (position and velocities of the robot chassis),
-          environmental information (goal position and orientation), and
-          interaction information in the form of RGB, RGB-D, and/or Lidar data.
-          The Neural Network produces two output values: linear velocity along
-          the X-axis and angular velocity along the Z-axis of the robot chassis.
-          This design allows the Neural Network to be generalized for both
-          differential (two wheels) and holonomic (three wheels) types of robot
-          locomotion. This versatility enhances reproducibility and accelerates
-          testing when searching for navigation strategies using Deep
-          Reinforcement Learning. Additionally, the training process can be
-          performed without rendering images, further increasing training speed.
-          Moreover, being photorealistic, it facilitates the transfer of the
-          neural network to real robots.</p>
+        <h3>Results</h3>
+          
+          <p>
+            To evaluate the simulation and performance of the digital models of the ROVVER X 130, I have created test circuits that replicate real pipes 
+            both in appearance and shape. These circuits allow the evaluation of both robots' ability to navigate through simulated environments 
+            with precision and efficiency.
+          </p>
 
-        <img src="/src/project_posts/project1/DH_draw.png"
-          alt="Isaac Sim robots and Kaya and Jetson">
-
-        <h3>Project outcomes</h3>
-        <p>A case study is presented to summarize and explain the workings and
-          interactions of the library's components with external entities. The
-          experiment's general configuration involves a differential robot
-          Jetbot serving as the agent, with a custom scene serving as the
-          environment and the reward function. Initially, the robot's pose is
-          randomized, and a new obstacle map is generated within the scene
-          (although a custom fixed obstacle map is also available).
-          Subsequently, the logic and environment behavior are executed using
-          corresponding functions, particularly focusing on the robot's wheel
-          velocities. The DQN agent from SB3 estimates reward values for each
-          set of possible actions, and one action is selected. The differential
-          controller then translates the angular and linear velocity of the
-          robot's base into wheel movements.</p>
-        <img src="/src/project_posts/project1/trayectories.png"
-          alt="Isaac Sim research outcome paths">
-
-        <p>Between steps 800k and 1400k, the average reward shows a significant
-          increase, indicating the policy's progression towards a local optimum.
-          However, this alone does not suffice to demonstrate the robot's
-          ability to navigate to the target point. To complement this analysis,
-          the average episode length is considered. The decrease in episode
-          length indicates that the robot has learned how to successfully reach
-          the goal, thereby confirming the acquisition of a navigation
-          strategy.</p>
-        <img src="/src/project_posts/project1/DQN24V2.png"
-          alt="Isaac Sim research learning curves">
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1.png"
+          alt="DCircuito de prueba 1">
+          
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1A.gif"
+          alt="Circuito de prueba 1A gif">
+        
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1B.gif"
+          alt="Circuito de prueba 1B gif">
+          
+          <p>These tests also serve to validate the robot's concept before building it, significantly reducing costs by saving resources on errors 
+            and possible corrections. Additionally, the development and research process becomes faster, as failures can be identified early in the simulation phase.
+          </p>
+          
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2.png"
+          alt="DCircuito de prueba 1">
+          
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2A.gif"
+          alt="Circuito de prueba 1A gif">
+        
+        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2B.gif"
+          alt="Circuito de prueba 1B gif">
+          
 
       </div>
       <div class="division-space-only"></div>
