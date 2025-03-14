@@ -80,7 +80,7 @@ copyEmailBtn.addEventListener('click', copyEmail);
 
 // Function to copy the email to the clipboard
 function copyEmail() {
-  const email = 'maximiliano.rojas.lema@gmail.com';
+  const email = 'magicalengineeringlab@gmail.com';
 
   // Create a temporary textarea element
   const tempTextarea = document.createElement('textarea');
