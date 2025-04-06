@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta name="description" content="Diseño y entrenamiento de un péndulo invertido con ruedas usando aprendizaje por refuerzo profundo y aprendizaje por currículo en Isaac Sim con PPO" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <div id="navbar-placeholder"></div>
+      <div id="content-blog">
+        <h1 class="massiveHeading">Este robot puede navegar mientras mantiene el equilibrio</h1>
+        <p class="categories">
+          <span class="category">Isaac Sim</span>
+          <span class="category">Robótica</span>
+        </p>
+
+
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/gItKZjNL-CE?si=yIOpMPfUmrl1uHkY"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        
+
+
+        <h2 class="subtitle">
+          Diseño y simulación de un péndulo invertido de dos ruedas entrenado con aprendizaje por refuerzo en NVIDIA Isaac Lab para mantener el equilibrio y navegar. Este proyecto es una colaboración con un estudiante de maestría del <a href="https://issai.nu.edu.kz/">Institute of Smart Systems and Artificial Intelligence, Nazarbayev University</a>.
+        </h2>
+        <img src="/src/project_posts/project8/intro.gif" alt="Gif del robot Rovver X 130 simulado con accesorios">
+
+        <h3>El Problema</h3>
+        <p>
+          <a href="https://www.linkedin.com/in/mohammad-shoaib-babar-339128177/">Mohammad Shoaib Babar</a> es estudiante de maestría investigando cómo lograr que un robot péndulo invertido de dos ruedas se equilibre y realice movimientos simples (como avanzar y retroceder) utilizando Isaac Sim e Isaac Lab. Necesitaba ayuda para construir la canalización de entrenamiento necesaria para su proyecto y graduación. Afortunadamente, pude acelerar significativamente su progreso ayudándolo a configurar todos los scripts de simulación, entrenamiento y pruebas.
+          <br><br>
+          Como este trabajo forma parte de una investigación en curso (al momento de escribir este blog), presento una versión derivada de nuestra colaboración, mostrando resultados con mi propio robot de dos ruedas.
+        </p>
+        <img src="/src/project_posts/project8/adobe_render.jpg" alt="Render del robot en Adobe Substance Painter">
+
+        <h3>Usando Aprendizaje Refuerzo Profundo</h3>
+        <p>
+          El robot debe aprender a mantenerse equilibrado, orientarse hacia un objetivo y moverse sin caerse. El Aprendizaje por Refuerzo Profundo (DRL) permite esto mediante el aprendizaje por prueba y error, como un niño aprendiendo a través de experiencias.
+        </p>
+
+        <p>
+          Por ejemplo, imagina un niño que intenta evitar comer su almuerzo y huye, solo para ser castigado con una chancla por su madre—una recompensa negativa graciosa pero ilustrativa. La siguiente vez, el niño come la comida y no recibe castigo. Así funciona el DRL, con recompensas y castigos.
+        </p>
+        <img src="/src/project_posts/project8/chancla.gif" alt="Madre castigando a su hijo">
+
+        <p>
+          Inicialmente intenté entrenar al robot para hacer todo—equilibrarse, navegar y detenerse en la meta—en una sola sesión. Sin embargo, esto falló debido a la capacidad limitada de su red neuronal.
+        </p>
+        <img src="/src/project_posts/project8/RL_train.gif" alt="Gif del entrenamiento del robot">
+
+        <h3>Aprendizaje por Currículo</h3>
+        <p>
+          La solución fue dividir el problema en tareas más simples y entrenar al robot paso a paso—una técnica llamada aprendizaje por currículo. La idea es usar los resultados de la primera etapa (por ejemplo, equilibrarse) para ayudar en la siguiente (por ejemplo, navegar).
+        </p>
+        <img src="/src/project_posts/project8/RL_train_2.gif" alt="Segunda etapa del entrenamiento">
+
+        <p>
+          Los sensores del robot juegan un papel clave en este proceso. Proporcionan retroalimentación sobre las consecuencias de sus acciones, lo que permite guiar mejor su aprendizaje.
+        </p>
+        <img src="/src/project_posts/project8/sensors.gif" alt="Sensores del robot en funcionamiento">
+
+        <p>
+          Cada etapa se basa en la anterior. Esto permite a la red neuronal competir y priorizar entre comportamientos, reforzando gradualmente los más útiles.
+        </p>
+        <img src="/src/project_posts/project8/behaviors.gif" alt="Competencia entre comportamientos">
+
+        <h3>Navegación</h3>
+        <p>
+          Con el robot entrenado para moverse, el siguiente desafío fue navegar en entornos realistas. Para esto, creé una casa virtual usando Unreal Engine 5, que se integra perfectamente con IsaacSim.
+        </p>
+        <img src="/src/project_posts/project8/house_1.png" alt="Casa virtual creada con Unreal Engine">
+        <img src="/src/project_posts/project8/house_2.png" alt="Integración de la casa con IsaacSim">
+
+        <p>
+          IsaacSim proporciona herramientas para generar mapas de ocupación de los entornos. Estos mapas se usan con el algoritmo A* para generar rutas.
+        </p>
+        <img src="/src/project_posts/project8/map.png" alt="Mapa de ocupación generado">
+
+        <p>
+          Las rutas generadas con A* se suavizan con curvas de Bézier y luego se amortiguan para crear puntos objetivos que el robot puede seguir de forma natural, permitiéndole moverse con fluidez por entornos complejos.
+        </p>
+        <img src="/src/project_posts/project8/a_1.png" alt="Puntos generados">
+        <img src="/src/project_posts/project8/a_2.png" alt="Curvas Bézier aplicadas">
+        <img src="/src/project_posts/project8/a_3.png" alt="Ruta suavizada">
+        <img src="/src/project_posts/project8/a_4.png" alt="Ruta seguida por el robot">
+
+        <h3>Resultados</h3>
+        <p>
+          El robot puede moverse con éxito de un punto a otro sin caerse. Más impresionante aún, puede seguir rutas predefinidas dentro de una casa, navegando entre muebles y esquinas estrechas.
+        </p>
+        <img src="/src/project_posts/project8/house_nav.gif" alt="Robot navegando en la casa virtual">
+    
+        <p>
+          Este blog marca la primera fase de un proyecto más grande. La siguiente etapa será transferir todo desde la simulación a un robot real—una transición Sim2Real desafiante pero emocionante.
+        </p>
+      </div>
+      <div class="division-space-only"></div>
+      <div id="footer-placeholder"></div>
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+</html>

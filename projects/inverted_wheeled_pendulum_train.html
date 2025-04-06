@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta name="description" content="Desing and training of an inverted wheeled pendulum with curriculum learning and deep reinforcement learning Isaac Sim PPO" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <div id="navbar-placeholder"></div>
+      <div id="content-blog">
+        <h1 class="massiveHeading">This robot can navigate while keeping its balance</h1>
+        <p class="categories">
+          <span class="category">Isaac Sim</span>
+          <span class="category">Robotics</span>
+        </p>
+
+        <div class="video-container">
+          <iframe 
+            src="https://www.youtube.com/embed/gItKZjNL-CE?si=yIOpMPfUmrl1uHkY"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+
+        <h2 class="subtitle">
+          Design and simulation of a two-wheeled inverted pendulum trained using reinforcement learning in NVIDIA Isaac Lab to maintain balance and navigate. This project is a collaboration with a master's candidate from the <a href="https://issai.nu.edu.kz/">Institute of Smart Systems and Artificial Intelligence, Nazarbayev University</a>.
+        </h2>
+        <img src="/src/project_posts/project8/intro.gif" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <h3>The Problem</h3>
+        <p>
+          <a href="https://www.linkedin.com/in/mohammad-shoaib-babar-339128177/">Mohammad Shoaib Babar</a> is a master's candidate conducting research on enabling a two-wheeled inverted pendulum robot to balance and perform simple movements (such as moving forward and backward) using Isaac Sim and Isaac Lab. He needed guidance in building the training pipeline necessary for his project and graduation. Fortunately, I was able to significantly speed up his progress by helping him set up all the scripts related to simulation, training, and testing.
+          <br><br>
+          Since this work is part of an ongoing research project (at the time of writing this blog), I’m presenting a spin-off of our collaboration, showcasing results with my own two-wheeled inverted pendulum robot.
+        </p>
+        <img src="/src/project_posts/project8/adobe_render.jpg" alt="Adobe substance painte render of the robot">
+
+        <h3>Using plain Deep Reinforcement Learning</h3>
+        <p>
+          The robot must learn to balance itself, orient toward a goal, and move without falling. Deep Reinforcement Learning (DRL) enables this by letting the robot learn from trial and error—similar to how a child learns through experiences.
+        </p>
+
+        <p>
+          For instance, imagine a child trying to avoid eating lunch and running away, only to get hit by a sandal thrown by their mom—a humorous but illustrative negative reward. The next time, the child eats the food and receives no negative response. This learning through rewards and punishments is how DRL functions.
+        </p>
+        <img src="/src/project_posts/project8/chancla.gif" alt="Mother punishing a child">
+
+        <p>
+          Initially, I attempted to train the robot to do everything—balance, navigate, and stop at the goal—in a single session. However, this failed due to the limited learning capacity of the robot’s neural network.
+        </p>
+        <img src="/src/project_posts/project8/RL_train.gif" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <h3>Curriculum Learning</h3>
+        <p>
+          The solution was to divide the problem into simpler tasks and train the robot step by step—a technique called curriculum learning. The idea is to use the results of the first stage of training (e.g., balancing) to help with the next stage (e.g., navigating).
+        </p>
+        <img src="/src/project_posts/project8/RL_train_2.gif" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <p>
+          The robot’s sensors play a key role in this process. They provide feedback about the consequences of its actions, allowing us to guide its learning more effectively.
+        </p>
+        <img src="/src/project_posts/project8/sensors.gif" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <p>
+          Each stage builds on the previous one. This allows the neural network to compete and prioritize among different behaviors, gradually solidifying the most useful ones.
+        </p>
+        <img src="/src/project_posts/project8/behaviors.gif" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <h3>Navigation</h3>
+        <p>
+          With the robot trained to move, the next challenge was navigating in realistic environments. For this, I created a virtual house using Unreal Engine 5, which integrates smoothly with IsaacSim.
+        </p>
+        <img src="/src/project_posts/project8/house_1.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+        <img src="/src/project_posts/project8/house_2.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <p>
+          IsaacSim provides tools for generating occupancy maps of environments. These maps are then used with the A* algorithm to generate paths.
+        </p>
+        <img src="/src/project_posts/project8/map.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <p>
+          The paths from A* are smoothed using Bezier curves and then damped to create goal points the robot can follow naturally, enabling it to move fluidly through complex environments.
+        </p>
+        <img src="/src/project_posts/project8/a_1.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+        <img src="/src/project_posts/project8/a_2.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+        <img src="/src/project_posts/project8/a_3.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+        <img src="/src/project_posts/project8/a_4.png" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+
+        <h3>Results</h3>
+        <p>
+          The robot can successfully move from one point to another without falling. More impressively, it can follow predefined paths through a house, navigating around furniture and tight corners.
+        </p>
+        <img src="/src/project_posts/project8/house_nav.gif" alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+    
+        <p>
+          This blog marks the first phase of a larger project. The next stage will involve transferring everything from simulation to a real robot—a challenging but exciting Sim2Real transition.
+        </p>
+
+      </div>
+      <div class="division-space-only"></div>
+      <div id="footer-placeholder"></div>
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+</html>
