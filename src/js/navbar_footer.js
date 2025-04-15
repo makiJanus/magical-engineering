@@ -48,18 +48,31 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleSwitch.addEventListener("change", switchTheme);
 
         // Save user preference on load
-        const currentTheme = localStorage.getItem("theme") || null;
+        // const currentTheme = localStorage.getItem("theme") || null;
 
-        if (currentTheme) {
-            document.documentElement.setAttribute("data-theme", currentTheme);
-            toggleSwitch.checked = currentTheme === "dark";
+        // if (currentTheme) {
+        //     document.documentElement.setAttribute("data-theme", currentTheme);
+        //     toggleSwitch.checked = currentTheme === "dark";
+        // }
+        let currentTheme = localStorage.getItem("theme");
+
+        if (!currentTheme) {
+            // Default to dark if nothing is set
+            currentTheme = "dark";
+            localStorage.setItem("theme", currentTheme);
         }
+
+        document.documentElement.setAttribute("data-theme", currentTheme);
+        toggleSwitch.checked = currentTheme === "dark";
+
 
         // Language switcher button
         const langSwitcherButton = document.getElementById("langSwitcher");
         const langIcon = document.getElementById("langIcon");
 
-        const initialLang = localStorage.getItem("lang") || "es";
+        // const initialLang = localStorage.getItem("lang") || "es";
+        const initialLang = localStorage.getItem("lang") || document.documentElement.lang || "es";
+
         updateLangIcon(initialLang);
 
         langSwitcherButton.addEventListener("click", () => {
