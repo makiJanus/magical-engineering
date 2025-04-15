@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Engineering</title>
+    <meta name="title" content="Magical Engineering" />
+    <meta name="description" content="Exploring Social Interactions with Aina: My Journey as an Open-Source Humanoid Robot Developer." />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <header id="hero">
+      <div id="navbar-placeholder"></div>
+      <div id="content-blog">
+        <h1 class="massiveHeading">Small Humanoid Robot for Interaction with Kids with Autism</h1>
+        <p class="categories">
+          <span class="category">Robotics</span>
+          <span class="category">Electronics</span>
+        </p>
+        <h2 class="subtitle">
+          More and more children today are being diagnosed with neurodivergent conditions like autism.
+          This project explores how technology can support these children in developing better social interaction skills.
+        </h2>
+        <img class="gif" src="/src/project_posts/project9/introv2.png" alt="Design of the robot, head">
+
+        <h3>Problem</h3>
+        <p>
+          Sandra Cano, a software engineer from PUCV, needed a friendly humanoid robot to interact with children on the autism spectrum.
+          The robot had to express basic emotions through facial expressions and gestures using its arms, neck, and torso.
+          For this request, only the mechanical model and electronic design were required.
+        </p>
+        <p>
+          To meet this need, we designed a compact robot about 55 cm tall, with expressive capabilities focused on the face.
+          To ensure it's appealing to kids, we adopted a cartoon-inspired aesthetic.
+        </p>
+        <p>
+          Keeping costs low was a top priority. The robot is 3D printed, and powered by a transformer instead of batteries.
+          The requested sensor suite includes:
+        </p>
+        <ol>
+          <li>ASTRA PRO REALSENSE RGBD</li>
+          <li>10 DOF IMU (MPU9259+BMP280)</li>
+          <li>RGB LEDs</li>
+          <li>Nose-mounted potentiometer</li>
+          <li>Speakers</li>
+        </ol>
+
+        <h3>Eyes</h3>
+        <p>
+          The head's primary function is to convey emotions using eyes, mouth, and eyebrows.
+          The nose includes a potentiometer as a tactile input.
+          Eye movement is achieved using two SG90 servo motors.
+        </p>
+        <img src="/src/project_posts/project9/2.png" alt="Robot eyes movement">
+        <p>
+          Vertical eye movement is done through a bar mechanism with two fixed and two moving pivots.
+          Since both the servo and the eye linkage are on the same side, the servo angle directly matches the eye angle — ideally within a 25° range.
+          For horizontal motion, the servo moves the eye directly with a 30° range.
+        </p>
+        <img src="/src/project_posts/project9/3.png" alt="Robot eyes movement">
+
+        <h3>Mouth</h3>
+        <p>
+          The mouth is controlled by two motors that shape a surgical tube into different expressions — happy, neutral, or sad/angry.
+          Though the motors can rotate 180°, 45° is recommended for expressive but controlled movement.
+          Developers are encouraged to experiment with other combinations.
+        </p>
+        <img src="/src/project_posts/project9/4.png" alt="Robot mouth movement">
+
+        <h3>Eyebrows</h3>
+        <p>
+          Flexible expressions are achieved by manipulating a surgical tube with two degrees of freedom.
+          The up/down motion has a 20° range, while the twisting motion spans 45°.
+          These ranges are ideal; be cautious when combining them at extreme positions.
+        </p>
+        <img src="/src/project_posts/project9/5.png" alt="Robot eyebrows movements">
+
+        <h3>Eyelids</h3>
+        <p>
+          Eyelids use a similar bar mechanism as the eyes.
+          Here, the motor linkage is longer, resulting in a larger movement range — up to 95°.
+        </p>
+        <img src="/src/project_posts/project9/6.png" alt="Robot eyelids movements">
+
+        <h3>Nose</h3>
+        <p>
+          The nose is the simplest moving component.
+          Its potentiometer has a full 270° range, but only 135° (side-to-side) is used for interaction.
+        </p>
+        <img src="/src/project_posts/project9/7.png" alt="Robot nose movements">
+
+        <h3>Neck</h3>
+        <p>
+          The robot's head weighs about 600g, with its center of mass 15 cm from the rotation axis.
+          This requires ~9 kg·cm torque to move.
+          A servo rated at 18.5 kg·cm@4.5V handles this with ease.
+          The neck can tilt 20° forward and 25° backward.
+        </p>
+        <img src="/src/project_posts/project9/8.png" alt="Robot neck movements">
+
+        <h3>Ears</h3>
+        <p>
+          Ears enhance emotional expression.
+          They have two degrees of freedom: one allows up/down movement (120° range), the other rotates them up to 90°.
+        </p>
+        <img src="/src/project_posts/project9/9.png" alt="Robot Ears movements">
+
+        <h3>Base and Torso</h3>
+        <p>
+          The base rotates within a 180° range via a single servo.
+          A bearing ensures smooth motion.
+          The torso requires more torque, so we implemented two redundant degrees of freedom.
+          Assuming a 20° tilt instead of 90°, the torque requirement drops from 40 to about 15.4 kg·cm:
+        </p>
+        <p>
+          $$45\cdot \cos(90° - 20°) = 15.39\ kg\cdot cm$$
+        </p>
+        <img src="/src/project_posts/project9/10.png" alt="Robot base movements">
+
+        <h3>Arms</h3>
+        <p>
+          Each arm has three servo-driven degrees of freedom, allowing a wide range of expressive motions.
+        </p>
+        <img src="/src/project_posts/project9/11.png" alt="Robot arms movements">
+
+        <h3>Results</h3>
+        <p>
+          After successfully designing and simulating the robot, the parts were 3D printed and assembled.
+          Below are some photos and a video showcasing the robot's expressive face — a key factor in social interaction.
+        </p>
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/QqVNn-uDtxc"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <img src="/src/project_posts/project9/r.jpg" alt="Robot head happy">
+        <img src="/src/project_posts/project9/s.jpg" alt="Robot head sad">
+        <img src="/src/project_posts/project9/v.jpg" alt="Robot head neutral">
+        <img src="/src/project_posts/project9/i.jpg" alt="Robot head confused">
+        <img src="/src/project_posts/project9/d.jpg" alt="Robot head angry">
+        <img src="/src/project_posts/project9/c.jpg" alt="Robot body assembled">
+      </div>
+      <div class="division-space-only"></div>
+      <div id="footer-placeholder"></div>
+      <script src="/src/js/navbar_footer.js"></script>
+    </header>
+  </body>
+</html>

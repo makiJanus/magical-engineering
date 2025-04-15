@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Ingeniería Mágica</title>
+    <meta name="title" content="Ingeniería Mágica" />
+    <meta name="description" content="Explorando Interacciones Sociales con Aina: Mi Viaje como Desarrollador de Robots Humanoides de Código Abierto." />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <header id="hero">
+      <div id="navbar-placeholder"></div>
+      <div id="content-blog">
+        <h1 class="massiveHeading">Robot Humanoide Pequeño: Interacción con Niños con Autismo</h1>
+        <p class="categories">
+          <span class="category">Robótica</span>
+          <span class="category">Electrónica</span>
+        </p>
+        <h2 class="subtitle">
+          Cada vez se diagnostica a más niños con condiciones neurodivergentes, como el autismo.
+          Este proyecto explora cómo la tecnología puede ayudar a estos niños a desarrollar mejores habilidades de interacción social.
+        </h2>
+        <img class="gif" src="/src/project_posts/project9/introv2.png" alt="Diseño de la cabeza del robot">
+
+        <h3>Problema</h3>
+        <p>
+          Sandra Cano, una ingeniera de software de la PUCV, necesitaba un robot humanoide amigable para interactuar con niños en el espectro autista.
+          El robot debía expresar emociones básicas mediante expresiones faciales y gestos usando sus brazos, cuello y torso.
+          Para esta solicitud, solo se requería el modelo mecánico y el diseño electrónico.
+        </p>
+        <p>
+          Para satisfacer esta necesidad, diseñamos un robot compacto de aproximadamente 55 cm de altura, con capacidades expresivas centradas en la cara.
+          Para asegurar que sea atractivo para los niños, adoptamos una estética inspirada en los dibujos animados.
+        </p>
+        <p>
+          Mantener los costos bajos fue una prioridad. El robot está impreso en 3D y se alimenta mediante un transformador en lugar de baterías.
+          El conjunto de sensores solicitado incluye:
+        </p>
+        <ol>
+          <li>ASTRA PRO REALSENSE RGBD</li>
+          <li>10 DOF IMU (MPU9259+BMP280)</li>
+          <li>LEDs RGB</li>
+          <li>Potenciómetro montado en la nariz</li>
+          <li>Altavoces</li>
+        </ol>
+
+        <h3>Ojos</h3>
+        <p>
+          La función principal de la cabeza es transmitir emociones utilizando los ojos, la boca y las cejas.
+          La nariz incluye un potenciómetro como entrada táctil.
+          El movimiento de los ojos se logra utilizando dos servomotores SG90.
+        </p>
+        <img src="/src/project_posts/project9/2.png" alt="Movimiento de los ojos del robot">
+        <p>
+          El movimiento vertical de los ojos se realiza mediante un mecanismo de barra con dos pivotes fijos y dos móviles.
+          Dado que tanto el servomotor como el enlace del ojo están en el mismo lado, el ángulo del servo coincide directamente con el ángulo del ojo, idealmente en un rango de 25°.
+          Para el movimiento horizontal, el servo mueve el ojo directamente con un rango de 30°.
+        </p>
+        <img src="/src/project_posts/project9/3.png" alt="Movimiento de los ojos del robot">
+
+        <h3>Boca</h3>
+        <p>
+          La boca se controla mediante dos motores que moldean un tubo quirúrgico para formar diferentes expresiones: feliz, neutral o triste/enojada.
+          Aunque los motores pueden girar 180°, se recomienda un ángulo de 45° para lograr un movimiento expresivo pero controlado.
+          Se alienta a los desarrolladores a experimentar con otras combinaciones.
+        </p>
+        <img src="/src/project_posts/project9/4.png" alt="Movimiento de la boca del robot">
+
+        <h3>Cejas</h3>
+        <p>
+          Se logran expresiones flexibles manipulando un tubo quirúrgico con dos grados de libertad.
+          El movimiento hacia arriba/abajo tiene un rango de 20°, mientras que el movimiento de giro abarca 45°.
+          Estos rangos son ideales; tenga cuidado al combinarlos en posiciones extremas.
+        </p>
+        <img src="/src/project_posts/project9/5.png" alt="Movimiento de las cejas del robot">
+
+        <h3>Párpados</h3>
+        <p>
+          Los párpados utilizan un mecanismo de barra similar al de los ojos.
+          Aquí, el enlace del motor es más largo, lo que resulta en un rango de movimiento mayor, de hasta 95°.
+        </p>
+        <img src="/src/project_posts/project9/6.png" alt="Movimiento de los párpados del robot">
+
+        <h3>Nariz</h3>
+        <p>
+          La nariz es el componente en movimiento más simple.
+          Su potenciómetro tiene un rango completo de 270°, pero solo se utiliza un rango de 135° (de lado a lado) para la interacción.
+        </p>
+        <img src="/src/project_posts/project9/7.png" alt="Movimiento de la nariz del robot">
+
+        <h3>Cuello</h3>
+        <p>
+          La cabeza del robot pesa aproximadamente 600g, con su centro de masa a 15 cm del eje de rotación.
+          Esto requiere un torque de aproximadamente 9 kg·cm para moverse.
+          Un servomotor con una capacidad de 18.5 kg·cm a 4.5V maneja esto sin problema.
+          El cuello puede inclinarse 20° hacia adelante y 25° hacia atrás.
+        </p>
+        <img src="/src/project_posts/project9/8.png" alt="Movimiento del cuello del robot">
+
+        <h3>Orejas</h3>
+        <p>
+          Las orejas realzan la expresión emocional.
+          Tienen dos grados de libertad: uno permite el movimiento de arriba hacia abajo (rango de 120°) y el otro las rota hasta 90°.
+        </p>
+        <img src="/src/project_posts/project9/9.png" alt="Movimiento de las orejas del robot">
+
+        <h3>Base y Torso</h3>
+        <p>
+          La base rota dentro de un rango de 180° mediante un único servomotor.
+          Un cojinete garantiza un movimiento suave.
+          El torso requiere más torque, por lo que implementamos dos grados de libertad redundantes.
+          Suponiendo una inclinación de 20° en lugar de 90°, el requerimiento de torque baja de 40 a aproximadamente 15.4 kg·cm:
+        </p>
+        <p>
+          $$45\cdot \cos(90° - 20°) = 15.39\ kg\cdot cm$$
+        </p>
+        <img src="/src/project_posts/project9/10.png" alt="Movimiento de la base del robot">
+
+        <h3>Brazos</h3>
+        <p>
+          Cada brazo tiene tres grados de libertad accionados por servomotores, permitiendo una amplia variedad de movimientos expresivos.
+        </p>
+        <img src="/src/project_posts/project9/11.png" alt="Movimiento de los brazos del robot">
+
+        <h3>Resultados</h3>
+        <p>
+          Después de diseñar y simular exitosamente el robot, las piezas fueron impresas en 3D y ensambladas.
+          A continuación, se muestran algunas fotos y un video que exhiben la expresiva cara del robot, un factor clave en la interacción social.
+        </p>
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/QqVNn-uDtxc"
+            title="Reproductor de YouTube"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <img src="/src/project_posts/project9/r.jpg" alt="Cabeza del robot feliz">
+        <img src="/src/project_posts/project9/s.jpg" alt="Cabeza del robot triste">
+        <img src="/src/project_posts/project9/v.jpg" alt="Cabeza del robot neutral">
+        <img src="/src/project_posts/project9/i.jpg" alt="Cabeza del robot confundida">
+        <img src="/src/project_posts/project9/d.jpg" alt="Cabeza del robot enojada">
+        <img src="/src/project_posts/project9/c.jpg" alt="Cuerpo ensamblado del robot">
+      </div>
+      <div class="division-space-only"></div>
+      <div id="footer-placeholder"></div>
+      <script src="/src/js/navbar_footer.js"></script>
+    </header>
+  </body>
+</html>
