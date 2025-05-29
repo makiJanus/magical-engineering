@@ -62,7 +62,7 @@ A long title that basically means: you can give orders to a robot using text and
 <ol>
 
   <p><strong>LLM Module (Language)</strong>: This is the part of the system that reasons using language. Its job is to understand what the user wants the robot to do. This module converts natural language into structured data: task type, final destination, and environmental constraints.</p>
-  <ul>
+  <ul class="custom-list">
     <li><strong>Instruction:</strong> Everything starts with a command, which can be spoken or written, such as “Take the VIP to the fridge, but go past the shelf.”</li>
     <li><strong>Semantic Map:</strong> Since the LLM cannot directly see the environment, it is given a semantic map that describes what objects are present, where they are, and how they relate to each other.</li>
     <li><strong>Function Library:</strong> These are small mathematical and logical tools that the LLM can use to interpret instructions. For example, it can calculate what “in front of the fridge” means in real coordinates.</li>
@@ -71,16 +71,16 @@ A long title that basically means: you can give orders to a robot using text and
   <p></p>
 
   <p><strong>Intelligent Sensing Module</strong>: This is the system’s “eye.” It merges what the user draws with what the robot detects through its sensors. Additionally, if the task involves people, this module also detects and tracks their movements with high precision.</p>
-  <ul>
+  <ul class="custom-list">
     <li>Users can mark preferred routes, danger zones, or places to avoid through an interface.</li>
     <li>The system combines these drawings with real-time data from the lidar and camera.</li>
     <li>The result is an <strong>enriched map</strong> that the robot can use to navigate more safely.</li>
-  </ul>
+  </ul class="custom-list">
 
   <p></p>
 
   <p><strong>Reinforcement Learning Module (RL)</strong>: This is the decision-making engine. It is responsible for turning the previously gathered information into concrete actions. This module ensures that the robot not only knows <em>what</em> to do, but also <em>how</em> to do it well, even in new situations.</p>
-  <ul>
+  <ul class="custom-list">
     <li><strong>Task Processor:</strong> This component organizes all the information and tells the robot: “this is your mission, these are the obstacles, and that is the destination.”</li>
     <li><strong>SAC (Soft Actor-Critic):</strong> This is the algorithm that controls movement. It continuously learns how to move better, avoid obstacles, and adjust its behavior based on the environment.</li>
   </ul>
@@ -239,7 +239,7 @@ A long title that basically means: you can give orders to a robot using text and
     <p></p>
 
   <p>This prompt is long and detailed, but its structure is clear:</p>
-  <ol>
+  <ol class="custom-list">
     <li>System role.</li>
     <li>Spatial considerations.</li>
     <li>Format of the expected result.</li>

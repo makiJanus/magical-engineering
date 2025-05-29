@@ -145,13 +145,14 @@ td {
     /* maintain aspect ratio */
 }
 
-li {
+.custom-list li {
   list-style-type: circle;
 }
 
-li li {
+.custom-list li li {
   list-style-type: square;
 }
+
 
 
 .video-container {

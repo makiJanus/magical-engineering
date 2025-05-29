@@ -71,7 +71,7 @@
         <p><strong>Módulo LLM (Lenguaje)</strong>: Este es la parte del sistema que razona mediante el lenguaje. Su
           trabajo es entender lo que el usuario quiere que el robot haga. Este módulo convierte el lenguaje natural en
           datos organizados: tipo de tarea, destino final y restricciones del entorno.</p>
-        <ul>
+        <ul class="custom-list">
           <li><strong>Instruction:</strong> Todo comienza con una orden, que puede ser hablada o escrita, como “Llevá al
             VIP al refrigerador, pero pasá por el estante”.</li>
           <li><strong>Semantic Map:</strong> Como el LLM no puede ver directamente el entorno, se le da un mapa
@@ -86,7 +86,7 @@
         <p><strong>Módulo de Sensing Inteligente</strong>: Este es el "ojo" del sistema. Fusiona lo que el usuario
           dibuja con lo que el robot detecta con sensores. Además, si la tarea involucra personas, este módulo también
           se encarga de detectar y seguir sus movimientos con alta precisión.</p>
-        <ul>
+        <ul class="custom-list">
           <li>Los usuarios pueden marcar en una interfaz: rutas deseadas, zonas de peligro o lugares que se deben
             evitar.</li>
           <li>El sistema combina estos dibujos con información en tiempo real del radar láser y la cámara.</li>
@@ -99,7 +99,7 @@
         <p><strong>Módulo de Aprendizaje por Refuerzo (RL)</strong>: Este es el motor de toma de decisiones. Se encarga
           de convertir la información anterior en acciones concretas. Este módulo se asegura de que el robot no solo
           sepa <em>qué</em> hacer, sino <em>cómo</em> hacerlo bien, incluso en situaciones nuevas.</p>
-        <ul>
+        <ul class="custom-list">
           <li><strong>Task Processor:</strong> Es quien organiza toda la información y le dice al robot: “esta es tu
             misión, estos son los obstáculos y ese es el destino”.</li>
           <li><strong>SAC (Soft Actor-Critic):</strong> Es el algoritmo que toma el control del movimiento. Aprende
@@ -265,7 +265,7 @@
     <p></p>
 
     <p>Este prompt es largo y detallado, pero su estructura es clara:</p>
-    <ol>
+    <ol class="custom-list">
       <li>Rol del sistema.</li>
       <li>Consideraciones espaciales.</li>
       <li>Formato del resultado esperado.</li>
