@@ -33,3 +33,32 @@
 .message.ai-message p {
     margin-right: 20px;
 }
+
+.code-container {
+    max-width: 80%;
+    margin: auto;
+    background: var(--bg-primary);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.scrollable-code-container {
+    overflow-x: auto;
+}
+
+.scrollable-code-container pre {
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+    padding: 1em;
+    border-radius: 8px;
+    overflow: auto;
+    font-family: monospace;
+    font-size: 1.5em;
+    white-space: pre;
+    margin: 10px 0;
+}
+
+.message.user-message pre {
+    margin-left: 2px;
+}

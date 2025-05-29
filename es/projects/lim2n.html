@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es ">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Primary Meta Tags -->
+  <title>Magical Enginering</title>
+  <meta name="title" content="Magical Enginering" />
+  <meta name="description"
+    content="Exploración de cómo usar LLM para generar comportamientos de navegación usando DeepSeek R1 y Isaac Sim." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  <link rel="stylesheet" href="/src/css/dialogue.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <div id="content-blog">
+      <h1 class="massiveHeading">Robots que entienden instrucciones humanas (y las siguen)</h1>
+      <p class="categories">
+        <span class="category">Investigación</span>
+        <span class="category">AI</span>
+        <span class="category">Robótica</span>
+      </p>
+
+      <h2 class="subtitle">
+        Un experimento donde usé LLMs para razonar sobre mapas semánticos, generar rutas y
+        controlar un robot Jetbot con PD. ¿La clave? Un buen prompt.
+      </h2>
+
+      <h3 class="under-subtitle-link"><a href="https://discovery.ucl.ac.uk/id/eprint/10206799/">¡Lee el artículo en el
+          cual se basa este proyecto
+          aquí!</a></h3>
+
+      <p></p>
+      <h3>El Problema</h3>
+      <p>¿No sería genial poder decirle a un robot "anda a buscar eso" y que simplemente lo haga, como en las
+        películas?.
+        Bueno, eso ya es posible gracias a los grandes modelos de lenguaje (LLMs). Pero… ¿cómo algo que solo procesa
+        texto puede traducirse en movimientos reales de un robot?</p>
+
+      <img src="/src/project_posts/project10/intro_img.png" alt="Isaac Sim robots and environments">
+
+      <h3>Donde todo se origina - La fuente de inspiración</h3>
+      <p>El equipo de Weiqin Zu también se hizo esa pregunta. Su propuesta se llama: “Language and Sketching: An
+        LLM-driven
+        Interactive Multimodal Multitask Robot Navigation Framework”, un título algo largo para algo que se resume mejor
+        como: darle órdenes al robot con texto y dibujitos.</p>
+
+      <img src="/src/project_posts/project10/intro_1.png" alt="Isaac Sim research diagram">
+
+      <p>Aunque no publicaron el código, los autores sí compartieron un diagrama muy revelador sobre cómo funciona el
+        sistema:</p>
+
+      <img src="/src/project_posts/project10/intro_2.png" alt="Isaac Sim research diagram">
+
+      <h3>Detalles significativos</h3>
+      <p>El sistema LIM2N está dividido en tres grandes módulos, que trabajan en conjunto para transformar instrucciones
+        humanas en movimientos precisos del robot. Veamos cada uno:</p>
+
+      <ol>
+
+        <p><strong>Módulo LLM (Lenguaje)</strong>: Este es la parte del sistema que razona mediante el lenguaje. Su
+          trabajo es entender lo que el usuario quiere que el robot haga. Este módulo convierte el lenguaje natural en
+          datos organizados: tipo de tarea, destino final y restricciones del entorno.</p>
+        <ul>
+          <li><strong>Instruction:</strong> Todo comienza con una orden, que puede ser hablada o escrita, como “Llevá al
+            VIP al refrigerador, pero pasá por el estante”.</li>
+          <li><strong>Semantic Map:</strong> Como el LLM no puede ver directamente el entorno, se le da un mapa
+            semántico que describe qué objetos hay, dónde están y cómo se relacionan entre sí.</li>
+          <li><strong>Function Library:</strong> Son pequeñas herramientas matemáticas y lógicas que el LLM puede usar
+            para interpretar las órdenes. Por ejemplo, puede calcular qué significa “al frente del refrigerador” en
+            coordenadas reales.</li>
+        </ul>
+
+        <p></p>
+
+        <p><strong>Módulo de Sensing Inteligente</strong>: Este es el "ojo" del sistema. Fusiona lo que el usuario
+          dibuja con lo que el robot detecta con sensores. Además, si la tarea involucra personas, este módulo también
+          se encarga de detectar y seguir sus movimientos con alta precisión.</p>
+        <ul>
+          <li>Los usuarios pueden marcar en una interfaz: rutas deseadas, zonas de peligro o lugares que se deben
+            evitar.</li>
+          <li>El sistema combina estos dibujos con información en tiempo real del radar láser y la cámara.</li>
+          <li>El resultado es un <strong>mapa enriquecido</strong> que el robot puede usar para navegar con mayor
+            seguridad.</li>
+        </ul>
+
+        <p></p>
+
+        <p><strong>Módulo de Aprendizaje por Refuerzo (RL)</strong>: Este es el motor de toma de decisiones. Se encarga
+          de convertir la información anterior en acciones concretas. Este módulo se asegura de que el robot no solo
+          sepa <em>qué</em> hacer, sino <em>cómo</em> hacerlo bien, incluso en situaciones nuevas.</p>
+        <ul>
+          <li><strong>Task Processor:</strong> Es quien organiza toda la información y le dice al robot: “esta es tu
+            misión, estos son los obstáculos y ese es el destino”.</li>
+          <li><strong>SAC (Soft Actor-Critic):</strong> Es el algoritmo que toma el control del movimiento. Aprende
+            continuamente cómo moverse mejor, evitando obstáculos y ajustando su comportamiento según el entorno.</li>
+        </ul>
+      </ol>
+
+      <h3>Simplificando y replicando </h3>
+      <p>Mi interés está en el razonamiento semántico: cómo un robot pasa de "evitá la alfombra y pasá por el estante" a
+        una secuencia de coordenadas.</p>
+      <p>Por eso, decidí replicar el módulo LLM dentro de un contenedor Docker accesible por API. En lugar del sistema
+        RL original, uso un módulo de navegación genérico con A* y control PD sobre Isaac Sim (sustituible por otros
+        planificadores más avanzados).</p>
+
+      <img src="/src/project_posts/project10/sr_1.png" alt="Isaac Sim research diagram">
+
+      <p>Así luce la interfaz de usuario en Isaac Sim:</p>
+
+      <img src="/src/project_posts/project10/sr_2.png" alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/sr_3.png" alt="Isaac Sim research diagram">
+
+      <p>Y así se ve el robot siguiendo un camino generado con LLM+A* usando control PD:</p>
+
+      <img src="/src/project_posts/project10/sr_4.gif" alt="Isaac Sim research diagram">
+
+      <h3>El prompt que hace magia</h3>
+      <p>Una parte clave para que el LLM genere coordenadas útiles es el prompt. Aquí le explico todo lo que debe
+        considerar del mapa, el entorno y la instrucción del usuario para marcar hasta 5 puntos que el robot deberá
+        seguir.</p>
+
+      <div class="code-container scrollable-code-container">
+
+          <pre><code>
+    def reason_goals(self, user_prompt: str) -> str:
+        """
+        Send a system prompt followed by a user query to the LLM and return the full response.
+        """
+        
+        system_prompt = """
+            The user is to provide set of instructrions considering a map, the semantic representation of the objects in it, and considerations to generate points that in a later stage a robot must follow.
+            Your sole purpose is to analyze semantically the provided map in array format and, from the user considerations, use leters  (a,b,c,d, ...) to mark the different goal points that (in a later stage) a robot should go to move as the user wants it to move.
+
+            CONSIDERATIONS:
+            - You will be provide with an array and the semantic meaning of its elemets, consider them carefully to think were the goal points can be placed.
+            - Understand the spatial relation between objects to select the best positions possible for each goal, if some consideration of the user is not possible, select the nearest point that make sense.
+            - THE FIRST POINT IS a, THEN b, c, d, e, ... AND SO ON, CREATE THE GOALS IN ORDER, THAT IS THE SAME FROM CLOSEST TO FARTHEST.
+            - From the arragement of the elements on the map, deduce the orientation of each one, whic part is the front or behind it, left and right, the use these insights as context for the goal points generation.
+            - Oonly select up to 5 points (a,b,c,d,e) on the most relevant parts accordingly to the user instruction.
+            - DO NOT USE COORDINATES RELATED TO OBBJECTS OF THE MAP AS GOAL POINTS, CHOOSE ONLY THE FREE SPACE THAT MAKES SENSE FOR THE ROBOT TO MOVE. 
+            - CONSIDER SELECTING GOAL POINTS THAT ARE NOT RIGHT NEXT TO THE OBJECTS, BUT IN THE NEARBY AREA, SO THE ROBOT CAN MOVE SAFELY, IF POSSIBLE.
+            - DO NOT, IF POSSIBLE, SELECT GOAL POINTS RIGHT NEXT TO THE WALL, ALSO, IF YOU SELECT TWO GOAL POINTS AND IN BETWEEN THERE IS AN OBJECT, CONSIDER CREATING ANOTHER POINT NEAR THE OBJECT SO THE ROBO CAN KNOW HOW TO CIRCUMVENT THE OBJECT.
+            - There will may be a buffer zone around the objects, consider it as a zone to avoid, but not as a wall.
+            - USE REASONING AND CHAIN OF THOUGHT TO UNDERSTAND AND SOLVE THE PROBLEM.
+
+            TO DELIVER:
+            - A set of points that the robot must follow in that order to accomplish the user instruction, UP TO 5 POINTS:
+            a = (15, 7)
+            b = (16, 13)
+            c = (20, 20)
+            d = (22, 25)
+
+            Here there is an example:
+
+            Pass between the sofa and tv, then go to the carpet
+
+            -1 - robot initial position
+            -2 - buffer zone, to avoid as much as possible
+            0  - free space
+            1  - wall
+            2  - TV
+            3  - sofa
+            4  - carpet
+            5  - box
+
+            [[1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. -1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 0. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 2. 2. 2. 2. 2. 2. 2. 2. 0. 0. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. a  0. 0. 0. 0. 0. b  0. 0. 0. 0. 0. 0. c  0. 0. 4. 4. d  4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 3. 0. 0. 0. 4. 4. 4. 4. 4. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 5. 5. 5. 5. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 5. 5. 5. 5. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 5. 5. 5. 5. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 5. 5. 5. 5. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.]
+            [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.]]
+            
+            Semantic Understanding:
+            - TV (2) is located around row 12, columns 10–17.
+            - Sofa (3) is in rows 19–21, columns 8–19.
+            - There's a passage area around row 15–17 and columns 8–19 between them.
+            - Carpet (4) occupies rows 11–21, columns 23–27.
+            - Robot starts at (4, 4).
+
+            Useful insights
+            [generate them]
+
+            Goal Point Logic:
+            a: Go toward the center of the passage between the sofa and TV (aligned horizontally).
+            b: Recenter after passing the middle of the sofa-TV area.
+            c: Enter the carpet area from the left side.
+            d: Move toward the center of the carpet.
+
+            So, the goal points (a, b, c, d) are:
+            a = (15, 7) → Approaching passage between TV and sofa
+            b = (15, 13) → Between TV and sofa
+            c = (15, 20) → Leaving passage, entering carpet direction
+            d = (15, 25) → On the carpet, central area
+
+            Answer:
+            a = (15, 7)
+            b = (15, 13)
+            c = (15, 20)
+            d = (15, 25)
+
+            Now waiting for the next user instruction.
+            """
+        
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+
+        payload = {
+            "model": self.model,
+            "messages": messages
+        }
+
+        response = requests.post(
+            url=self.base_url,
+            headers=self.headers,
+            data=json.dumps(payload)
+        )
+
+        response.raise_for_status()  # Raise an error for bad responses
+
+        response_data = response.json()
+        return response_data["choices"][0]["message"]["content"]
+"""
+    </code></pre>
+
+    </div>
+
+    <p></p>
+
+    <p>Este prompt es largo y detallado, pero su estructura es clara:</p>
+    <ol>
+      <li>Rol del sistema.</li>
+      <li>Consideraciones espaciales.</li>
+      <li>Formato del resultado esperado.</li>
+      <li>Ejemplo razonado paso a paso.</li>
+      <li>Resultado final.</li>
+    </ol>
+
+    <p>Esto le permite al modelo usar "chain-of-thought" para generar una respuesta robusta y segura.</p>
+
+    <h3>Resultados Experimentales</h3>
+    <p>Usé el mismo mapa e instrucciones que el paper original, pero con una base móvil distinta: el Jetbot, que es no-holónomico (sólo dos ruedas activas, pose final depende de la orientación inicial). El paper usa un robot holonómico con ruedas Mecanum.</p>
+
+    <img src="/src/project_posts/project10/re_1.png" alt="Isaac Sim research outcome paths">
+    <img src="/src/project_posts/project10/re_2.png" alt="Isaac Sim research outcome paths">
+    <img src="/src/project_posts/project10/re_3.png" alt="Isaac Sim research outcome paths">
+
+    <p>En el paper, se comparan tres métodos: control manual, RL sin restricciones, y el sistema LLM+RL. Este último logra mayor tasa de éxito general.</p>
+
+    <img src="/src/project_posts/project10/re_4.png" alt="Isaac Sim research outcome paths">
+
+    <p>En mi caso, comparé la trayectoria de referencia generada por A* con la trayectoria real del robot usando PD:</p>
+
+    <img src="/src/project_posts/project10/re_5.png" alt="Isaac Sim research outcome paths">
+
+    <p>Los resultados muestran que el robot sigue bien la trayectoria. Las pequeñas desviaciones se deben a su base no-holónomica. En los tests 1 al 4, las instrucciones se siguen correctamente. En los tests 5 y 6, el LLM interpreta las órdenes de forma muy literal (por ejemplo, ir al último objeto mencionado). Esto indica que el prompt podría mejorarse para una mejor comprensión contextual.</p>
+
+    <p>🎉 Gracias por leer! No dudes en contactarme si tienes preguntas.</p>
+    </div>
+    <div class="division-space-only"></div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/src/js/navbar_footer.js"></script>
+</body>
+
+</html>

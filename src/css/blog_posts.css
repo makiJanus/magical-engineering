@@ -145,6 +145,14 @@ td {
     /* maintain aspect ratio */
 }
 
+li {
+  list-style-type: circle;
+}
+
+li li {
+  list-style-type: square;
+}
+
 
 .video-container {
     position: relative;
@@ -291,4 +299,9 @@ td {
 /* ASD Robot */
 .project9 {
     background: url(/src/project_posts/project9/r.jpg) center center/cover;
+}
+
+/* LLM+A*+PD Navigation */
+.project10 {
+    background: url(/src/project_posts/project10/intro_img.png) center center/cover;
 }
