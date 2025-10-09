@@ -9,7 +9,7 @@
     <meta name="title" content="Magical Enginering" />
     <meta
       name="description"
-      content="Iter, a highly modular robot, swaps dedicated modules for different tasks as needed, communicating via a Python-based API and controlled through a VR interface for Oculus Quest 2, both using the same API.y" />
+      content="Iter, a highly modular robot, swaps dedicated modules for different tasks as needed, communicating via a Python-based API and controlled through a VR interface for Oculus Quest 3, both using the same API.y" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -33,18 +33,11 @@
           <span class="category">Electronics</span>
         </p> -->
 
-        <h2 class="subtitle">Iter is a robot designed to be as modular as
-          possible, both in terms of software and
-          hardware. With dedicated
-          swappable modules for each task according to the
-          requirements that may
-          arise. When communicating with external
-          devices, it uses a Python-based API. It is
-          controlled through a
-          VR
-          interface for Oculus Quest 2, connected to
-          the
-          robot using the same API.</h2>
+        <h2 class="subtitle">Designed to be as modular as possible, both in 
+          terms of software and hardware. With dedicated swappable modules 
+          for each task according to the requirements and a Python-based API. It can
+           be controlled through a MX interface using Oculus Quest 3 or with an 
+           android app, both developed in Unreal Engine 5.</h2>
         <!-- <h3 class="under-subtitle-link"><a
             href="https://github.com/makiJanus/iter">Check the GitHub
             here!</a></h3> -->
@@ -56,24 +49,21 @@
           the robotics laboratory I was once a part of. However, I had a strong
           desire to continue my robotics experiments and conduct home-made
           research. To fulfill this aspiration, I needed a robot that would
-          serve as a platform for my experiments. The robot had to be flexible
-          enough to accommodate different components based on the requirements
-          of each experiment. For example, if I wanted to test a navigation
-          algorithm, I needed a module with wheels. If I aimed to capture a
-          panoramic view of the robot's surroundings, I required a module
-          equipped with multiple webcams. The idea was to have the ability to
-          customize the robot based on specific experiment needs. However, this
-          was just one aspect of the problem - the hardware and design.
-          Simultaneously, it was crucial to have versatile and scalable software
+          serve as a platform for my experiments. The idea was to have the ability to
+          customize the robot based on specific needs. Simultaneously, it was 
+          crucial to have versatile and scalable software
           that could incorporate new features upon request and establish
           connections with various devices. This software would serve as the
           backbone, enabling the robot to adapt and expand its capabilities as
-          needed. In summary, the challenge encompassed two key components: the
+          needed. </p>
+
+        <img src="/src/project_posts/project2/robot_meme.png"
+          alt="Isaac Sim robots and environments">
+
+          <p>In summary, the challenge encompassed two key components: the
           flexible hardware/design to support diverse experiment requirements
           and a versatile software system capable of accommodating new features
           and interacting with different devices.</p>
-        <img src="/src/project_posts/project2/iter_vertical.jpg"
-          alt="Isaac Sim robots and environments">
 
         <h3> Starting the right way</h3>
         <p>The robot structure is modular, consisting of different modules that
@@ -81,7 +71,12 @@
           the vanilla version includes a holonomic mobile base, a power supply
           module for distributing energy to all parts of the robot, and a
           processing module. This one is equipped with a Jetson Nano and an
-          Intel RealSense D455 RGB-D camera. However, it is entirely possible to
+          Intel RealSense D455 RGB-D camera. </p>
+
+        <img src="/src/project_posts/project2/modules.jpg"
+          alt="Isaac Sim robots and environments">
+          
+        <p>However, it is entirely possible to
           switch out the wheels for legs or add an arm module with minimal
           effort. This flexibility is made possible by utilizing I2C
           communication between the modules. Each unit is connected through four
@@ -89,15 +84,21 @@
           incorporates either a microprocessor, such as an Arduino board or an
           ESP32, or a microcomputer, such as a Jetson or a Raspberry Pi. The
           software follows a similar modular structure, enabling seamless
-          interconnection between different types of devices. The robot utilizes
+          interconnection between different types of devices. </p>
+        
+        <img src="/src/project_posts/project2/i2c_diagram.png"
+          alt="Isaac Sim research diagram">
+        <img src="/src/project_posts/project2/iter_diagram.png"
+          alt="Isaac Sim research diagram">
+
+          
+        <p>The robot utilizes
           a Python HTTP API, where each function can be wrapped in a dynamic
           GET/POST format. This approach simplifies and accelerates the addition
           of different functions, allowing for further development and
-          customization. The robot's controller is an Oculus Quest 2 VR headset.
-          Thanks to the Python API, the headset can be linked to the robot
-          through an application developed in Unreal Engine 5, which supports
-          HTTP communication.</p>
-        <img src="/src/project_posts/project2/iter_diagram.png"
+          customization. The robot's controller is an Oculus Quest 3 VR headset or
+          Android APP.</p>
+        <img src="/src/project_posts/project2/http_showcase.png"
           alt="Isaac Sim research diagram">
 
         <h3>VR controller, a good match</h3>
@@ -106,16 +107,34 @@
           enhances the user experience by providing a more intuitive and
           immersive way to interact with the robot. Users can have a
           first-person perspective, seeing the robot's surroundings as if they
-          were inside it, which facilitates better spatial awareness. The
-          flexibility of a VR headset as a controller enables easy integration
-          with the modular robot. By leveraging a Python API and an application
-          developed in Unreal Engine 5, the VR headset can be seamlessly linked
-          to the robot. This integration empowers users to control and interact
+          were inside it while mantaining aware of the real surroundings, 
+          which facilitates better spatial awareness. 
+          This integration empowers users to control and interact
           with the robot remotely, leveraging the full capabilities of the VR
           headset while maintaining a strong connection to the robot's
           functionalities. It facilitates the creation of interfaces and
           high-level control.</p>
-        <img src="/src/project_posts/project2/vrunreal.png"
+        <img src="/src/project_posts/project2/vrunreal.gif"
+          alt="Isaac Sim robots and Kaya and Jetson">
+
+        <h3>A controller in the comfort of your pocket</h3>
+        <p>In addition to the VR controller, I developed an Android app that
+          serves as an alternative control interface for the robot. This app
+          offers a more accessible and convenient option for users who may not
+          have access to a VR headset. The Android device is used alongside a
+          BackBone One controller to provide a familiar and ergonomic control
+          experience. The app communicates with the robot using the same Python
+          API as the VR controller, ensuring consistency in functionality and
+          ease of integration.</p>
+
+        <img src="/src/project_posts/project2/androidUnreal.gif"
+          alt="Isaac Sim robots and Kaya and Jetson">
+          
+          <p>By leveraging the capabilities
+          of mobile devices, the Android app enables users to have a portable
+          and readily available control option for the robot, enhancing its
+          versatility and usability in various scenarios.</p>
+        <img src="/src/project_posts/project2/android_controller.png"
           alt="Isaac Sim robots and Kaya and Jetson">
 
         <h3>Project outcomes</h3>
@@ -131,18 +150,15 @@
         <img src="/src/project_posts/project2/conlcusion1.gif"
           alt="Isaac Sim research outcome paths">
 
-        <p>A VR controller offers tremendous advantages in the field of
-          robotics,
-          extending beyond its association with sci-fi animations. Its
-          versatility lies in the ability to create tailored virtual
-          environments for a wide range of applications. Whether it involves
+        <p>A VR controller alongside a pocker size one as an option
+          offers tremendous advantages in the field of
+          robotics. Whether it involves
           manipulating giant virtual screens or designing custom user
-          interfaces, the possibilities are truly boundless. One of the key
-          benefits of employing a VR controller in robotics is enhanced
-          teleoperation and interaction. By utilizing a VR headset along with
-          controllers or hand tracking, operators can seamlessly maneuver and
-          control robots within the virtual environment. This immersive
-          experience not only adds a sense of realism but also provides an
+          interfaces for a more compact format, this versatility facilitates
+          teleoperation and interaction. By utilizing a VR headset alongside hand tracking
+          or just a pocket controller, operators can seamlessly maneuver and
+          control robots by selecting, or even creating a controller that fits their needs, 
+          providing an
           intuitive and natural way of interfacing with the robotic system.
           Moreover, the virtual nature of the environment opens up new avenues
           for training and simulation. Users can recreate real-world scenarios,

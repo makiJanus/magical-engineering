@@ -34,15 +34,10 @@
           </p>
            -->
 
-        <h2 class="subtitle">Iter es un robot diseñado para ser lo más modular
-          posible, tanto en términos de software como de
-          hardware. Con módulos intercambiables dedicados
-          para cada tarea de acuerdo a los requisitos que
-          puedan surgir. Al comunicarse con dispositivos
-          externos, utiliza una API basada en Python. Se
-          controla a través de una interfaz de realidad
-          virtual para Oculus Quest 2, conectada al robot
-          usando la misma API.</h2>
+        <h2 class="subtitle">  Diseñado para ser lo más modular posible, tanto en términos de software 
+          como de hardware. Con módulos intercambiables dedicados para cada tarea según los requisitos 
+          y una API basada en Python. Puede ser controlado a través de una interfaz MX usando Oculus 
+          Quest 3 o con una aplicación android, ambas desarrolladas en Unreal Engine 5.</h2>
         <!-- <h3 class="under-subtitle-link"><a
             href="https://github.com/makiJanus/iter">¡Echa un vistazo al GitHub
             aquí!</a></h3> -->
@@ -51,113 +46,130 @@
           alt="Isaac Sim Deep Learning simmulation with Kaya">
         <h3>El Problema</h3>
         <p>Después de completar mi educación universitaria, ya no tenía acceso
-          al laboratorio de robótica del que una vez formé parte. Sin embargo,
-          aún tenía un fuerte deseo de continuar mis experimentos en robótica y
-          llevar a cabo investigaciones caseras. Para cumplir con esta
-          aspiración, necesitaba un robot que sirviera como plataforma para mis
-          experimentos. El robot debía ser lo suficientemente flexible como para
-          adaptarse a diferentes componentes según los requisitos de cada
-          experimento. Por ejemplo, si quería probar un algoritmo de navegación,
-          necesitaba un módulo con ruedas. Si pretendía capturar una vista
-          panorámica del entorno del robot, requería un módulo equipado con
-          múltiples cámaras. La idea era tener la capacidad de personalizar
-          el robot en función de las necesidades específicas de cada
-          experimento. Sin embargo, este era solo un aspecto del problema: el
-          hardware y el diseño. Al mismo tiempo, era crucial contar con un
-          software versátil y escalable que pudiera incorporar nuevas funciones
-          según fuera necesario y establecer conexiones con varios dispositivos.
-          Este software serviría como columna vertebral, permitiendo que el
-          robot se adaptara y ampliara sus capacidades según lo requerido. En
-          resumen, el desafío abarcaba dos componentes clave: el hardware/diseño
-          flexible para respaldar diversos requisitos de experimentos y un
-          sistema de software versátil capaz de incorporar nuevas funciones e
-          interactuar con diferentes dispositivos.</p>
+          al laboratorio de robótica del cual formé parte alguna vez. Sin embargo, tenía un fuerte
+          deseo de continuar mis experimentos de robótica y realizar investigación
+          casera. Para cumplir esta aspiración, necesitaba un robot que sirviera
+          como plataforma para mis experimentos. La idea era tener la capacidad de
+          personalizar el robot según necesidades específicas. Simultáneamente, era
+          crucial tener software versátil y escalable
+          que pudiera incorporar nuevas características bajo demanda y establecer
+          conexiones con diversos dispositivos, permitiendo que el robot se adaptara y 
+          expandiera sus capacidades según
+          fuera necesario.</p>
 
-        <img src="/src/project_posts/project2/iter_vertical.jpg"
+
+        <img src="/src/project_posts/project2/robot_meme.png"
           alt="Isaac Sim robots and environments">
 
-        <h3>Comenzando de la manera correcta</h3>
-        <p>La estructura del robot es modular, compuesta por diferentes módulos
-          que contribuyen a las características generales del robot. Por
-          ejemplo, la versión básica incluye una base móvil holonómica, un
-          módulo de suministro de energía para distribuirla a todas las
-          partes del robot, y un módulo de procesamiento. Este último está
-          equipado con un Jetson Nano y una cámara RGB-D Intel RealSense D455.
-          Sin embargo, es totalmente posible cambiar las ruedas por patas o
-          agregar un módulo de brazo con un esfuerzo mínimo. Esta flexibilidad
-          es posible gracias a la comunicación I2C entre los módulos. Cada
-          unidad está conectada a través de cuatro cables: dos para el
-          suministro de energía y dos para la comunicación. Además cada uno de
-          estos
-          incorpora un microprocesador, como una placa Arduino o un ESP32, o una
-          microcomputadora, como un Jetson o una Raspberry Pi. El software sigue
-          una estructura modular similar, lo que permite una interconexión
-          fluida entre diferentes tipos de dispositivos. El robot utiliza una
-          API de Python HTTP, donde cada función puede envolverse en un formato
-          dinámico GET/POST. Este enfoque simplifica y acelera la adición de
-          diferentes funciones, permitiendo un mayor desarrollo y
-          personalización. El controlador del robot es un auricular de realidad
-          virtual Oculus Quest 2. Gracias a la API de Python, el auricular puede
-          vincularse al robot a través de una aplicación desarrollada en Unreal
-          Engine 5, que admite la comunicación HTTP.</p>
+        <p>En resumen, el desafío abarcaba dos componentes clave: el
+          hardware/diseño flexible para soportar diversos requisitos de experimentos
+          y un sistema de software versátil capaz de acomodar nuevas características
+          e interactuar con diferentes dispositivos.</p>
 
+
+        <h3>Empezando de la manera correcta</h3>
+        <p>La estructura del robot es modular, consistiendo en diferentes módulos que
+          contribuyen a las características generales del robot. Por ejemplo,
+          la versión básica incluye una base móvil holonómica, un módulo de fuente de alimentación
+          para distribuir energía a donde se necesite, y un
+          módulo de procesamiento. Este último está equipado con una Jetson Nano y una
+          cámara RGB-D Intel RealSense D455.</p>
+
+
+        <img src="/src/project_posts/project2/modules.jpg"
+          alt="Robots y entornos de Isaac Sim">
+          
+        <p>Sin embargo, es completamente posible
+          cambiar las ruedas por patas o agregar un módulo de brazo con un mínimo
+          de modificaciones. Esta flexibilidad es posible mediante la utilización de comunicación I2C
+          entre los módulos. Cada unidad está conectada a través de cuatro
+          cables: dos para la fuente de alimentación y dos para comunicación. Cada uno
+          incorpora ya sea un microprocesador (Arduino o un
+          ESP32) o una microcomputadora (Jetson o una Raspberry Pi). El
+          software sigue una estructura modular similar, permitiendo una
+          interconexión fluida entre diferentes tipos de dispositivos.</p>
+
+        
+        <img src="/src/project_posts/project2/i2c_diagram.png"
+          alt="Isaac Sim research diagram">
         <img src="/src/project_posts/project2/iter_diagram.png"
           alt="Isaac Sim research diagram">
 
-        <h3>Controlador de RV, una combinación perfecta</h3>
-        <p>Usar un joystick de realidad virtual como controlador para un robot
-          modular ofrece varios beneficios notables. La naturaleza inmersiva de
-          esta mejora la experiencia del usuario al proporcionar
-          una forma más intuitiva e inmersiva de interactuar con el robot. Los
-          usuarios pueden tener una perspectiva en primera persona, viendo el
-          entorno del robot como si estuvieran dentro de él, lo que facilita una
-          mejor conciencia espacial. La flexibilidad control RV permite una
-          integración fácil con el robot modular. Al
-          aprovechar una API de Python y una aplicación desarrollada en Unreal
-          Engine 5, oculus quest 2 puede vincularse de manera fluida al
-          robot. Esta integración permite a los usuarios controlar e interactuar
-          con el robot de forma remota, aprovechando todas los beneficios de la
-          realida virtual mientras mantienen una conexión sólida con las
-          funcionalidades del robot. Facilita la creación de interfaces y el
-          control de alto nivel.</p>
+          
+        <p>El robot utiliza
+          una API HTTP de Python, donde cada función puede ser envuelta en un formato
+          GET/POST dinámico. Este enfoque simplifica y acelera la adición
+          de diferentes funciones, permitiendo un mayor desarrollo y
+          personalización. El controlador del robot es un casco de realidad virtual Oculus Quest 3 o
+          una aplicación Android.</p>
 
-        <img src="/src/project_posts/project2/vrunreal.png"
+        <img src="/src/project_posts/project2/http_showcase.png"
+          alt="Isaac Sim research diagram">
+
+        <h3>Controlador de realidad virtual, una buena combinación</h3>
+        <p>Usar un casco de realidad virtual como controlador para un robot modular ofrece
+          varios beneficios notables. La naturaleza inmersiva de la realidad virtual
+          mejora la experiencia del usuario al proporcionar una forma más intuitiva e
+          inmersiva de interactuar con el sistema. Los usuarios pueden tener una
+          perspectiva en primera persona, viendo los alrededores del robot como si estuvieran
+          dentro de él mientras se mantienen conscientes del entorno real,
+          lo que facilita una mayor seguridad y snetido de orientación.
+          Esta integración empodera a los usuarios para controlar e interactuar
+          con el robot de forma remota, aprovechando las capacidades completas del casco de realidad virtual
+          facilitando la creación de interfaces y
+          control de alto nivel.</p>
+        <img src="/src/project_posts/project2/vrunreal.gif"
+          alt="Robots de Isaac Sim y Kaya y Jetson">
+
+
+        <h3>Un controlador en la comodidad de tu bolsillo</h3>
+        <p>Además del controlador de realidad virtual, desarrollé una aplicación Android que
+          sirve como interfaz de control alternativa para el robot. Esta aplicación
+          ofrece una opción más accesible y conveniente para usuarios que tal vez no
+          tengan acceso a un casco de realidad virtual. El dispositivo Android se usa junto con un
+          controlador BackBone One para proporcionar una experiencia de control
+          familiar y ergonómica. La aplicación se comunica con el robot usando la misma API
+          de Python que el controlador de realidad virtual, asegurando consistencia en funcionalidad y
+          facilidad de integración.</p>
+
+
+        <img src="/src/project_posts/project2/androidUnreal.gif"
+          alt="Isaac Sim robots and Kaya and Jetson">
+          
+        <p>Al aprovechar las capacidades
+          de los dispositivos móviles, la aplicación Android permite a los usuarios tener una opción de
+          control portátil y fácilmente disponible para el robot, mejorando su
+          versatilidad y usabilidad en varios escenarios.</p>
+
+        <img src="/src/project_posts/project2/android_controller.png"
           alt="Isaac Sim robots and Kaya and Jetson">
 
         <h3>Resultados del proyecto</h3>
-        <p>En general, el Iter cumple su propósito. Ahora es un robot modular y
-          escalable con un sistema rápido y fácil para agregar o quitar
-          cualquier característica. Su tamaño me permite ahorrar dinero en la
-          estructura, lo que me habilita enfocar mis esfuerzos en el diseño de
-          software y módulos. Aunque un
-          Jetson Nano puede no ser capaz de ejecutar aplicaciones de IA
-          intensivas en recursos, es factible transferir el procesamiento pesado
-          a una computadora de escritorio utilizando su API. Además, con la
-          disponibilidad de Wi-Fi de 5 GHz, todos los datos pueden transmitirse
-          en tiempo real, lo que permite la toma de decisiones oportuna.</p>
+        <p>En general Iter cumple su propósito. Ahora es un robot modular y
+          escalable con un sistema rápido y fácil de agregar o eliminar cualquier
+          característica. Su tamaño me permite ahorrar dinero en la estructura, permitiéndome
+          enfocar mis esfuerzos en el software y diseño de módulos. Aunque una Jetson
+          Nano puede no ser capaz de ejecutar aplicaciones de IA intensivas,
+          es factible transferir el procesamiento pesado a una computadora de escritorio usando
+          su API. Además, con la disponibilidad de Wi-Fi de 5 GHz, todos los datos
+          pueden ser transmitidos en tiempo real, permitiendo la toma de decisiones oportuna.</p>
+
 
         <img src="/src/project_posts/project2/conlcusion1.gif"
-          alt="Isaac Sim research outcome paths">
+          alt="Rutas de resultados de investigación de Isaac Sim">
 
-        <p>Un controlador de realidad virtual (VR) ofrece enormes ventajas en el
-          campo de la robótica. Su versatilidad radica en la capacidad para crear
-          entornos virtuales adaptados para una amplia gama de aplicaciones. Ya
-          sea manipulando pantallas virtuales gigantes o diseñando interfaces de
-          usuario personalizadas, las posibilidades son verdaderamente
-          infinitas. Uno de los principales beneficios de utilizar un
-          controlador de VR en la robótica es la mejora de la teleoperación y la
-          interacción. Al utilizar un casco de VR junto con controles o
-          seguimiento de manos, los operadores pueden maniobrar y controlar los
-          robots de manera fluida dentro del entorno virtual. Esta experiencia
-          inmersiva no solo añade un sentido de realismo, sino que también
-          proporciona una forma intuitiva y natural de interactuar con el
-          sistema robótico. Además, la naturaleza virtual del entorno abre
-          nuevas vías para el entrenamiento y la simulación. Los usuarios pueden
-          recrear escenarios del mundo real, probar diferentes estrategias de
-          control y experimentar con tareas complejas sin riesgo de daño físico.
-          Este campo de juego virtual permite el prototipado rápido, mejoras
-          iterativas en el diseño y la exploración de diversas configuraciones y
-          funcionalidades de robots.</p>
+
+        <p>Al utilizar un casco de realidad virtual junto con seguimiento de manos
+          o simplemente un controlador de bolsillo, los operadores pueden maniobrar y
+          controlar e robot sin problemas seleccionando, o incluso creando, un controlador que se ajuste a sus necesidades,
+          proporcionando una
+          forma intuitiva y natural de interactuar con el sistema robótico.
+          Además, la naturaleza virtual del entorno abre nuevas vías
+          para entrenamiento y simulación. Los usuarios pueden recrear escenarios del mundo real,
+          probar diferentes estrategias de control y experimentar con tareas complejas
+          sin ningún riesgo de daño físico. Permitiendo un 
+          prototipado rápido, mejoras iterativas de diseño y exploración de
+          varias configuraciones y funcionalidades en el robot.</p>
 
         <img src="/src/project_posts/project2/conclusion2.gif"
           alt="Isaac Sim research learning curves">
