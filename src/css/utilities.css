@@ -8,7 +8,7 @@
 .container {
   max-width: 80%;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 }
 
 h1::selection,
@@ -149,7 +149,7 @@ h2::selection {
 /* Project cards */ 
 
 .card {
-  padding: 1rem;
+  padding: 0rem;
   background: var(--card-background);
   color: #ffffff;
   border-radius: 5px;
