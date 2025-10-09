@@ -58,7 +58,7 @@ body {
 
 #content-blog a:link,
 #content-blog a:visited {
-    color: #2ecc71;
+    color: #1a743f;
     text-decoration: none;
     -moz-transition: all 0.3s;
     -webkit-transition: all 0.3s;
@@ -240,69 +240,69 @@ td {
 
 /* Blog 1 */
 .blog1 {
-    background: url(/src/blog_posts/blog1/placeholder.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Blog 2 */
 .blog2 {
-    background: url(/src/blog_posts/blog2/cyberlover_placehilder.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Blog 2 */
 .blog3 {
-    background: url(/src/blog_posts/blog3/img1.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Project paper */
-.project1 {
+/* .project1 {
     background: url(/src/project_posts/project1/paper.png) center center/cover;
-}
+} */
 
 .project1V2 {
-    background: url(/src/project_posts/project1/trayectories.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Project iter */
 .project2 {
-    background: url(/src/project_posts/project2/iter_placeholder.jpg) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Project pdf chat */
 .project3 {
-    background: url(/src/project_posts/project3/pdf-chat.jpg) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Project 3v3 charger */
 .project4 {
-    background: url(/src/project_posts/project4/circuit.jpg) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Aina humanoid robot */
 .project5 {
-    background: url(/src/project_posts/project5/aina.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Maquintel - Mini Vizca 400 */
 .project6 {
-    background: url(/src/project_posts/project6/digital_twin.jpg) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Envirosight - Rovver X 130 */
 .project7 {
-    background: url(/src/project_posts/project7/card.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* Inverted two wheeled robot - part 1 */
 .project8 {
-    background: url(/src/project_posts/project8/card.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* ASD Robot */
 .project9 {
-    background: url(/src/project_posts/project9/r.jpg) center center/cover;
+    background-color: var(--card-bg-primary);
 }
 
 /* LLM+A*+PD Navigation */
 .project10 {
-    background: url(/src/project_posts/project10/intro_img.png) center center/cover;
+    background-color: var(--card-bg-primary);
 }
