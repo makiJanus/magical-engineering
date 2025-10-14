@@ -103,7 +103,6 @@ body {
   justify-content: space-between;
   z-index: 20;
   height: 80px;
-  width: 100%;
 }
 
 .navbar .nav-menu {
@@ -419,12 +418,20 @@ body {
 }
 
 @media (max-width: 670px) {
+
+  .navbar {
+    left: 30px;
+    right: 30px;
+    /* Optional: add rounded corners for better visual */
+    border-radius: 0 0 8px 8px;
+  }
+
   .navbar .nav-menu {
     position: fixed;
     right: -100vw;
     top: 4.5rem;
     flex-direction: column;
-    width: calc(80% - 10px);
+    width: calc(80% - 30px);
     transition: 0.3s;
     box-shadow: var(--shadow);
     padding: 2rem;
