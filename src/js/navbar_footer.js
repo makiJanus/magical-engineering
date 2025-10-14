@@ -76,6 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
         updateLangIcon(initialLang);
 
         langSwitcherButton.addEventListener("click", () => {
+            // Read the CURRENT language from localStorage
+            const currentLang = localStorage.getItem("lang") || document.documentElement.lang || "es";
             const newLang = initialLang === "en" ? "es" : "en";
             // Get the current page URL
             let currentPage = window.location.pathname;
@@ -87,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const newURL = `${baseURL}${newLang === "es" ? `/${newLang}` : ""}${currentPage}`;
             // Redirect to the new URL
             window.location.href = newURL;
-            localStorage.setItem("lang", newLang);
+            // localStorage.setItem("lang", newLang);
             updateLangIcon(newLang);
             loadTranslations(newLang);
         });
