@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const newURL = `${baseURL}${newLang === "es" ? `/${newLang}` : ""}${currentPage}`;
             // Redirect to the new URL
             window.location.href = newURL;
-            // localStorage.setItem("lang", newLang);
+            localStorage.setItem("lang", newLang);
             updateLangIcon(newLang);
             loadTranslations(newLang);
         });
