@@ -17,7 +17,7 @@
   --bg-secondary: #000000;
   --card-background: #f4f4f4;
   --bg-secondary-two: #050505;
-  --bg-text: rgba(41, 39, 34, 0.3);
+  --bg-text: rgba(153, 65, 10, 0.247);
   --btn-hover: #a2c9d8;
 
   --shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
@@ -46,7 +46,7 @@
   --bg-secondary: #f4f4f4;
   --card-background: #111111;
   --bg-secondary-two: #f4f4f4;
-  --bg-text: rgba(197, 252, 0, 0.3);
+  --bg-text: #ffd45c4b;
   --shadow: 0 2px 10px rgba(95, 95, 95, 0.2);
 
   /* Project Cards Format */
