@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta
+      name="description"
+      content="Explorando Interacciones Sociales con Aina: Mi Experiencia como Desarrollador de Robots Humanoides." />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <header id="hero">
+      <!-- Navbar -->
+      <div id="navbar-placeholder"></div>
+
+      <div id="content-blog">
+        <h1 class="massiveHeading">Lumina — A personality framework disguised as an erotic streamer</h1>
+
+        <h2 class="subtitle">
+          Lumina is an erotic virtual streamer that combines different AI technologies to create an 
+          interactive and engaging experience for her audience.
+        </h2>
+
+        <img class="gif" src="/src/project_posts/project11/1.gif"
+          alt="Lumina streamer virtual erótica looking at a mirror">
+        
+        <h3>Why?</h3>
+        <p>
+          Lumina is a deeply personal project with a strong emotional component, and it has been one of the 
+          most complex projects so far in terms of the number of elements that must work together for it to 
+          function correctly. The end goal is a fully autonomous virtual streamer capable of interacting with 
+          the audience without human intervention.
+        </p>
+
+        <img class="gif" src="/src/project_posts/project11/4.gif"
+          alt="Lumina streamer virtual erótica looking at a mirror">
+
+        <p>
+          The idea was never fully planned; it emerged as an accumulation of concepts that came together to 
+          form Lumi, from early attempts to build an NLCA (Natural Language Cognitive Architecture) based on 
+          large language models to an almost obsessive interest in the serie Westworld, where Dr. Ford has 
+          been a constant inspiration through my engineering journey. Could I someday build a Dolores 
+          Abernathy?
+        </p>
+
+        <div class="video-container">
+          <iframe  
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/MypWNnxZXaQ?si=wUw-Atelw3GRO60t" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <p>
+          It’s something that took a lot of time and resources, so monetization became a natural question. 
+          Looking at the success of Projekt Melody, an erotic VTuber controlled by a real person, the most 
+          accessible monetization path seemed to be Chaturbate, an adult streaming platform.
+        </p>
+
+        <h3>First attempt</h3>
+        <p>
+          Months were spent creating the first functional version of Lumina, more than one would like to admit. 
+          After running trial streams on Chaturbate, it became clear the idea was worth pursuing; users, few at 
+          the time, seemed to enjoy the experience, and some left tips, feedback, and positive comments. This 
+          contrasted with remarks from close acquaintances, many of whom didn’t like or simply didn’t understand 
+          the project.
+        </p>
+
+        <img src="/src/project_posts/project11/2.png"
+          alt="Lumina's Chatbusrate profile page screenshot">
+
+        <h3>Total redesign</h3>
+        <p>
+          While implementing improvements, the first design mistake became obvious: spaghetti code inside a 
+          monolithic software structure. Initially, this led me to organize and modularize the code, but as 
+          complexity grew, a total redesign was necesary in favor of a microservices architecture. Each system 
+          component gained standardized inputs and outputs, accelerating continuous improvement and easing 
+          the integration of new technologies.
+        </p>
+
+        <img src="/src/project_posts/project11/3.png"
+          alt="Lumina's first architecture diagram">
+
+        <img src="/src/project_posts/project11/5.png"
+          alt="Lumina's second architecture diagram">
+        
+        <p>
+          This reduced inference time, from when information arrives from Chaturbate to when Lumina responds, from 
+          ~30 seconds down to ~3.5 seconds, significantly improving the user experience. The best part is that 
+          this same architecture can be repurposed for social robotics projects.
+        </p>
+
+        <h3>3D Model</h3>
+        <p>
+          Lumi is designed to look appealing, but achieving a good result requires several sequential stages. 
+          The base model is created in tools like Daz3D or Blender, with special care given to skin textures 
+          and details such as blush, freckles, and imperfections. Clothing and accessories are also designed, 
+          from lingerie sets to more casual outfits.
+        </p>
+
+        <img class="gif" src="/src/project_posts/project11/6.png"
+          alt="Lumina streamer virtual erótica 3D model">
+        
+        <img class="gif" src="/src/project_posts/project11/7.png"
+          alt="Lumina streamer virtual erótica 3D model clothed">
+        
+        <p>
+          With the body completed, outfits and animations can be selected and exported into tools like Unreal 
+          Engine, where a whole second configuration stage is required.
+        </p>
+
+        <img class="gif" src="/src/project_posts/project11/8.gif"
+          alt="Lumina streamer virtual erótica un Unreal Engine">
+
+        <img class="gif" src="/src/project_posts/project11/9.gif"
+          alt="Lumina streamer virtual erótica un Unreal Engine">
+
+        <p>
+          Attention to detail is always important, lighting, shadows, and believable clothing are essential, but 
+          beyond that, it’s necessary to add the subtle elements that make the model feel alive: hair dynamics, 
+          breathing, blinking, and small facial motions, from scrunching the nose to micro saccades.
+        </p>
+
+        <h3>Beyond the 3D model — Generative AI</h3>
+        <p>
+          The erotic component was initially implemented as animations imported directly into Unreal Engine. 
+          For each interaction category like kissing, oral sex, penetration, etc, a specific animation was required. 
+          Each animation had to be created in an external program and then reconfigured in Unreal, which was a 
+          slow and tedious process.
+        </p>
+
+        <p>
+          While that pipeline still works and remains useful in specific cases, purely erotic animations were 
+          first replaced by fully rendered sequences of those animations, improving visual quality while 
+          preserving the general aesthetic of the 3D model.
+        </p>
+
+        <img class="gif" src="/src/project_posts/project11/10.gif"
+          alt="Lumina comparison, stream vs 3D moderender">
+         
+
+        <p>
+          Given the limited versatility of the previous process, the next step was to incorporate state-of-the-art 
+          generative models text-to-image, image-editing, and image-to-video, in any order as needed. This 
+          enabled the creation of personalized erotic content for users, from images to videos, based on their 
+          specific requests, increasing audience interaction and satisfaction.
+        </p>
+
+        <p>
+          A few simple examples:
+        </p>
+
+        <img class="gif" src="/src/project_posts/project11/11.png"
+          alt="AI image generated of Lumina streamer virtual erótica">
+        <img class="gif" src="/src/project_posts/project11/12.gif"
+          alt="video generated of Lumina streamer virtual erótica">
+        <img class="gif" src="/src/project_posts/project11/14.gif"
+          alt="video generated of Lumina streamer virtual erótica">
+        <img class="gif" src="/src/project_posts/project11/15.gif"
+          alt="video generated of Lumina streamer virtual erótica">
+
+        <h3>Conclusion</h3>
+        <p>
+          Beyond appearances, what has gradually taken shape is the first version of a framework that makes 
+          sense of social interactions in a virtual environment, something applicable to robots. It builds an 
+          understanding of its environment from incoming information, whether from humans, other systems, or 
+          Lumina’s internal states, and from that, makes coherent, contextual decisions autonomously.
+        </p>
+        <p>
+          Social interaction between humans and artificial entities may feel strange to those of us who are older, 
+          but amid increasing social fragmentation and loneliness, these systems are becoming more common. 
+          If you’re interested in this topic, check out the Blogs section, where several articles on social 
+          robotics and artificial intelligence are available.
+        </p>
+        <div class="video-container">
+          <iframe  
+            width="560" 
+            height="315" 
+            src="https://www.youtube.com/embed/sxgPWAG9kfY?si=bqsF9r2vwOuLAbCG"
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+
+
+      </div>
+      <div class="division-space-only"></div>
+
+      <!-- Footer -->
+      <div id="footer-placeholder"></div>
+
+      <script src="/src/js/navbar_footer.js"></script>
+    </body>
+  </html>
