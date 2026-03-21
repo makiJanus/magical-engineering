@@ -102,7 +102,7 @@ body {
   align-items: center;
   justify-content: space-between;
   z-index: 20;
-  height: 80px;
+  height: 100px;
 }
 
 .navbar .nav-menu {
@@ -403,6 +403,127 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* ── Griflan-style Headline ── */
+.griflan-headline {
+  max-width: 860px;
+  width: 100%;
+  margin: 10px auto 30px auto;
+  padding: 0 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.griflan-headline h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.8rem, 5.0vw, 5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: rgb(127, 236, 255);
+  margin: 0;
+  word-break: break-word;
+  /* ── Fix uneven centering ── */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.25em;
+}
+
+.griflan-headline .italic-serif {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* ── Color Wave animation ── */
+@keyframes colorWave {
+  0%   { color: rgb(127, 236, 255); }
+  33%  { color: rgb(180, 160, 255); }
+  66%  { color: rgb(127, 255, 212); }
+  100% { color: rgb(127, 236, 255); }
+}
+
+.griflan-headline h2 .wave-letter {
+  display: inline-block;
+  animation: colorWave 3s ease-in-out infinite;
+}
+
+.griflan-headline h2 .wave-space {
+  display: inline-block;
+  width: 0.3em;
+}
+
+/* ── Mobile adjustments ── */
+@media (max-width: 600px) {
+  .griflan-headline {
+    padding: 0 16px;
+    margin: 24px auto 20px auto;
+  }
+
+  .griflan-headline h2 {
+    font-size: clamp(2rem, 9vw, 5.0rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+}
+
+
+/* ── Cycling text cursor ── */
+h3[data-cursor]::after {
+  content: '|';
+  animation: blink 0.7s step-end infinite;
+  color: rgb(127, 236, 255);
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.cycling-text-background {
+  transition: width 0.1s ease, height 0.1s ease;
+}
+
+/* ── Golden Glow animation ── */
+@keyframes goldenGlow {
+  0%   {
+    color: rgb(255, 200, 50);
+    text-shadow: 0 0 8px rgba(255, 200, 50, 0.6);
+    opacity: 1;
+  }
+  33%  {
+    color: rgb(255, 160, 0);
+    text-shadow: 0 0 20px rgba(255, 160, 0, 0.95);
+    opacity: 0.75;
+  }
+  66%  {
+    color: rgb(255, 220, 100);
+    text-shadow: 0 0 14px rgba(255, 220, 100, 0.8);
+    opacity: 0.9;
+  }
+  100% {
+    color: rgb(255, 200, 50);
+    text-shadow: 0 0 8px rgba(255, 200, 50, 0.6);
+    opacity: 1;
+  }
+}
+
+.glow-letter {
+  display: inline-block;
+  animation: goldenGlow 4s ease-in-out infinite alternate;
+}
+
+.glow-headline h2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.25em;
+}
+
+
 
 /* Responsiveness */
 

@@ -32,14 +32,31 @@ h2::selection {
   color: #000000;
 }
 
-.btn-secondary {
+/* .btn-secondary {
   margin: 5px 0;
   background: var(--primary-color);
   color: #000000;
+} */
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  animation: btnGlow 3s ease-in-out infinite alternate;
 }
 
+@keyframes btnGlow {
+  0%   { box-shadow: 0 0 6px rgba(255, 200, 50, 0.4); }
+  100% { box-shadow: 0 0 20px rgba(255, 200, 50, 0.9), 0 0 40px rgba(255, 200, 50, 0.3); }
+}
+
+
 .btn-secondary:hover {
-  background: var(--btn-hover);
+  background: var(--primary-color);
+  color: #000000;
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(255, 200, 50, 1), 0 0 60px rgba(255, 200, 50, 0.4);
+  animation-play-state: paused; /* freezes the pulse glow on hover */
 }
 
 /* add hover to resume button */
@@ -83,7 +100,7 @@ h2::selection {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 8rem;
+  margin-top: 1rem;
   padding: 1rem;
 }
 
@@ -189,7 +206,7 @@ h2::selection {
 /* Media Queries */
 @media (max-width: 768px) {
   .header-container {
-    margin-top: 3rem;
+    margin-top: 2rem;
     text-align: center;
   }
 
