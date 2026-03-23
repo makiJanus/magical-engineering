@@ -25,27 +25,24 @@
       <div id="navbar-placeholder"></div>
 
       <div id="content-blog">
-        <h1 class="massiveHeading">Iter: Modularity at the heart of robotics
-          design</h1>
-        <!-- <p class="categories">
-          <span class="category">Virtual Reality</span>
-          <span class="category">Robotics</span>
-          <span class="category">Electronics</span>
-        </p> -->
+        <div class="griflan-headline">
+          <h1 >Iter: Modularity at the heart of robotics design</h1>
+        </div>
 
-        <h2 class="subtitle">Designed to be as modular as possible, both in 
+        <!-- <h2 class="subtitle">Designed to be as modular as possible, both in 
           terms of software and hardware. With dedicated swappable modules 
           for each task according to the requirements and a Python-based API. It can
            be controlled through a MX interface using Oculus Quest 3 or with an 
-           android app, both developed in Unreal Engine 5.</h2>
-        <!-- <h3 class="under-subtitle-link"><a
-            href="https://github.com/makiJanus/iter">Check the GitHub
-            here!</a></h3> -->
+           android app, both developed in Unreal Engine 5.</h2> -->
 
         <img class="gif" src="/src/project_posts/project2/intro.gif"
           alt="Isaac Sim Deep Learning simmulation with Kaya">
-        <h3>The Problem</h3>
-        <p>After completing my university education, I no longer had access to
+          
+        <div class="glow-headline">
+          <h3>The Problem</h3>
+        </div>
+        <p>
+          After completing my university education, I no longer had access to
           the robotics laboratory I was once a part of. However, I had a strong
           desire to continue my robotics experiments and conduct home-made
           research. To fulfill this aspiration, I needed a robot that would
@@ -55,28 +52,37 @@
           that could incorporate new features upon request and establish
           connections with various devices. This software would serve as the
           backbone, enabling the robot to adapt and expand its capabilities as
-          needed. </p>
+          needed. 
+        </p>
 
         <img src="/src/project_posts/project2/robot_meme.png"
           alt="Isaac Sim robots and environments">
 
-          <p>In summary, the challenge encompassed two key components: the
+          <p>
+            In summary, the challenge encompassed two key components: the
           flexible hardware/design to support diverse experiment requirements
           and a versatile software system capable of accommodating new features
-          and interacting with different devices.</p>
+          and interacting with different devices.
+        </p>
 
-        <h3> Starting the right way</h3>
-        <p>The robot structure is modular, consisting of different modules that
+        <div class="glow-headline">
+          <h3>Starting the right way</h3>
+        </div>
+
+        <p>
+          The robot structure is modular, consisting of different modules that
           contribute to the overall characteristics of the robot. For instance,
           the vanilla version includes a holonomic mobile base, a power supply
           module for distributing energy to all parts of the robot, and a
           processing module. This one is equipped with a Jetson Nano and an
-          Intel RealSense D455 RGB-D camera. </p>
+          Intel RealSense D455 RGB-D camera. 
+        </p>
 
         <img src="/src/project_posts/project2/modules.jpg"
           alt="Isaac Sim robots and environments">
           
-        <p>However, it is entirely possible to
+        <p>
+          However, it is entirely possible to
           switch out the wheels for legs or add an arm module with minimal
           effort. This flexibility is made possible by utilizing I2C
           communication between the modules. Each unit is connected through four
@@ -84,7 +90,8 @@
           incorporates either a microprocessor, such as an Arduino board or an
           ESP32, or a microcomputer, such as a Jetson or a Raspberry Pi. The
           software follows a similar modular structure, enabling seamless
-          interconnection between different types of devices. </p>
+          interconnection between different types of devices. 
+        </p>
         
         <img src="/src/project_posts/project2/i2c_diagram.png"
           alt="Isaac Sim research diagram">
@@ -92,17 +99,24 @@
           alt="Isaac Sim research diagram">
 
           
-        <p>The robot utilizes
+        <p>
+          The robot utilizes
           a Python HTTP API, where each function can be wrapped in a dynamic
           GET/POST format. This approach simplifies and accelerates the addition
           of different functions, allowing for further development and
           customization. The robot's controller is an Oculus Quest 3 VR headset or
-          Android APP.</p>
+          Android APP.
+        </p>
+
         <img src="/src/project_posts/project2/http_showcase.png"
           alt="Isaac Sim research diagram">
 
-        <h3>VR controller, a good match</h3>
-        <p>Using a VR headset as the controller for a modular robot offers
+        <div class="glow-headline">
+          <h3>VR controller, a good match</h3>
+        </div>
+
+        <p>
+          Using a VR headset as the controller for a modular robot offers
           several notable benefits. The immersive nature of virtual reality
           enhances the user experience by providing a more intuitive and
           immersive way to interact with the robot. Users can have a
@@ -113,44 +127,59 @@
           with the robot remotely, leveraging the full capabilities of the VR
           headset while maintaining a strong connection to the robot's
           functionalities. It facilitates the creation of interfaces and
-          high-level control.</p>
+          high-level control.
+        </p>
+        
         <img src="/src/project_posts/project2/vrunreal.gif"
           alt="Isaac Sim robots and Kaya and Jetson">
 
-        <h3>A controller in the comfort of your pocket</h3>
-        <p>In addition to the VR controller, I developed an Android app that
+        <div class="glow-headline">
+          <h3>A controller in the comfort of your pocket</h3>
+        </div>
+
+        <p>
+          In addition to the VR controller, I developed an Android app that
           serves as an alternative control interface for the robot. This app
           offers a more accessible and convenient option for users who may not
           have access to a VR headset. The Android device is used alongside a
           BackBone One controller to provide a familiar and ergonomic control
           experience. The app communicates with the robot using the same Python
           API as the VR controller, ensuring consistency in functionality and
-          ease of integration.</p>
+          ease of integration.
+        </p>
 
         <img src="/src/project_posts/project2/androidUnreal.gif"
           alt="Isaac Sim robots and Kaya and Jetson">
           
-          <p>By leveraging the capabilities
+        <p>
+          By leveraging the capabilities
           of mobile devices, the Android app enables users to have a portable
           and readily available control option for the robot, enhancing its
-          versatility and usability in various scenarios.</p>
+          versatility and usability in various scenarios.
+        </p>
+
         <img src="/src/project_posts/project2/android_controller.png"
           alt="Isaac Sim robots and Kaya and Jetson">
 
-        <h3>Project outcomes</h3>
-        <p>Overall, the Iter fulfills its purpose. It is now a modular and
+        <div class="glow-headline">
+          <h3>Project outcomes</h3>
+        </div>
+        <p>
+          Overall, the Iter fulfills its purpose. It is now a modular and
           scalable robot with a fast and easy system for adding or removing any
           feature. Its size allows me to save money on the structure, enabling
           me to focus my efforts on software and module design. While a Jetson
           Nano may not be capable of running resource-intensive AI applications,
           it is feasible to offload heavy processing to a desktop computer using
           its API. Furthermore, with the availability of 5 GHz Wi-Fi, all data
-          can be transmitted in real-time, enabling timely decision-making.</p>
+          can be transmitted in real-time, enabling timely decision-making.
+        </p>
 
         <img src="/src/project_posts/project2/conlcusion1.gif"
           alt="Isaac Sim research outcome paths">
 
-        <p>A VR controller alongside a pocker size one as an option
+        <p>
+          A VR controller alongside a pocker size one as an option
           offers tremendous advantages in the field of
           robotics. Whether it involves
           manipulating giant virtual screens or designing custom user
@@ -165,7 +194,9 @@
           test different control strategies, and experiment with complex tasks
           without any risk of physical damage. This virtual playground enables
           rapid prototyping, iterative design improvements, and exploration of
-          various robot configurations and functionalities.</p>
+          various robot configurations and functionalities.
+        </p>
+
         <img src="/src/project_posts/project2/conclusion2.gif"
           alt="Isaac Sim research learning curves">
 
@@ -176,5 +207,7 @@
       <div id="footer-placeholder"></div>
 
       <script src="/src/js/navbar_footer.js"></script>
+      <script src="/src/js/waveText.js"></script>
+      <script src="/src/js/glowText.js"></script>
     </body>
   </html>

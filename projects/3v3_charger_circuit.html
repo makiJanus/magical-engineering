@@ -25,24 +25,34 @@
       <div id="navbar-placeholder"></div>
 
       <div id="content-blog">
-        <h1 class="massiveHeading">Make every 3v3 device rechargeable</h1>
-        <!-- <p class="categories">
-          <span class="category">Electronics</span>
-        </p> -->
 
-        <h2 class="subtitle">This is a circuit that was design to charge a 3.7 V
+        <div class="griflan-headline">
+          <h1 >Make every 3v3 device rechargeable</h1>
+        </div>
+
+        <h2 class="subtitle">
+          This is a circuit that was design to charge a 3.7 V
           lipo battery and, if is necessary, act as a power supply, in both
-          cases the the output voltage is 3.3 V.</h2>
-        <h3 class="under-subtitle-link"><a
+          cases the the output voltage is 3.3 V.
+        </h2>
+
+        <h3 class="under-subtitle-link">
+          <a
             href="https://hackaday.io/project/171723-2020-make-every-3v3-device-rechargeable">Download
             the files
-            here!</a></h3>
+            here!
+          </a>
+          </h3>
 
-        <img class="gif" src="/src/project_posts/project4/circuit_eagle_3.png"
-          alt="Isaac Sim Deep Learning simmulation with Kaya">
-        <h3>The Circuit and How It Works</h3>
-        <p>For this design I wanted to address these requirements:</p>
+        <img class="gif" src="/src/project_posts/project4/circuit_eagle_3.png" alt="Isaac Sim Deep Learning simmulation with Kaya">
 
+        <div class="glow-headline">
+          <h3>The Circuit and How It Works</h3>
+        </div>
+
+        <p>
+          For this design I wanted to address these requirements:
+        </p>
         <ol>
           <li>Charge a 3.7 V Li-Ion/Li-Po Battery at maximum 4.2 V through
             USB.</li>
@@ -51,23 +61,26 @@
           <li>The circuit must have an output of 3.3 V.</li>
         </ol>
 
-        <p>This is the final scheme of the circuit:</p>
+        <p>
+          This is the final scheme of the circuit:
+        </p>
 
-        <img src="/src/project_posts/project4/circuit_eagle.png"
-          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/circuit_eagle.png" alt="Isaac Sim robots and environments">
 
-        <p>The heart of the design is the MCP73838, this IC is a battery charge
+        <p>
+          The heart of the design is the MCP73838, this IC is a battery charge
           management controller, it requires a few elements to work, the typical
-          application (available in the datasheet) circuit is:</p>
+          application (available in the datasheet) circuit is:
+        </p>
 
-        <img src="/src/project_posts/project4/mcp73838_typlical_application.png"
-          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mcp73838_typlical_application.png" alt="Isaac Sim robots and environments">
 
-        <p>As my intention is charge through USB I just ignored all the AC
+        <p>
+          As my intention is charge through USB I just ignored all the AC
           configuration like the double diode with common cathode and the Vc
           connection, pin 3 and 4 indicates the actual state of the charging
-          process and faults:</p>
-
+          process and faults:
+        </p>
         <table>
           <tbody>
             <tr>
@@ -143,7 +156,8 @@
         <img src="/src/project_posts/project4/circuit_eagle_2.png"
           alt="Isaac Sim robots and environments">
 
-        <p>The PMOS gate is set to 0V through a pull-down resistor (R5). This
+        <p>
+          The PMOS gate is set to 0V through a pull-down resistor (R5). This
           ensures that the MOS turns on when VBUS is absent. In this situation,
           the battery energizes the load. Due to the fact that the transistor is
           not ideal, it has a maximum dropout voltage of 1.1V (typically 750mV).
@@ -164,44 +178,51 @@
           3.3V regulator has a maximum dropout voltage of 400mV, so the input
           must be above 3.7V (typically, it is 250mV, which implies a Vin of
           3.55V). The biggest allowed current is 600mA, so keep that in mind if
-          you want to use it.</p>
+          you want to use it.
+        </p>
 
-        <h3>Use Example: Inexpensive 2.4MHz Mouse Converted to Rechargeable</h3>
-        <p>As an example, a cheap wireless mouse is used. The idea is to replace
+        <div class="glow-headline">
+          <h3>Use Example: Inexpensive 2.4MHz Mouse Converted to Rechargeable</h3>
+        </div>
+
+
+        <p>
+          As an example, a cheap wireless mouse is used. The idea is to replace
           the AAA batteries with a rechargeable one. I didn't find the datasheet
           of the IC in the mouse, but since it uses 3V, I assumed a Vin of 3.3V
           would be just fine. So, I simply tore apart the battery holder and
-          placed the circuit with the new battery in that space.</p>
+          placed the circuit with the new battery in that space.
+        </p>
 
-        <img src="/src/project_posts/project4/mouse_1.JPG"
-          alt="Isaac Sim robots and environments">
-        <img src="/src/project_posts/project4/mouse_2.JPG"
-          alt="Isaac Sim robots and environments">
-        <img src="/src/project_posts/project4/mouse_3.JPG"
-          alt="Isaac Sim robots and environments">
-        <img src="/src/project_posts/project4/mouse_4.JPG"
-          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_1.JPG" alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_2.JPG" alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_3.JPG" alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_4.JPG" alt="Isaac Sim robots and environments">
 
-        <p>The mouse consumes 25 mA at 3.0V, and the battery can provide 250
+        <p>
+          The mouse consumes 25 mA at 3.0V, and the battery can provide 250
           mAh. Ideally, with this setup, the mouse can be used for approximately
           10 hours on a single charge. To enhance the design, the mouse case can
           be modified for easier access to the USB charger port. For this
           modification, a 3D-printed case would be recommended. Creating a
           custom-designed case would allow for a seamless integration of the
           charging port while maintaining the mouse's ergonomics and
-          aesthetics.</p>
+          aesthetics.
+        </p>
 
-        <p>While the initial conversion demonstrates the feasibility of
+        <p>
+          While the initial conversion demonstrates the feasibility of
           converting a disposable battery device into a rechargeable one,
           further refinements through case modifications can significantly
           improve the user experience and overall functionality of the
           rechargeable wireless mouse. However, for the purposes of this
           example, the demonstration concludes with the successful integration
           of the rechargeable battery and charging circuit into the existing
-          mouse case.</p>
+          mouse case.
+        </p>
 
-        <img src="/src/project_posts/project4/mouse_gif.gif"
-          alt="Isaac Sim robots and environments">
+        <img src="/src/project_posts/project4/mouse_gif.gif" alt="Isaac Sim robots and environments">
+      
       </div>
       <div class="division-space-only"></div>
 
@@ -209,5 +230,7 @@
       <div id="footer-placeholder"></div>
 
       <script src="/src/js/navbar_footer.js"></script>
+      <script src="/src/js/waveText.js"></script>
+      <script src="/src/js/glowText.js"></script>
     </body>
   </html>
