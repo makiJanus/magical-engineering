@@ -25,21 +25,21 @@
 
     <div id="content-blog">
       <div class="griflan-headline">
-        <h1 >Robots That Understand and Follow Human Instructions</h1>
+        <h1>Robots That Understand and Follow Human Instructions</h1>
       </div>
 
-      <h3 class="under-subtitle-link"><a href="https://discovery.ucl.ac.uk/id/eprint/10206799/">Read the article in which this porject is inspired here!</a></h3>
+      <h3 class="under-subtitle-link"><a href="https://discovery.ucl.ac.uk/id/eprint/10206799/">Read the article in
+          which this porject is inspired here!</a></h3>
 
       <div class="glow-headline">
         <h3>The Problem</h3>
       </div>
 
       <p>
-        Wouldn't it be amazing to just tell a robot, "go get that" and have it actually do it, just like in the movies? Well, thanks to large language models (LLMs), that's now a real possibility. But how can a model that only processes text actually control a robot in the physical world?
+        Wouldn't it be amazing to just tell a robot, "go get that" and have it actually do it, just like in the movies?
+        Well, thanks to large language models (LLMs), that's now a real possibility. But how can a model that only
+        processes text actually control a robot in the physical world?
       </p>
-
-      <!-- <img src="/src/project_posts/project10/intro_img.png" 
-      alt="Isaac Sim robots and environments"> -->
 
       <div class="glow-headline">
         <h3>Where It All Begins</h3>
@@ -50,124 +50,136 @@
         "Language and Sketching: An LLM-driven Interactive Multimodal Multitask Robot Navigation Framework"
         A long title that basically means: you can give orders to a robot using text and little drawings.</p>
 
-      <img src="/src/project_posts/project10/intro_1.png"  
-      alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/intro_1.png" alt="Isaac Sim research diagram">
 
       <p>
-        Even though the authors didn’t release their code, they did share a very helpful diagram explaining how the system works:
+        Even though the authors didn’t release their code, they did share a very helpful diagram explaining how the
+        system works:
       </p>
 
-      <img src="/src/project_posts/project10/intro_2.png" 
-      alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/intro_2.png" alt="Isaac Sim research diagram">
 
       <div class="glow-headline">
         <h3>System Overview</h3>
       </div>
       <p>
-        The LIM2N system is divided into three main modules that work together to turn human instructions into robotic movement:
+        The LIM2N system is divided into three main modules that work together to turn human instructions into robotic
+        movement:
       </p>
 
-<ol>
+      <ol>
 
-  <p><strong>LLM Module (Language)</strong>: This is the part of the system that reasons using language. Its job is to understand what the user wants the robot to do. This module converts natural language into structured data: task type, final destination, and environmental constraints.</p>
-  <ul class="custom-list">
-    <li><strong>Instruction:</strong> Everything starts with a command, which can be spoken or written, such as “Take the VIP to the fridge, but go past the shelf.”</li>
-    <li><strong>Semantic Map:</strong> Since the LLM cannot directly see the environment, it is given a semantic map that describes what objects are present, where they are, and how they relate to each other.</li>
-    <li><strong>Function Library:</strong> These are small mathematical and logical tools that the LLM can use to interpret instructions. For example, it can calculate what “in front of the fridge” means in real coordinates.</li>
-  </ul>
+        <p><strong>LLM Module (Language)</strong>: This is the part of the system that reasons using language. Its job
+          is to understand what the user wants the robot to do. This module converts natural language into structured
+          data: task type, final destination, and environmental constraints.</p>
+        <ul class="custom-list">
+          <li><strong>Instruction:</strong> Everything starts with a command, which can be spoken or written, such as
+            “Take the VIP to the fridge, but go past the shelf.”</li>
+          <li><strong>Semantic Map:</strong> Since the LLM cannot directly see the environment, it is given a semantic
+            map that describes what objects are present, where they are, and how they relate to each other.</li>
+          <li><strong>Function Library:</strong> These are small mathematical and logical tools that the LLM can use to
+            interpret instructions. For example, it can calculate what “in front of the fridge” means in real
+            coordinates.</li>
+        </ul>
 
-  <p><strong>Intelligent Sensing Module</strong>: This is the system’s “eye.” It merges what the user draws with what the robot detects through its sensors. Additionally, if the task involves people, this module also detects and tracks their movements with high precision.</p>
-  <ul class="custom-list">
-    <li>Users can mark preferred routes, danger zones, or places to avoid through an interface.</li>
-    <li>The system combines these drawings with real-time data from the lidar and camera.</li>
-    <li>The result is an <strong>enriched map</strong> that the robot can use to navigate more safely.</li>
-  </ul class="custom-list">
+        <p><strong>Intelligent Sensing Module</strong>: This is the system’s “eye.” It merges what the user draws with
+          what the robot detects through its sensors. Additionally, if the task involves people, this module also
+          detects and tracks their movements with high precision.</p>
+        <ul class="custom-list">
+          <li>Users can mark preferred routes, danger zones, or places to avoid through an interface.</li>
+          <li>The system combines these drawings with real-time data from the lidar and camera.</li>
+          <li>The result is an <strong>enriched map</strong> that the robot can use to navigate more safely.</li>
+        </ul class="custom-list">
 
-  <p><strong>Reinforcement Learning Module (RL)</strong>: This is the decision-making engine. It is responsible for turning the previously gathered information into concrete actions. This module ensures that the robot not only knows <em>what</em> to do, but also <em>how</em> to do it well, even in new situations.</p>
-  <ul class="custom-list">
-    <li><strong>Task Processor:</strong> This component organizes all the information and tells the robot: “this is your mission, these are the obstacles, and that is the destination.”</li>
-    <li><strong>SAC (Soft Actor-Critic):</strong> This is the algorithm that controls movement. It continuously learns how to move better, avoid obstacles, and adjust its behavior based on the environment.</li>
-  </ul>
-</ol>
+        <p><strong>Reinforcement Learning Module (RL)</strong>: This is the decision-making engine. It is responsible
+          for turning the previously gathered information into concrete actions. This module ensures that the robot not
+          only knows <em>what</em> to do, but also <em>how</em> to do it well, even in new situations.</p>
+        <ul class="custom-list">
+          <li><strong>Task Processor:</strong> This component organizes all the information and tells the robot: “this
+            is your mission, these are the obstacles, and that is the destination.”</li>
+          <li><strong>SAC (Soft Actor-Critic):</strong> This is the algorithm that controls movement. It continuously
+            learns how to move better, avoid obstacles, and adjust its behavior based on the environment.</li>
+        </ul>
+      </ol>
 
-<div class="glow-headline">
-  <h3>Simplifying and replicating</h3>
-</div>
-<p>My main interest is in semantic reasoning: how a robot goes from “avoid the carpet and go past the shelf” to a sequence of coordinates.</p>
-<p>That’s why I decided to replicate the LLM module inside a Docker container accessible via API. Instead of the original RL system, I use a generic navigation module with A* and PD control in Isaac Sim (which can be replaced later with more advanced planners).</p>
+      <div class="glow-headline">
+        <h3>Simplifying and replicating</h3>
+      </div>
+      <p>My main interest is in semantic reasoning: how a robot goes from “avoid the carpet and go past the shelf” to a
+        sequence of coordinates.</p>
+      <p>That’s why I decided to replicate the LLM module inside a Docker container accessible via API. Instead of the
+        original RL system, I use a generic navigation module with A* and PD control in Isaac Sim (which can be replaced
+        later with more advanced planners).</p>
 
-      <img src="/src/project_posts/project10/sr_1.png" 
-      alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/sr_1.png" alt="Isaac Sim research diagram">
 
       <p>This is what the user interface looks like in Isaac Sim:</p>
 
-      <img src="/src/project_posts/project10/sr_2.png" 
-      alt="Isaac Sim research diagram">
-      <img src="/src/project_posts/project10/sr_3.png" 
-      alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/sr_2.png" alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/sr_3.png" alt="Isaac Sim research diagram">
 
       <p>And this is how the robot looks while following a path generated with LLM + A* using PD control:</p>
 
-      <img src="/src/project_posts/project10/sr_4.gif" 
-      alt="Isaac Sim research diagram">
+      <img src="/src/project_posts/project10/sr_4.gif" alt="Isaac Sim research diagram">
 
       <div class="glow-headline">
         <h3>The Prompt</h3>
       </div>
       <p>
-        A key part of the system is the prompt. It explains everything the LLM needs to know about the map, 
-        the user’s instruction, and the expected output up to 5 waypoints. This prompt is long and detailed, 
+        A key part of the system is the prompt. It explains everything the LLM needs to know about the map,
+        the user’s instruction, and the expected output up to 5 waypoints. This prompt is long and detailed,
         but its structure is clear:
       </p>
 
-  <p>
-    This prompt is long and detailed, but its structure is clear:
-  </p>
-  <ol class="custom-list">
-    <li>System role.</li>
-    <li>Spatial considerations.</li>
-    <li>Format of the expected result.</li>
-    <li>Step-by-step reasoned example.</li>
-    <li>Final result.</li>
-  </ol>
+      <p>
+        This prompt is long and detailed, but its structure is clear:
+      </p>
+      <ol class="custom-list">
+        <li>System role.</li>
+        <li>Spatial considerations.</li>
+        <li>Format of the expected result.</li>
+        <li>Step-by-step reasoned example.</li>
+        <li>Final result.</li>
+      </ol>
 
-  <p>
-    This allows the model to use "chain-of-thought" to generate a robust and reliable response.
-  </p>
+      <p>
+        This allows the model to use "chain-of-thought" to generate a robust and reliable response.
+      </p>
 
-  <div class="glow-headline">
-    <h3>Experimental Results</h3>
-  </div>
-  <p>
-    I used the same map and instructions as the original paper, but with a different mobile base: the Jetbot, which is non-holonomic (only two active wheels, final pose depends on the initial orientation). The paper uses a holonomic robot with Mecanum wheels.
-  </p>
+      <div class="glow-headline">
+        <h3>Experimental Results</h3>
+      </div>
+      <p>
+        I used the same map and instructions as the original paper, but with a different mobile base: the Jetbot, which
+        is non-holonomic (only two active wheels, final pose depends on the initial orientation). The paper uses a
+        holonomic robot with Mecanum wheels.
+      </p>
 
-    <img src="/src/project_posts/project10/re_1.png" 
-    alt="Isaac Sim research outcome paths">
-    <img src="/src/project_posts/project10/re_2.png" 
-    alt="Isaac Sim research outcome paths">
-    <img src="/src/project_posts/project10/re_3.png" 
-    alt="Isaac Sim research outcome paths">
+      <img src="/src/project_posts/project10/re_1.png" alt="Isaac Sim research outcome paths">
+      <img src="/src/project_posts/project10/re_2.png" alt="Isaac Sim research outcome paths">
+      <img src="/src/project_posts/project10/re_3.png" alt="Isaac Sim research outcome paths">
 
-  <p>
-    The paper compares three methods: manual control, unconstrained RL, and the LLM+RL system. The latter achieves a higher overall success rate.
-  </p>
+      <p>
+        The paper compares three methods: manual control, unconstrained RL, and the LLM+RL system. The latter achieves a
+        higher overall success rate.
+      </p>
 
-  <img src="/src/project_posts/project10/re_4.png" 
-  alt="Isaac Sim research outcome paths">
+      <img src="/src/project_posts/project10/re_4.png" alt="Isaac Sim research outcome paths">
 
-  <p>
-    In my case, I compared the reference path generated by A* with the robot’s actual path using PD control:
-  </p>
+      <p>
+        In my case, I compared the reference path generated by A* with the robot’s actual path using PD control:
+      </p>
 
-  <img src="/src/project_posts/project10/re_5.png" 
-  alt="Isaac Sim research outcome paths">
+      <img src="/src/project_posts/project10/re_5.png" alt="Isaac Sim research outcome paths">
 
-  <p>
-    The results show that the robot follows the path well. The small deviations are due to its non-holonomic base. In tests 1 through 4, the instructions are correctly followed. In tests 5 and 6, the LLM interprets the commands very literally (for example, going to the last mentioned object). This indicates that the prompt could be improved for better contextual understanding.
-  </p>
+      <p>
+        The results show that the robot follows the path well. The small deviations are due to its non-holonomic base.
+        In tests 1 through 4, the instructions are correctly followed. In tests 5 and 6, the LLM interprets the commands
+        very literally (for example, going to the last mentioned object). This indicates that the prompt could be
+        improved for better contextual understanding.
+      </p>
 
-  <p>🎉 Thanks for reading! Feel free to contact me if you have any questions.</p>
+      <p>🎉 Thanks for reading! Feel free to contact me if you have any questions.</p>
 
     </div>
     <div class="division-space-only"></div>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingeniería Mágica</title>
+    <meta name="title" content="Ingeniería Mágica" />
+    <meta name="description"
+        content="Diseño e implementación de un robot social llamado Emma, diseñada para interactuar con niños de forma natural y cercana." />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+    <header id="hero">
+        <div id="navbar-placeholder"></div>
+        <div id="content-blog">
+
+
+            <div class="griflan-headline">
+                <h1>Emma: Una robot a la que le encanta conversar</h1>
+            </div>
+
+
+            <!-- placeholder for vid -->
+            <div class="video-wrapper">
+                <div class="video-label">▶ Ver la demo</div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/hazGMOoddSA?si=Bt8if4xo-4slrMSD"
+                        title="Reproductor de video de YouTube" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+
+            <div class="glow-headline">
+                <h3>Descripción general</h3>
+            </div>
+
+
+            <p>
+                Emma, como me gusta llamarla, es un robot social diseñada para interactuar con niños de una manera
+                natural y entretenida. Tiene una apariencia amigable y acogedora,
+                con un exterior suave y colorido pensado para resultar atractivo visualmente a los más pequeños. Emma
+                cuenta con una variedad de sensores (cámaras, micrófonos
+                y sensores táctiles) que le permiten percibir su entorno e interactuar con los niños de forma más
+                espontánea y lúdica.
+            </p>
+
+
+            <img src="/src/project_posts/project12/cover.gif" alt="El creador interactuando con Emma">
+
+
+            <p>
+                Este proyecto me tomó alrededor de 2 meses, desde el diseño CAD hasta el ensamblaje y las pruebas
+                finales. Diseñé el robot en Fusion 360; la cara, que es clave para
+                lograr interacciones más naturales, está hecha en silicona utilizando un molde impreso en 3D. El resto
+                del cuerpo también fue impreso en 3D con componentes adicionales
+                disponibles en el mercado. El robot es controlado por una Raspberry Pi 3B+ y programado en Python,
+                usando los pines GPIO para leer los sensores, gestionar las pantallas
+                y controlar los servomotores.
+            </p>
+            <p>
+                El resultado es un robot social que funciona: puede interactuar con niños de forma natural y, en
+                términos más amplios, sirve como plataforma para el desarrollo
+                continuo e investigación en este campo. Estoy muy satisfecho con el resultado y espero seguir trabajando
+                en este proyecto, añadiendo nuevas funcionalidades
+                y refinando el diseño.
+            </p>
+
+
+            <div class="glow-headline">
+                <h3>Diseño</h3>
+            </div>
+            <p>
+                La apariencia del robot es fundamental, ya que es lo primero con lo que los niños van a interactuar.
+                Quería crear un robot que transmitiera cercanía y confianza. Estas son algunas de las referencias
+                principales que usé como punto de partida para el diseño conceptual:
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/design_1.png" alt="Conceptos de arte para Emma">
+
+
+            <p>
+                Un aspecto central es la cara: era imprescindible usar un material suave, similar a la piel. Por eso
+                opté por silicona teñida vaciada en un molde impreso en 3D,
+                lo que permite lograr un acabado más natural y agradable a la vista, además de interacciones más cálidas
+                con los niños gracias a su textura flexible y suave.
+                A continuación, algunas imágenes del proceso de diseño y el resultado final:
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/design_2.png" alt="Molde y pruebas de silicona para la cara de Emma">
+
+            <p>
+                El resto del robot está construido con piezas impresas en 3D, cubiertas con resina transparente para
+                mayor protección (principalmente para preservar la pintura).
+                Cada pieza fue pensada para ser fácil de armar y desarmar, lo que facilita realizar ajustes y mejoras en
+                el futuro.
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/design_3.png" alt="Piezas impresas en 3D de Emma ensambladas">
+
+
+            <p>
+                Claro que no todo es apariencia, la electrónica también juega un papel fundamental. Ya sabemos que el
+                robot es controlado por una Raspberry Pi, pero dada la
+                cantidad de componentes conectados a ella, fue necesario diseñar una placa de circuito personalizada que
+                integrara todos los elementos. Esto no solo ordenó el
+                diseño y facilitó el diagnóstico de problemas, sino que también lo hizo más eficiente. Usar Fusion 360
+                me permitió diseñar tanto el CAD como el PCB en un mismo
+                entorno, logrando una integración mucho más fluida entre los componentes mecánicos y electrónicos.
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/design_4.png"
+                alt="Distintas etapas del diseño de Emma: Fusion 360, Adobe Substance Painter y el resultado final">
+            <img src="/src/project_posts/project12/design_5.png" alt="Circuito interno de la cabeza de Emma">
+
+
+            <p>
+                Aquí podemos ver el esquema completo del PCB y los componentes electrónicos utilizados en el robot:
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/design_6.png" alt="Esquema del circuito principal de Emma">
+
+
+            <div class="glow-headline">
+                <h3>Software</h3>
+            </div>
+            <p>
+                La arquitectura de software del robot fue diseñada de forma modular y escalable, pensando en la
+                integración futura de nuevas funcionalidades.
+                La lógica principal se organiza en hilos de ejecución en paralelo, cada uno con una responsabilidad
+                específica: uno se encarga del seguimiento facial,
+                otro gestiona la conversación (síntesis de voz, reconocimiento de voz y lógica del LLM), un tercero
+                realiza el automonitoreo del sistema (sensores y
+                estado de las APIs), y el último administra la interfaz física, un botón que desencadena acciones
+                concretas al presionarse. Esta separación garantiza
+                que si un hilo falla, los demás continúen funcionando sin interrupciones, lo que se traduce en un
+                desempeño más estable y confiable.
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/software_1.png"
+                alt="Esquema de arquitectura de software de Emma - hilo 1">
+            <img src="/src/project_posts/project12/software_2.png"
+                alt="Esquema de arquitectura de software de Emma - hilo 2">
+            <img src="/src/project_posts/project12/software_3.png"
+                alt="Esquema de arquitectura de software de Emma - hilo 3">
+
+
+            <p>
+                Cada hilo controla los componentes de hardware correspondientes, pero antes de que todo entre en
+                funcionamiento, el sistema ejecuta una rutina de autodiagnóstico
+                en cada inicio. Esta rutina verifica el estado de todos los componentes y APIs, mostrando el proceso en
+                la pantalla LCD y en la parte trasera del robot. Así se
+                garantiza que todo esté operativo antes de comenzar las interacciones, y si algo falla, el sistema
+                alerta al usuario y previene posibles problemas durante el uso.
+            </p>
+
+
+            <p>
+                Dado que la Raspberry Pi no es especialmente potente y el software es bastante exigente, tuve que
+                optimizar el código al máximo. Para ello, implementé APIs que
+                conectan con servidores más poderosos (en este caso, mi computador principal) donde corro el servidor
+                LLM con LM Studio; un contenedor Docker de desarrollo
+                que maneja el reconocimiento de voz (STT) con una versión liviana de Whisper, y la síntesis de voz
+                (TTS), que se conecta al contenedor oficial de Kokoro en Docker.
+            </p>
+
+
+            <!-- placeholder for imgs -->
+            <img src="/src/project_posts/project12/software_4.png"
+                alt="Esquema de arquitectura de software de Emma - conexiones API">
+
+            <p>
+                De esta manera, la Raspberry Pi se encarga de las interacciones básicas y el control del hardware,
+                mientras que las tareas de procesamiento más intensivas
+                se delegan a servidores más potentes, garantizando un rendimiento más fluido y responsivo.
+            </p>
+
+            <div class="glow-headline">
+                <h3>Resultados</h3>
+            </div>
+            <p>
+                Como se puede apreciar en las imágenes, hay muchos detalles y funcionalidades trabajando en conjunto
+                para lograr una interacción más natural y envolvente con los niños.
+                Aún hay bastante margen de mejora (por ejemplo, el sensor táctil capacitivo está operativo pero no
+                integrado del todo, debido al ruido eléctrico y la longitud
+                necesaria del cableado hacia la Raspberry Pi), pero en términos generales, el robot funciona y puede
+                servir como plataforma para el desarrollo continuo e investigación
+                en este campo. Estoy muy contento con el resultado, y espero que hayas disfrutado leyendo sobre este
+                proyecto tanto como yo disfruté construyéndolo. ¡Gracias por leer!
+            </p>
+
+
+            <img src="/src/project_posts/project12/result_1.png" alt="Una imagen del creador junto a Emma">
+
+
+        </div>
+        <div class="division-space-only"></div>
+        <div id="footer-placeholder"></div>
+        <script src="/src/js/navbar_footer.js"></script>
+        <script src="/src/js/waveText.js"></script>
+        <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

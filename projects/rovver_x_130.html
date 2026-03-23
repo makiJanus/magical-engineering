@@ -1,157 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Primary Meta Tags -->
-    <title>Magical Enginering</title>
-    <meta name="title" content="Magical Enginering" />
-    <meta
-      name="description"
-      content="Making a digital clone of the robo Rovver X 130 from Envirosight" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
-      crossorigin="anonymous" />
-    <link rel="stylesheet" href="/src/css/style.css" />
-    <link rel="stylesheet" href="/src/css/utilities.css" />
-    <link rel="stylesheet" href="/src/css/blog_posts.css" />
-  </head>
-  <body>
-    <header id="hero">
-      <!-- Navbar -->
-      <div id="navbar-placeholder"></div>
 
-      <div id="content-blog">
-        <div class="griflan-headline">
-          <h1 >Rovver X 130: Digital Twin</h1>
-        </div>
-        
-        <img src="/src/project_posts/project7/intro_gif.gif"
-          alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Primary Meta Tags -->
+  <title>Magical Enginering</title>
+  <meta name="title" content="Magical Enginering" />
+  <meta name="description" content="Making a digital clone of the robo Rovver X 130 from Envirosight" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
 
-        <div class="glow-headline">
-          <h3>The Problem</h3>
-        </div>
-          <p>
-            The inspection of municipal pipes is a constantly evolving sector, where the maintenance of sanitation and drinking water infrastructure 
-            is at the center of interest. This industry has challenges such as: adverse operating conditions, high costs, personnel training, and regulatory 
-            compliance, which create a competitive environment.
-          </p>
+<body>
+  <header id="hero">
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
 
-          <p>
-            Out of curiosity, I started researching inspection robots and better understanding the industry context. By the end of my research, 
-            I had everything I needed to create a proposal, but I had no one to present it to, so, with some enthusiasm, I decided to go ahead 
-            and make a digital clone of the Rovver X 130.
-          </p>
-        
-        <img src="/src/project_posts/project7/pipe_clean_ssample_img.png"
-            alt="A picture of someone cleanning a pipe">
-      
-        <div class="glow-headline">
-          <h3>Looking Into the Rovver X 130</h3>
-        </div>
-            <p>
-              The ROVVER X 130 is a sewer inspection robotic system developed by Envirosight, which is as versatile as it is robust, especially in underground environments. 
-              It can travel up to 1640 feet (or around 500 meters for our metric system friends) through pipe systems, has agility thanks to a six-wheel drive system, 
-              and is capable of inspecting pipes with diameters between 6 and 96 inches, or around 15 to 244 centimeters respectively.
-            </p>
-          
-          <img src="/src/project_posts/project7/rvx_sizes_s.png"
-            alt="Rovver X 130 Simple">
-          
-            <p>
-              The design focus is adaptability, so it has interchangeable wheels to adapt to different types and conditions in pipes. The camera can tilt and rotate, 
-              providing a wide field of view with 10x optical zoom and 12x digital zoom. Overall, this robot is teleoperated and can encode observations directly into the control interface 
-              using PACP, MACP, and LACP catalogs, facilitating the identification of necessary repairs and report generation.
-            </p>
-            
-            <p>
-              The ROVVER X 130 is used in various industries, including municipal inspection to assess the condition of sewers and stormwater systems, critical inspections in underground nuclear systems, 
-              and validation of the internal condition of pipes in chemical and pharmaceutical plants.
-            </p>
-          
-          <img src="/src/project_posts/project7/rovver_modules.png"
-            alt="Rovver and its accesories">
-          
-        <div class="glow-headline">
-          <h3>Digital Twin</h3>
-        </div>
-        <p>
-          Envirosight provides information about the robot's dimensions, but does not specify exactly which part of it they cover. However, this problem can be accurately circumvented by using a flat image 
-          of the robot in Fusion 360. In this tool, the image can be precisely measured and adjusted to the official measurements of the Rovver in the most logical way possible. From this, the CAD model can be generated.
-        </p>
-          
-        <img src="/src/project_posts/project7/rovver_cad_1.png"
-          alt="Rovver inverse engineering measurements">
-          
-        <img src="/src/project_posts/project7/rovver_real_1.jpeg"
-          alt="Rovver real">
-          
-        <img src="/src/project_posts/project7/rpvver_cad_2.png"
-          alt="Rovver cad model">
-          
-          <p>We already have the design. Now we will import it into Onshape to add the joints. 
-            Then, we will configure the robot's sensors and lights in Isaac Sim to make them work correctly. 
-            Once this is done, we save it as USD and it is ready to be tested.</p>
-
-        <img src="/src/project_posts/project7/rovver_cad_3.png"
-          alt="Rovver digital twin basic">
-          
-          <p>Of course, this is just the process of the basic model, without accessories, used for small pipes. However, in 
-            larger environments, greater traction, height, and lighting capacity are needed. To meet these 
-            needs, Envirosight offers accessories that can be easily attached to the base model. Following the same procedure used 
-            previously:
-          </p>
-
-        <img src="/src/project_posts/project7/rovver_extended_cad_1.png"
-          alt="Rovver digital twin basic">
-
-        <img src="/src/project_posts/project7/rovver_extended_cad_2.png"
-          alt="Rovver digital twin basic">
-
-        <div class="glow-headline">
-          <h3>Results</h3>
-        </div>
-          <p>
-            To evaluate the simulation and performance of the digital models of the ROVVER X 130, I have created test circuits that replicate real pipes 
-            both in appearance and shape. These circuits allow the evaluation of both robots' ability to navigate through simulated environments 
-            with precision and efficiency.
-          </p>
-
-        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1.png"
-          alt="DCircuito de prueba 1">
-          
-        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1A.gif"
-          alt="Circuito de prueba 1A gif">
-        
-        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1B.gif"
-          alt="Circuito de prueba 1B gif">
-          
-          <p>These tests also serve to validate the robot's concept before building it, significantly reducing costs by saving resources on errors 
-            and possible corrections. Additionally, the development and research process becomes faster, as failures can be identified early in the simulation phase.
-          </p>
-          
-        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2.png"
-          alt="DCircuito de prueba 1">
-          
-        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2A.gif"
-          alt="Circuito de prueba 1A gif">
-        
-        <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2B.gif"
-          alt="Circuito de prueba 1B gif">
-          
-
+    <div id="content-blog">
+      <div class="griflan-headline">
+        <h1>Rovver X 130: Digital Twin</h1>
       </div>
-      <div class="division-space-only"></div>
 
-      <!-- Footer -->
-      <div id="footer-placeholder"></div>
+      <img src="/src/project_posts/project7/intro_gif.gif"
+        alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
 
-      <script src="/src/js/navbar_footer.js"></script>
-      <script src="/src/js/waveText.js"></script>
-      <script src="/src/js/glowText.js"></script>
-    </body>
-  </html>
+      <div class="glow-headline">
+        <h3>The Problem</h3>
+      </div>
+      <p>
+        The inspection of municipal pipes is a constantly evolving sector, where the maintenance of sanitation and
+        drinking water infrastructure
+        is at the center of interest. This industry has challenges such as: adverse operating conditions, high costs,
+        personnel training, and regulatory
+        compliance, which create a competitive environment.
+      </p>
+
+      <p>
+        Out of curiosity, I started researching inspection robots and better understanding the industry context. By the
+        end of my research,
+        I had everything I needed to create a proposal, but I had no one to present it to, so, with some enthusiasm, I
+        decided to go ahead
+        and make a digital clone of the Rovver X 130.
+      </p>
+
+      <img src="/src/project_posts/project7/pipe_clean_ssample_img.png" alt="A picture of someone cleanning a pipe">
+
+      <div class="glow-headline">
+        <h3>Looking Into the Rovver X 130</h3>
+      </div>
+      <p>
+        The ROVVER X 130 is a sewer inspection robotic system developed by Envirosight, which is as versatile as it is
+        robust, especially in underground environments.
+        It can travel up to 1640 feet (or around 500 meters for our metric system friends) through pipe systems, has
+        agility thanks to a six-wheel drive system,
+        and is capable of inspecting pipes with diameters between 6 and 96 inches, or around 15 to 244 centimeters
+        respectively.
+      </p>
+
+      <img src="/src/project_posts/project7/rvx_sizes_s.png" alt="Rovver X 130 Simple">
+
+      <p>
+        The design focus is adaptability, so it has interchangeable wheels to adapt to different types and conditions in
+        pipes. The camera can tilt and rotate,
+        providing a wide field of view with 10x optical zoom and 12x digital zoom. Overall, this robot is teleoperated
+        and can encode observations directly into the control interface
+        using PACP, MACP, and LACP catalogs, facilitating the identification of necessary repairs and report generation.
+      </p>
+
+      <p>
+        The ROVVER X 130 is used in various industries, including municipal inspection to assess the condition of sewers
+        and stormwater systems, critical inspections in underground nuclear systems,
+        and validation of the internal condition of pipes in chemical and pharmaceutical plants.
+      </p>
+
+      <img src="/src/project_posts/project7/rovver_modules.png" alt="Rovver and its accesories">
+
+      <div class="glow-headline">
+        <h3>Digital Twin</h3>
+      </div>
+      <p>
+        Envirosight provides information about the robot's dimensions, but does not specify exactly which part of it
+        they cover. However, this problem can be accurately circumvented by using a flat image
+        of the robot in Fusion 360. In this tool, the image can be precisely measured and adjusted to the official
+        measurements of the Rovver in the most logical way possible. From this, the CAD model can be generated.
+      </p>
+
+      <img src="/src/project_posts/project7/rovver_cad_1.png" alt="Rovver inverse engineering measurements">
+
+      <img src="/src/project_posts/project7/rovver_real_1.jpeg" alt="Rovver real">
+
+      <img src="/src/project_posts/project7/rpvver_cad_2.png" alt="Rovver cad model">
+
+      <p>We already have the design. Now we will import it into Onshape to add the joints.
+        Then, we will configure the robot's sensors and lights in Isaac Sim to make them work correctly.
+        Once this is done, we save it as USD and it is ready to be tested.</p>
+
+      <img src="/src/project_posts/project7/rovver_cad_3.png" alt="Rovver digital twin basic">
+
+      <p>Of course, this is just the process of the basic model, without accessories, used for small pipes. However, in
+        larger environments, greater traction, height, and lighting capacity are needed. To meet these
+        needs, Envirosight offers accessories that can be easily attached to the base model. Following the same
+        procedure used
+        previously:
+      </p>
+
+      <img src="/src/project_posts/project7/rovver_extended_cad_1.png" alt="Rovver digital twin basic">
+
+      <img src="/src/project_posts/project7/rovver_extended_cad_2.png" alt="Rovver digital twin basic">
+
+      <div class="glow-headline">
+        <h3>Results</h3>
+      </div>
+      <p>
+        To evaluate the simulation and performance of the digital models of the ROVVER X 130, I have created test
+        circuits that replicate real pipes
+        both in appearance and shape. These circuits allow the evaluation of both robots' ability to navigate through
+        simulated environments
+        with precision and efficiency.
+      </p>
+
+      <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1.png" alt="DCircuito de prueba 1">
+
+      <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1A.gif" alt="Circuito de prueba 1A gif">
+
+      <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1B.gif" alt="Circuito de prueba 1B gif">
+
+      <p>These tests also serve to validate the robot's concept before building it, significantly reducing costs by
+        saving resources on errors
+        and possible corrections. Additionally, the development and research process becomes faster, as failures can be
+        identified early in the simulation phase.
+      </p>
+
+      <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2.png" alt="DCircuito de prueba 1">
+
+      <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2A.gif" alt="Circuito de prueba 1A gif">
+
+      <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2B.gif" alt="Circuito de prueba 1B gif">
+
+
+    </div>
+    <div class="division-space-only"></div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

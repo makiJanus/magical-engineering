@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,11 +8,9 @@
     <!-- Primary Meta Tags -->
     <title>Magical Enginering</title>
     <meta name="title" content="Magical Enginering" />
-    <meta
-      name="description"
+    <meta name="description"
       content="Explorando Interacciones Sociales con Aina: Mi Experiencia como Desarrollador de Robots Humanoides." />
-    <link
-      rel="stylesheet"
+    <link rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
       integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
       crossorigin="anonymous" />
@@ -22,26 +21,22 @@
     <script id="MathJax-script" async
       src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
+
   <body>
     <header id="hero">
       <!-- Navbar -->
       <div id="navbar-placeholder"></div>
 
       <div id="content-blog">
-        <h1 class="massiveHeading">Aina - Plataforma de robot humanoide
-          basada en ROS</h1>
-        <!-- <p class="categories">
-          <span class="category">Robótica</span>
-          <span class="category">Electrónica</span>
-        </p> -->
-
-        <h2 class="subtitle">Explorando las interacciones sociales
-          a través de Aina, mi primera experiencia como desarrollador de robots
-          humanoides de código abierto</h2>
+        <div class="griflan-headline">
+          <h1>Aina - Plataforma de robot humanoide basada en ROS</h1>
+        </div>
 
         <img class="gif" src="/src/project_posts/project5/diagram.png"
           alt="Isaac Sim Deep Learning simmulation with Kaya">
-        <h3>Diseño</h3>
+        <div class="glow-headline">
+          <h3>Diseño</h3>
+        </div>
         <p>Aina es una plataforma de robot humanoide de código abierto diseñada
           para interacciones sociales entre humanos y máquinas, desarrollada
           para mi tesis de universidad. Para lograr este objetivo, me enfoqué en
@@ -103,7 +98,9 @@
           fácil de modificar del robot humanoide Pepper, así que sigue el
           proyecto si estás interesado y cualquier comentario es bienvenido a mi
           correo.</p>
-        <h3>Control de Brazos</h3>
+        <div class="glow-headline">
+          <h3>Control de Brazos</h3>
+        </div>
         <p>Con respecto al aspecto de control de Aina, implementé con éxito el
           algoritmo FABRIK en MATLAB para probar su capacidad de producir
           movimientos coherentes espacial y temporalmente. El objetivo es
@@ -184,7 +181,8 @@
           siguiente Figura, mostrando la efectividad de este enfoque.</p>
 
         <img src="/src/project_posts/project5/fabrik_mod_check.PNG"
-          alt="Isaac Sim research outcome paths" class="resized-image">
+          alt="Isaac Sim research outcome paths"
+          class="resized-image">
 
         <p>El Arduino Mega es responsable de ejecutar
           comandos de control para los diversos motores servo-actuados. Para
@@ -202,11 +200,14 @@
           cruda, mientras que el rojo es el filtrado.</p>
 
         <img src="/src/project_posts/project5/filtered signal.PNG"
-          alt="Isaac Sim research outcome paths" class="resized-image">
+          alt="Isaac Sim research outcome paths"
+          class="resized-image">
 
         <p>Donde la ecuación de diferencia utilizada es:</p>
         $$y(n) = 0.1x(n) + 0.9y(n-1)$$
-        <h3>Base móvil</h3>
+        <div class="glow-headline">
+          <h3>Base Móvil</h3>
+        </div>
         <p>La base del robot está diseñada para ser modular tanto en los
           aspectos de software como de hardware, lo que presenta un desafío a la
           hora de programarla. Con numerosos parámetros y nodos que deben estar
@@ -283,59 +284,6 @@
             personas o animales</li>
         </ol>
 
-        <p>Para entender cómo interactúan estos mapas entre sí y con el sistema
-          de navegación, es esencial conocer los siguientes parámetros de
-          configuración:</p>
-
-        <ol>
-          <li><b>Obstacle_range:</b> rango máximo para detectar objetos.</li>
-          <li><b>Raytrace_range:</b> rango máximo para detectar espacio libre
-            alrededor del robot.</li>
-          <li><b>Footprint:</b> coordenadas en metros que contienen el área de
-            la base del robot.</li>
-          <li><b>Footprint_inflation:</b> área segura alrededor del robot.</li>
-          <li><b>Inflation_radius:</b> distancia máxima de un obstáculo para
-            generar un área de seguridad.</li>
-          <li><b>Max_obstacle_height:</b> altura máxima de un obstáculo.</li>
-          <li><b>Min_obstacle_height:</b> altura mínima de un obstáculo.</li>
-          <li><b>Observation_sources:</b> especifica los sensores utilizados
-            para generar los mapas y sus características.</li>
-        </ol>
-
-        <p>Los parámetros que impactan el Mapa de Costa Global son:</p>
-
-        <ol>
-          <li><b>Global_frame:</b> define el sistema de coordenadas para los
-            mapas.</li>
-          <li><b>Robot_base_frame:</b> establece el marco de referencia para la
-            posición base del robot.</li>
-          <li><b>Update_frequency:</b> controla la frecuencia de actualización
-            del mapa en hercios.</li>
-          <li><b>Static_map:</b> determina si se deben cargar nuevos mapas de
-            costa basados en los anteriores.</li>
-        </ol>
-
-        <p>Los parámetros que influyen en el Mapa de Costo Local son:</p>
-
-        <ol>
-          <li><b>Rolling_window:</b> indica si el mapa local permanece centrado
-            alrededor del robot o no.</li>
-          <li><b>Width:</b> define el tamaño del mapa,, en metros.</li>
-          <li><b>Height:</b> define la altura del mapa, en metros.</li>
-          <li><b>Resolution:</b> especifica la resolución de la cuadrícula, en
-            metros.</li>
-          <li><b>Origen_x:</b> establece la coordenada x de origen para el
-            mapa.</li>
-          <li><b>Origen_y:</b> establece la coordenada y de origen para el
-            mapa.</li>
-          <li><b>Obstacle_layer:</b> especifica la capa del mapa que contiene
-            los datos
-            de obstáculos.</li>
-          <li><b>Inflation_layer:</b> especifica la capa del mapa que contiene
-            los datos
-            del área de seguridad.</li>
-        </ol>
-
         <p>En la siguiente Figura, puedes ver el mapa de costa global en azul
           claro, el mapa de costa local en el área púrpura y el mapa de
           ocupación como todo el suelo en gris. Además, todos los objetos están
@@ -343,142 +291,18 @@
         <img src="/src/project_posts/project5/maps_navigation.PNG"
           alt="Isaac Sim research outcome paths">
 
-        <div class="video-container">
-          <iframe
-            src="https://www.youtube.com/embed/ygayD2Gxvkw?si=2lWvQ0-9dLZ0Shjc"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+        <div class="video-wrapper">
+          <div class="video-label">▶ Watch the demo</div>
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/ygayD2Gxvkw?si=2lWvQ0-9dLZ0Shjc"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+          </div>
         </div>
-
-        <p>Los valores que usé son:</p>
-
-        <table>
-          <tbody>
-            <tr>
-              <td>Parámetros</td>
-              <td>Valores</td>
-            </tr>
-            <tr>
-              <td>Footprint</td>
-              <td>$$\left[\begin{array}{cc}
-                0.2 m & 0.2 m \\
-                -0.2 m & 0.2 m \\
-                0.2 m & -0.2 m \\
-                -0.2 m & -0.2 m
-                \end{array}\right]$$</td>
-            </tr>
-            <tr>
-              <td>Footprint padding</td>
-              <td>$$0.02$$</td>
-            </tr>
-            <tr>
-              <td>Inflation radius</td>
-              <td>$$0.5[m]$$</td>
-            </tr>
-            <tr>
-              <td>Raytrace range</td>
-              <td>$$2.5[m]$$</td>
-            </tr>
-            <tr>
-              <td>Obstalce range</td>
-              <td>$$3.0[m]$$</td>
-            </tr>
-            <tr>
-              <td>Max obstacle range</td>
-              <td>$$1.0[m]$$</td>
-            </tr>
-            <tr>
-              <td>Track unknown space</td>
-              <td>$$True$$</td>
-            </tr>
-            <tr>
-              <td>Observation sources</td>
-              <td>$$Laser scan sensor$$</td>
-            </tr>
-            <tr>
-              <td>Sensor frame</td>
-              <td>$$Camera link$$</td>
-            </tr>
-            <tr>
-              <td>Data type</td>
-              <td>$$laserScan$$</td>
-            </tr>
-            <tr>
-              <td>Topic</td>
-              <td>$$scan$$</td>
-            </tr>
-            <tr>
-              <td>Global frame</td>
-              <td>$$Odom$$</td>
-            </tr>
-            <tr>
-              <td>Robot base link</td>
-              <td>$$Base_link$$</td>
-            </tr>
-            <tr>
-              <td>Update frecuency</td>
-              <td>$$2[Hz]$$</td>
-            </tr>
-            <tr>
-              <td>Publish frequency</td>
-              <td>$$2[Hz]$$</td>
-            </tr>
-            <tr>
-              <td>Static map</td>
-              <td>$$False$$</td>
-            </tr>
-            <tr>
-              <td>Rolling windows</td>
-              <td>$$True$$</td>
-            </tr>
-            <tr>
-              <td>Width</td>
-              <td>$$10[m]$$</td>
-            </tr>
-            <tr>
-              <td>Height</td>
-              <td>$$10[m]$$</td>
-            </tr>
-            <tr>
-              <td>Resolution</td>
-              <td>$$0.05[m/cell]$$</td>
-            </tr>
-            <tr>
-              <td>Origin x</td>
-              <td>$$-5[m]$$</td>
-            </tr>
-            <tr>
-              <td>Origin y</td>
-              <td>$$-5[m]$$</td>
-            </tr>
-            <tr>
-              <td>Obstacle layer</td>
-              <td>$$Costmap_2d:ObstacleLayer$$</td>
-            </tr>
-            <tr>
-              <td>Inflation layer</td>
-              <td>$$Costmap_2d::InflationLAyer$$</td>
-            </tr>
-            <tr>
-              <td>Global frame</td>
-              <td>$$Map$$</td>
-            </tr>
-            <tr>
-              <td>Robot base frame</td>
-              <td>$$Base link$$</td>
-            </tr>
-            <tr>
-              <td>Update frequency</td>
-              <td>$$2[Hz]$$</td>
-            </tr>
-            <tr>
-              <td>Static map</td>
-              <td>$$False$$</td>
-            </tr>
-          </tbody>
-        </table>
 
         <p>Aquí presento tres temas clave: Modelo CAD, Piezas Impresas en 3D y
           Electrónica. Para el primer tema, Modelo CAD, utilicé Fusion360 (con
@@ -511,7 +335,7 @@
           principales para la regulación y distribución de energía, asegurando
           que cada parte de Aina reciba la potencia necesaria.</p>
 
-        <p>Para lograr esto, diseñé un banco de baterías con 16.4V@17000 mAh, 
+        <p>Para lograr esto, diseñé un banco de baterías con 16.4V@17000 mAh,
           compuesto por 20 celdas NCR18650. Esta configuración
           proporciona aproximadamente una hora y media de autonomía, teniendo en
           cuenta los ciclos de recarga y las recomendaciones del fabricante.
@@ -540,7 +364,9 @@
           disipación de energía, haciéndolos altamente eficientes a pesar de
           generar algo de calor.</p>
 
-        <h3>Conclusión</h3>
+        <div class="glow-headline">
+          <h3>Conclusión</h3>
+        </div>
         <p>En este proyecto, desarrollé con éxito una plataforma de robot
           humanoide de código abierto llamada Aina, diseñada para interacciones
           sociales entre humanos y robots. Al enfocarme en la modularidad y
@@ -587,5 +413,8 @@
       <div id="footer-placeholder"></div>
 
       <script src="/src/js/navbar_footer.js"></script>
+      <script src="/src/js/waveText.js"></script>
+      <script src="/src/js/glowText.js"></script>
     </body>
+
   </html>
