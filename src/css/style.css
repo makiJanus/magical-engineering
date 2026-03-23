@@ -414,7 +414,23 @@ body {
   box-sizing: border-box;
 }
 
-.griflan-headline h2 {
+.griflan-headline h1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.25em;
+  font-size: clamp(2rem, 6vw, 6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: rgb(127, 236, 255);
+  margin: 0;
+  word-break: break-word;
+  margin-top: 5dvw;
+}
+
+.griflan-headline h2{
   font-family: 'Inter', sans-serif;
   font-size: clamp(1.8rem, 5.0vw, 5rem);
   font-weight: 700;
@@ -445,23 +461,27 @@ body {
   100% { color: rgb(127, 236, 255); }
 }
 
+.griflan-headline h1 .wave-letter,
 .griflan-headline h2 .wave-letter {
   display: inline-block;
   animation: colorWave 3s ease-in-out infinite;
 }
 
+.griflan-headline h1 .wave-space,
 .griflan-headline h2 .wave-space {
   display: inline-block;
   width: 0.3em;
 }
 
+
 /* ── Mobile adjustments ── */
 @media (max-width: 600px) {
   .griflan-headline {
     padding: 0 16px;
-    margin: 24px auto 20px auto;
+    margin: 60px auto 20px auto;
   }
 
+  .griflan-headline h1,
   .griflan-headline h2 {
     font-size: clamp(2rem, 9vw, 5.0rem);
     line-height: 1.2;
@@ -521,6 +541,23 @@ h3[data-cursor]::after {
   justify-content: center;
   align-items: baseline;
   gap: 0.25em;
+}
+
+.glow-headline h3 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: baseline;
+  gap: 0.25em;
+}
+
+/* ── Mobile adjustments ── */
+@media (max-width: 600px) {
+  #content-blog .glow-headline h3 {
+    font-size: clamp(2rem, 3vw, 3.0rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
 }
 
 

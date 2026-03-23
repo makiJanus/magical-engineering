@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta name="description" content="Desing and implementation of a social robot called emma, she is design to interact with childs in a natural way" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+  </head>
+  <body>
+    <header id="hero">
+      <div id="navbar-placeholder"></div>
+      <div id="content-blog">
+
+        <div class="griflan-headline">
+          <h1 >Emma: A robot girl that likes to talk</h1>
+        </div>
+        
+        <div class="glow-headline">
+          <h3>Overview</h3>
+        </div>
+
+        <!-- placeholder for vid -->
+        <div class="video-wrapper">
+          <div class="video-label">▶ Watch the demo</div>
+          <div class="video-container">
+            <iframe
+              src="https://www.youtube.com/embed/hazGMOoddSA?si=Bt8if4xo-4slrMSD"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+
+
+
+        <p>
+          Emma, as I like to call her, is a social robot designed to interact with children in a natural and engaging way. She has a friendly and approachable appearance, 
+          with a soft and colorful exterior that is designed to be visually appealing to children. Emma is equipped with a variety of sensors, including cameras, microphones, 
+          and touch sensors, which allow her to perceive her environment and interact with children in a more natural  and playfulway.   
+        </p>
+        <p>
+          So, I spent around 2 months working on this project, from cad design, to assembling and testing. I designed the robot using fusion 360, where the face, that allows more natural intreractions,
+          is made out of silicone! I used a 3D printed mold to cast the face, and then I assembled the rest of the robot using 3D printed parts and some off-the-shelf components. The robot is controlled by a
+          raspberry pi 3B+ and coded in python, using the GPIO to read the sensors, mange the screens, and control the servos.
+        </p>
+        <p>
+          The result is a social robot works, it can interact with children in a natural way and the overall robot can be used as platform for continuous development and research in this field. 
+          I am really happy with the result, and I hope to continue working on this project in the future, adding more features and improving the design.
+        </p>
+
+        <div class="glow-headline">
+          <h3>Design</h3>
+        </div>
+        <p>
+          The appeance of the robot is of most importance, since it is the first thing that children will see and interact with.
+          I wanted to design a robot that is firendly and approachable, these are some of the main references I used as concept design: 
+        </p>
+
+        <!-- placeholder for imgs -->
+        <img src="/src/project_posts/project12/design_1.png" alt="Art concepts for emma">
+
+        <p>
+          Of course one important aspect is the face itself, soft and skin like material is a must, so I decided to use tinted silicone that 
+          can be casted in a 3D printed mold, this way I can achieve a more natural and appealing look, and also allows for more natural interactions 
+          with the children, since it is soft and flexible. Here are some images of the design process and the final result:
+        </p>
+
+        <!-- placeholder for imgs -->
+         <img src="/src/project_posts/project12/design_2.png" alt="mold and silicone test for emma's face">
+  
+        <p>
+          The rest of the robot is made out of 3D printed parts covered on transparent resin for further protenction (mostly for the painting), that are 
+          designed to be easy to assemble and disassemble, this way I can easily make changes and improvements to the design in the future.
+        </p>
+
+        <!-- placeholder for imgs -->
+         <img src="/src/project_posts/project12/design_3.png" alt="emma's assembled 3D printed parts">
+
+        <p>
+          Of course not all is 3D printed, the electronics are also an important part of the design, we already know that the robot is controlled by a raspberry pi, 
+          due the quiantity of elements connected to it, it was necessary to design a custom circuit board that link all the components together, this way I can have 
+          a more organized and efficient design, and also allows for easier troubleshooting and maintenance. using Fusion 360 allows me to design both CAD and PCB
+          in one place, ensuring not only a more efficient design process, but also a better integration between the mechanical and electronic components of the robot.
+        </p>
+
+        <!-- placeholder for imgs -->
+         <img src="/src/project_posts/project12/design_4.png" alt="emma's different stages of design, Fusion 360, Adobe Substance Painter, and the final result">
+         <img src="/src/project_posts/project12/design_5.png" alt="emma's ainner head circuit">
+
+        <p>
+          Here we can see the complete pcb scheme and electronic components used in the robot:
+        </p>
+
+        <!-- placeholder for imgs -->
+         <img src="/src/project_posts/project12/design_6.png" alt="emma's main circuit scheme">
+
+        <div class="glow-headline">
+          <h3>Software</h3>
+        </div>
+        <p>
+          The overall software architecture of the robot is designed to be modular and scalable, allowing for easy integration of new features and functionalities in the future.
+          The high logic that oversees the rest of the software are threads that run in parallel, each one is separated by functionality, for exampple one thread is responsible
+          for face tracking, another is responsible for conversation management (TTS, STT and LLM logic), another one is responsible for self monitoring (sensors, and api statuses),
+          and the last one to manage the las physical interface, a button that triggers specific actionswhen pressed. This way, if one thread crashes or has an error, the rest of 
+          the software can continue running without interruption, ensuring a more stable and reliable performance of the robot.
+        </p>
+
+        <!-- placeholder for imgs -->
+          <img src="/src/project_posts/project12/software_1.png" alt="emma's software architecture scheme thread 1">
+          <img src="/src/project_posts/project12/software_2.png" alt="emma's software architecture scheme thread 2">
+          <img src="/src/project_posts/project12/software_3.png" alt="emma's software architecture scheme thread 3">
+
+        <p>
+          Of course each thread controll the corresponding hardware components, but before all start working, the system at each boot runs a self monitoring routine, 
+          where it checks the status of all the components and APIs, showing the process on the LCD and the back of the robot, this way we can ensure that everything 
+          is working correctly before starting the interactions, and if something is not working, the system can alert the user and prevent any potential issues 
+          during the interactions.
+        </p>
+
+        <p>
+          Due that the raspberry pi is not that powerful, and the software is quite heavy, I had to optimize the code as much as possible, for that I implemented APIs
+          that connect to more powerful servers, in this case, my main computer, where I run the LLM server with LM Studio; a docker dev-container that handles SST with
+          a light version of whisper, and TTS management, which connects to the official Kokoro Docker container.
+        </p>
+
+        <!-- placeholder for imgs -->
+          <img src="/src/project_posts/project12/software_4.png" alt="emma's software architecture scheme, API connections">
+  
+          <p>
+            This way, the raspberry pi can handle the basic interactions and hardware control, while the more heavy processing tasks are offloaded to more powerful servers, ensuring a smoother and more responsive performance of the robot.
+
+        <div class="glow-headline">
+          <h3>Results</h3>
+        </div>
+        <p>
+          As you may see in the images, there are a lots of details and features working together to achieve a more natural and engagin interaction with the children,
+          there is a lot of room for improvement, for example, the capacitive touch sensor it is working but not implemented due the noise  and necessary length of the wires
+          to connect it to the raspberry pi, but overall, the robot is working and can be used as a platform for continuous development and research in this field. 
+          I am really happy with the result, and I hope you enjoyed reading about this project as much as I enjoyed working on it. Thanks for reading!
+        </p>
+
+        <img src="/src/project_posts/project12/result_1.png" alt="An image of the maker and emma">
+
+      </div>
+      <div class="division-space-only"></div>
+      <div id="footer-placeholder"></div>
+      <script src="/src/js/navbar_footer.js"></script>
+      <script src="/src/js/waveText.js"></script>
+      <script src="/src/js/glowText.js"></script>
+    </body>
+</html>

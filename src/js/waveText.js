@@ -38,5 +38,5 @@ function applyWaveEffect(selector) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  applyWaveEffect('.griflan-headline h2');
+  applyWaveEffect('.griflan-headline h1, .griflan-headline h2');
 });

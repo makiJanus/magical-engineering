@@ -1,5 +1,4 @@
-function applyGlowEffect(selector) {
-  const el = document.querySelector(selector);
+function applyGlowEffect(el) {
   if (!el) return;
 
   const nodes = Array.from(el.childNodes);
@@ -38,5 +37,8 @@ function applyGlowEffect(selector) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  applyGlowEffect('.glow-headline h2');  // ← change selector to match your element
+  // Targets ALL h2 and h3 inside any .glow-headline on the page
+  document.querySelectorAll('.glow-headline h2, .glow-headline h3').forEach(el => {
+    applyGlowEffect(el);
+  });
 });

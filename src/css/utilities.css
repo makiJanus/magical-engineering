@@ -32,11 +32,6 @@ h2::selection {
   color: #000000;
 }
 
-/* .btn-secondary {
-  margin: 5px 0;
-  background: var(--primary-color);
-  color: #000000;
-} */
 
 .btn-secondary {
   background: transparent;
