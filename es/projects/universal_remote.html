@@ -1,0 +1,178 @@
+[file name]: universal_remote_es.html
+[file content begin]
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary Meta Tags -->
+    <title>Magical Enginering</title>
+    <meta name="title" content="Magical Enginering" />
+    <meta name="description" content="Desarrollo de un control remoto universal" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/utilities.css" />
+    <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+    <header id="hero">
+        <!-- Navbar -->
+        <div id="navbar-placeholder"></div>
+
+        <div id="content-blog">
+            <div class="griflan-headline">
+                <h1>Control Remoto Universal</h1>
+            </div>
+
+            <div class="video-wrapper">
+                <div class="video-label">▶ Miralo en mi canal de Youtube!</div>
+                <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/cjmR9XVOftA?si=hir7O9lG2FcKUYA2" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
+                </div>
+            </div>
+
+            <div class="glow-headline">
+                <h3>El Problema</h3>
+            </div>
+            <p>
+                Todos hemos pasado por esto alguna vez, un control remoto con más botones de los que jamás usaremos! Cansado de los aparatosos monstruos de 30 botones que parecen 
+                atascados en los años 90, decidí tomar cartas en el asunto. Para esta primera iteración, me propuse 
+                diseñar un control remoto universal utilizando únicamente los componentes que tenía a mano, 
+                buscando una interfaz limpia y minimalista.
+            </p>
+
+            <div class="glow-headline">
+                <h3>Filosofía de Diseño</h3>
+            </div>
+            <p>
+                Construyendo desde cero, quería alejarme del tradicional formato de "barra". Aunque los componentes 
+                estándar ocupan más espacio que un PCB completamente personalizado, este prototipo inicial prioriza 
+                la accesibilidad y la iteración rápida. El objetivo es un prototipo funcional que demuestre la 
+                viabilidad del diseño.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/cad_elements.png"
+                alt="Elementos CAD del Control Remoto Universal">
+            <p>
+                El controlador se construye alrededor de varios componentes clave que trabajan en armonía. 
+                Un elemento central es el potenciómetro magnético de efecto Hall AS5600. En lugar de un codificador 
+                mecánico tradicional, este sensor proporciona una resolución angular de 12 bits a través de I2C. 
+                Midiendo el gradiente angular en cada ciclo del firmware, puedo replicar con precisión el "conteo de pulsos" 
+                de un codificador estándar, permitiendo una navegación suave y precisa por el menú.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/mag_1.png"
+                alt="Posiciones del imán junto con la medición de ángulo del AS5600">
+
+            <img class="gif" src="/src/project_posts/project13/mag_2.png"
+                alt="Posiciones del imán sobre el AS5600">
+
+            <p>
+                La interfaz de usuario se completa con una matriz de seis botones. Cada botón está equipado con su propio 
+                filtro RC para eliminar problemas de rebote, garantizando pulsaciones fiables. Dos botones están dedicados 
+                a funciones fijas—<strong>OK</strong> y <strong>Volver/Atrás</strong>—mientras que los cuatro restantes 
+                son sensibles al contexto, adaptando su función según la "cara" o modo seleccionado en la pantalla.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/button_board.png"
+                alt="Diseño PCB de la placa de botones para el Control Remoto Universal">
+
+            <img class="gif" src="/src/project_posts/project13/button_circuit.png"
+                alt="Diagrama del circuito de la interfaz de botones para el Control Remoto Universal">
+
+            <p>
+                El modelo de interacción central es simple, selecciona un control remoto registrado desde el menú, 
+                y luego usa el encoder magnético para navegar y elegir la función específica que deseas enviar,
+                reemplazando así un mar de botones por una interfaz 
+                inteligente y adaptable.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/remote_registered.jpg"
+                alt="Controles remotos disponibles para registrar en el Control Remoto Universal">
+
+            <p>
+                Para mantener una experiencia de usuario clara e intuitiva, a cada uno de los cuatro botones se le asigna una posición permanente en la pantalla: <strong>A</strong> para la esquina 
+                superior izquierda, <strong>B</strong> para la inferior izquierda, <strong>C</strong> para la superior 
+                derecha y <strong>D</strong> para la inferior derecha.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/buttons_faces.png"
+                alt="Botones y sus caras asignadas para el Control Remoto Universal">
+
+            <p>
+                El registro de un nuevo control remoto es un proceso doble. Puedes programarlos directamente en el código 
+                fuente, o utilizar el modo de "aprendizaje" integrado. En este modo, el controlador puede "escuchar" los 
+                códigos IR de tu control remoto existente y almacenarlos permanentemente en la memoria, ofreciendo la 
+                máxima flexibilidad para el usuario en cualquier situación.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/remote_learning.png"
+                alt="Modo de aprendizaje del Control Remoto Universal">
+
+            <p>
+                La interfaz de usuario cobra vida gracias a una pantalla LCD TFT de 1.28", impulsada por el driver GCA9A01. 
+                El uso de la librería gráfica LVGL garantiza una experiencia visual fluida, moderna y rápida.
+            </p>
+
+            <p>
+                En el corazón del sistema se encuentra un ESP32, gestionado por un PCB personalizado que integra el 
+                microcontrolador, un circuito de control para un motor de vibración háptica y todos los conectores 
+                necesarios para la pantalla, botones y el array de sensores.
+            </p>
+
+            <img class="gif" src="/src/project_posts/project13/system_board.png"
+                alt="Diseño PCB de la placa principal para el Control Remoto Universal">
+            
+            <p>
+                El paso final es unir todo. Aquí tenemos una vista completa del sistema completamente ensamblado, 
+                con todos los componentes alojados en su carcasa impresa en 3D personalizada, mostrando el prototipo terminado.
+            </p>
+            
+            <img class="gif" src="/src/project_posts/project13/system_all.png"
+                alt="Sistema completo del Control Remoto Universal">
+
+            <div class="glow-headline">
+                <h3>Conclusión y Próximos Pasos</h3>
+            </div>
+            <p>
+                Esta primera iteración del control remoto universal ha demostrado con éxito el concepto central: una interfaz 
+                minimalista y adaptable que reduce drásticamente la cantidad de botones mientras mantiene 
+                toda la funcionalidad. El dispositivo es completamente <strong>recargable</strong>, alimentado por un 
+                circuito de carga personalizado de 3.3V que desarrollé en un proyecto anterior, puedes encontrar los detalles de ese diseño aquí: 
+                <a href="https://magical-engineering.com/es/projects/3v3_charger_circuit.html" target="_blank">Circuito Cargador 3.3V</a>.
+            </p>
+            <p>
+                Todos los diseños mecánicos y electrónicos fueron meticulosamente elaborados usando <strong>Fusion 360</strong>, 
+                aprovechando al máximo sus capacidades integradas de CAD y diseño de circuitos. Este flujo de trabajo 
+                unificado fue particularmente valioso, ya que me permitió generar un modelo 3D preciso de la PCB. 
+                Este paso fue crucial para verificar las holguras de los componentes y asegurar un ajuste perfecto dentro 
+                de la carcasa.
+            </p>
+            <p>
+                De cara al futuro, ya está en marcha una <strong>segunda versión</strong>. La próxima iteración se centrará 
+                en el uso de una pantalla táctil en lugar de botones físicos, refinando aún más la experiencia de usuario 
+                y explorando características adicionales basadas en los comentarios de este prototipo inicial y una nueva 
+                placa de desarrollo ¡Manténganse atentos!
+            </p>
+
+            
+        </div>
+        <div class="division-space-only"></div>
+
+        <!-- Footer -->
+        <div id="footer-placeholder"></div>
+
+        <script src="/src/js/navbar_footer.js"></script>
+        <script src="/src/js/waveText.js"></script>
+        <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>
