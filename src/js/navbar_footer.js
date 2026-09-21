@@ -43,13 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const langSwitcherButton = document.getElementById("langSwitcher");
         const langIcon = document.getElementById("langIcon");
 
-        // Read current lang once for the icon, but NEVER use it inside the click handler
-        const initialLang = localStorage.getItem("lang") || document.documentElement.lang || "es";
-        updateLangIcon(initialLang);
+        const pageLang = document.documentElement.lang === "es" || window.location.pathname.startsWith("/es/")
+            ? "es"
+            : "en";
+        localStorage.setItem("lang", pageLang);
+        updateLangIcon(pageLang);
 
         langSwitcherButton.addEventListener("click", () => {
-            // Always read fresh — this is what fixes the first-click bug
-            const currentLang = localStorage.getItem("lang") || document.documentElement.lang || "es";
+            const currentLang = document.documentElement.lang === "es" || window.location.pathname.startsWith("/es/")
+                ? "es"
+                : "en";
             const newLang = currentLang === "en" ? "es" : "en";
 
             let currentPage = window.location.pathname;
