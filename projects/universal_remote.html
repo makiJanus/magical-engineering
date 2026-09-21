@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Primary Meta Tags -->
-    <title>Magical Enginering</title>
-    <meta name="title" content="Magical Enginering" />
-    <meta name="description" content="Development of an universal remote controller" />
+    <title>Universal Remote Controller | Magical Engineering</title>
+    <meta name="title" content="Universal Remote Controller | Magical Engineering" />
+    <meta name="description" content="A compact, context-aware universal remote controller built around an ESP32, a magnetic rotary input, and an IR learning system." />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
     <link rel="stylesheet" href="/src/css/style.css" />
@@ -40,32 +40,29 @@
             </div>
 
             <div class="glow-headline">
-                <h3>The Problem</h3>
+                <h3>The problem</h3>
             </div>
             <p>
-                We've all been there: a remote control with more buttons than we'll ever need, and yet, it's missing the simplicity we crave. 
-                Tired of the clunky, 30-button behemoths that seem stuck in the 90s, I decided to take matters into my own hands. 
-                For this first iteration, I set out to design a universal remote using only the components I had readily available, 
-                aiming for a clean, minimalist interface.
+                Most universal remotes solve compatibility by adding more buttons. The result is often a crowded interface with many controls that are rarely used. I wanted to explore the opposite approach: a remote that presents only the controls needed for the selected device or mode.
+
+                This first iteration was built with components already available to me. The goal was not to create a final commercial product, but to test whether a smaller, context-aware interface could remain practical in everyday use.
             </p>
 
             <div class="glow-headline">
-                <h3>Design Philosophy</h3>
+                <h3>Design direction</h3>
             </div>
             <p>
-                Building from the ground up, I wanted to move away from the traditional "bar" form factor. 
-                While off-the-shelf components are bulkier than a fully custom PCB, this initial prototype prioritizes accessibility 
-                and rapid iteration. The goal is a functional proof-of-concept that proves the design's viability.
+                The design moves away from the traditional bar-shaped remote. Off-the-shelf modules make the prototype larger than a custom production board, but they also make the system easier to assemble, modify, and debug. This version therefore prioritizes a functional proof of concept and fast iteration over miniaturization.
             </p>
+
+            <div class="glow-headline">
+                <h3>Physical controls</h3>
+            </div>
 
             <img class="gif" src="/src/project_posts/project13/cad_elements.png"
                 alt="CAD Elements of the Universal Remote Controller">
             <p>
-                The controller is built around several key components working in harmony. 
-                A central element is the AS5600 magnetic hall-effect potentiometer. 
-                Instead of a traditional mechanical encoder, this sensor provides 12-bit angular resolution via I2C. 
-                By measuring the angular gradient in each loop of the firmware, I can precisely replicate the "pulse counting" 
-                of a standard encoder, enabling smooth and accurate menu navigation.
+                The main navigation control is an AS5600 magnetic Hall-effect sensor. Instead of using a mechanical encoder, the sensor measures the angle of a magnet with 12-bit resolution and reports it over I2C. The firmware compares the angle between successive readings and converts that change into the same directional steps normally produced by encoder pulses. This provides smooth menu navigation without relying on mechanical encoder contacts.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/mag_1.png"
@@ -75,10 +72,7 @@
                 alt="Positions of the magnet on top of the AS5600">
 
             <p>
-                The user interface is completed with a six-button array. Each button is equipped with its own RC filter to 
-                eliminate debouncing issues, ensuring reliable presses. Two buttons are dedicated to fixed functions—<strong>OK</strong> 
-                and <strong>Return/Back</strong>—while the remaining four are context-sensitive, adapting their function based 
-                on the currently selected "face" or mode on the screen.
+                The physical interface also includes six buttons. Each button has its own RC filter to reduce contact bounce and make presses more reliable. Two buttons have fixed functions, <strong>OK</strong> and <strong>Return/Back</strong>. The other four are context-sensitive and change their function according to the selected screen or mode.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/button_board.png"
@@ -88,77 +82,60 @@
                 alt="Circuit diagram of the button interface for the Universal Remote Controller">
 
             <p>
-                The core interaction model is simple: select a registered remote control from the menu, then use the rotary 
-                encoder to cycle through and choose the specific button function you wish to send. This approach drastically 
-                reduces the physical footprint, replacing a sea of buttons with an intelligent, adaptable interface.
+                The interaction model has two steps: select a registered device, then rotate through its available functions and choose the command to send. The remote replaces a large fixed button array with a smaller set of controls whose meaning changes with the current screen.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/remote_registered.jpg"
                 alt="available remote controlers to be registered in the Universal Remote Controller">
 
             <p>
-                To maintain a clear and intuitive user experience, each of the four context-sensitive buttons is assigned a 
-                permanent position on the screen: <strong>A</strong> for upper left, <strong>B</strong> for bottom left, 
-                <strong>C</strong> for upper right, and <strong>D</strong> for bottom right. This consistent layout allows 
-                for muscle memory and quick, eyes-free operation.
+                Each context-sensitive button always corresponds to the same screen position: <strong>A</strong> is upper left, <strong>B</strong> is lower left, <strong>C</strong> is upper right, and <strong>D</strong> is lower right. Keeping these positions consistent supports muscle memory and makes the remote easier to operate without looking down.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/buttons_faces.png"
                 alt="Buttons and their assigned faces for the Universal Remote Controller">
 
             <p>
-                Registering a new remote is a two-fold process. You can pre-program them directly into the source code, or 
-                utilize the onboard "learning" mode. In this mode, the controller can "listen" to the IR codes from your 
-                existing remote and store them permanently in memory, offering maximum flexibility for the user on the go.
+                A device can be registered in two ways. Its commands can be defined directly in the source code, or the remote can learn them from an existing controller. In learning mode, it listens for incoming IR codes and stores them in permanent memory, making it possible to add devices without changing the firmware.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/remote_learning.png"
                 alt="Learning mode of the Universal Remote Controller">
 
             <p>
-                The user interface is brought to life on a vibrant 1.28" TFT LCD display, powered by the GCA9A01 driver. 
-                Leveraging the LVGL graphics library ensures a smooth, modern, and responsive visual experience that matches 
-                the controller's sleek design.
+                The interface is displayed on a 1.28-inch TFT LCD driven by the GCA9A01 controller. The LVGL graphics library handles the screens, menus, and visual states so the display can reflect the currently selected device and command.
             </p>
 
+            <div class="glow-headline">
+                <h3>Electronics and assembly</h3>
+            </div>
+
             <p>
-                At the heart of the system lies an ESP32, managed by a custom PCB that integrates the microcontroller, 
-                a driver circuit for a haptic feedback motor, and all the necessary connectors for the display, buttons, 
-                and sensor array.
+                An ESP32 coordinates the user interface, sensor, buttons, IR communication, and display. A custom PCB brings these elements together and includes a driver for the haptic feedback motor, along with connectors for the display, buttons, and sensor array.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/system_board.png"
                 alt="PCB design of the main board for the Universal Remote Controller">
             
             <p>
-                The final step is bringing it all together. Here is a comprehensive view of the fully assembled system, 
-                with all components housed within their custom 3D-printed enclosure, showcasing the completed prototype.
+                The completed prototype houses the electronics in a custom 3D-printed enclosure. This final assembly is where the electrical and mechanical decisions can be evaluated together, including component placement, clearances, and access to the controls.
             </p>
             
             <img class="gif" src="/src/project_posts/project13/system_all.png"
                 alt="Overall system of the Universal Remote Controller">
 
             <div class="glow-headline">
-                <h3>Conclusion &amp; Next Steps</h3>
+                <h3>Conclusion and next steps</h3>
             </div>
             <p>
-                This first iteration of the universal remote controller has successfully proven the core concept: a minimalist, 
-                context-aware interface that drastically reduces button clutter while maintaining full functionality. 
-                The device is completely <strong>rechargeable</strong>, powered by a custom 3.3V charging circuit that I developed 
-                in a previous project, ensuring convenience and sustainability. You can find the details of that design here: 
+                This first iteration validates the core idea: a context-aware interface can reduce button clutter while retaining the functions needed for several devices. The remote is also <strong>rechargeable</strong>, using the custom 3.3 V charging circuit described in a previous project: 
                 <a href="https://magical-engineering.com/projects/3v3_charger_circuit.html" target="_blank">3.3V Charger Circuit</a>.
             </p>
             <p>
-                All mechanical and electronic designs were meticulously crafted using <strong>Fusion 360</strong>, 
-                taking full advantage of its integrated CAD and circuit design capabilities. This unified workflow was 
-                particularly valuable, as it allowed me to generate a precise 3D model of the populated PCB. This step was 
-                crucial for verifying component clearances and ensuring a perfect fit within the enclosure, eliminating 
-                guesswork and costly revisions.
+                The mechanical and electronic designs were developed in <strong>Fusion 360</strong>. Keeping the CAD and circuit work in one workflow made it possible to model the populated PCB in three dimensions, verify component clearances, and refine the enclosure before assembly.
             </p>
             <p>
-                Looking ahead, a <strong>second version</strong> is already in the works. The next iteration will focus on 
-                using a touch screen instead of physical buttons, further refining the user experience, 
-                and exploring additional features based on feedback from this initial prototype and a new development board. Stay tuned!
+                The next version will investigate replacing the physical buttons with a touch screen. It will also incorporate feedback from this prototype and evaluate a new development board, with the aim of improving the interaction model without losing the simplicity of the first version.
             </p>
 
             

@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Primary Meta Tags -->
-  <title>Magical Enginering</title>
-  <meta name="title" content="Magical Enginering" />
+  <title>Lumina: Personality Framework | Magical Engineering</title>
+  <meta name="title" content="Lumina: Personality Framework | Magical Engineering" />
   <meta name="description"
     content="Explorando Interacciones Sociales con Aina: Mi Experiencia como Desarrollador de Robots Humanoides." />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -24,7 +24,7 @@
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
 
-    <div id="content-blog">
+    <div id="content-blog" class="project-article">
       <div class="griflan-headline">
         <h1>Lumina — A personality framework disguised as an erotic streamer</h1>
       </div>
@@ -38,10 +38,7 @@
       </div>
 
       <p>
-        Lumina has been one of the
-        most complex projects so far in terms of the number of elements that must work together for it to
-        function correctly. The end goal is a fully autonomous virtual streamer capable of interacting with
-        the audience without human intervention.
+        Lumina is a virtual-streaming system that combines conversation, avatar control, rendering, and audience interaction. The goal is a largely autonomous stream, meaning that the software can receive events, select a response, and update the presentation without a person manually triggering every step. Human oversight and clear moderation boundaries remain important for a public system.
       </p>
 
       <img class="gif" src="/src/project_posts/project11/4.gif"
@@ -55,9 +52,7 @@
       </p>
 
       <p>
-        It’s something that took a lot of time and resources, so monetization became a natural question.
-        Looking at the success of Projekt Melody, an erotic VTuber controlled by a real person, the most
-        accessible monetization path seemed to be Chaturbate, an adult streaming platform.
+        Because the project required significant time and resources, sustainability and monetization became practical design questions. I explored adult streaming as an initial distribution context, which also introduced requirements around age restrictions, consent, moderation, data handling, and platform policy.
       </p>
 
       <div class="glow-headline">
@@ -65,9 +60,7 @@
       </div>
 
       <p>
-        Months were spent creating the first functional version of Lumina.
-        After running trial streams on Chaturbate, it became clear the idea was worth pursuing; users, few at
-        the time, seemed to enjoy the experience, and some left tips, feedback, and positive comments.
+        I spent several months building the first functional version and running limited trial streams. The early audience provided tips, feedback, and positive comments, but those observations were informal rather than a controlled evaluation of the system.
       </p>
 
       <img src="/src/project_posts/project11/2.png" alt="Lumina's Chatbusrate profile page screenshot">
@@ -77,11 +70,7 @@
       </div>
 
       <p>
-        While implementing improvements, the first design mistake became obvious: spaghetti code inside a
-        monolithic software structure. Initially, this led me to organize and modularize the code, but as
-        complexity grew, a total redesign was necesary in favor of a microservices architecture. Each system
-        component gained standardized inputs and outputs, accelerating continuous improvement and easing
-        the integration of new technologies.
+        The first implementation became difficult to extend because many responsibilities were coupled inside one monolithic codebase. As complexity grew, I redesigned it around smaller services with standardized inputs and outputs. This separation made individual components easier to test, replace, and connect to new technologies.
       </p>
 
       <img src="/src/project_posts/project11/3.png" alt="Lumina's first architecture diagram">
@@ -89,9 +78,7 @@
       <img src="/src/project_posts/project11/5.png" alt="Lumina's second architecture diagram">
 
       <p>
-        This reduced inference time, from when information arrives from Chaturbate to when Lumina responds, from
-        ~30 seconds down to ~1.5 seconds, significantly improving the user experience. The best part is that
-        this same architecture can be repurposed for social robotics projects.
+        In my reported tests, the time between receiving an event and producing a response decreased from approximately 30 seconds to 1.5 seconds after the redesign. That comparison should be read alongside the test hardware, model configuration, and workload; the architecture is reusable for social robotics, but that application remains a possibility rather than a demonstrated result.
       </p>
 
       <div class="glow-headline">
@@ -99,10 +86,7 @@
       </div>
 
       <p>
-        Lumi is designed to look appealing, but achieving a good result requires several sequential stages.
-        The base model is created in tools like Daz3D or Blender, with special care given to skin textures
-        and details such as blush, freckles, and imperfections. Clothing and accessories are also designed,
-        from lingerie sets to more casual outfits.
+        Creating the avatar requires several sequential stages. The base model is prepared in tools such as Daz3D or Blender, then refined with skin textures, facial details, clothing, and accessories. Each stage must preserve the geometry and materials expected by the next tool in the pipeline.
       </p>
 
       <img class="gif" src="/src/project_posts/project11/6.png" alt="Lumina streamer virtual erótica 3D model">
@@ -110,8 +94,7 @@
       <img class="gif" src="/src/project_posts/project11/7.png" alt="Lumina streamer virtual erótica 3D model clothed">
 
       <p>
-        With the body completed, outfits and animations can be selected and exported into tools like Unreal
-        Engine, where a whole second configuration stage is required.
+        The completed model, outfits, and animations are exported to Unreal Engine, where materials, lighting, cameras, and runtime behavior are configured for the stream.
       </p>
 
       <img class="gif" src="/src/project_posts/project11/8.gif" alt="Lumina streamer virtual erótica un Unreal Engine">
@@ -119,9 +102,7 @@
       <img class="gif" src="/src/project_posts/project11/9.gif" alt="Lumina streamer virtual erótica un Unreal Engine">
 
       <p>
-        Attention to detail is always important, lighting, shadows, and believable clothing are essential, but
-        beyond that, it’s necessary to add the subtle elements that make the model feel alive: hair dynamics,
-        breathing, blinking, and small facial motions, from scrunching the nose to micro saccades.
+        Lighting, shadows, and clothing establish the visual quality, while smaller motions make the avatar feel responsive: hair dynamics, breathing, blinking, and subtle eye and facial movements.
       </p>
 
       <div class="glow-headline">
@@ -144,10 +125,7 @@
 
 
       <p>
-        Given the limited versatility of the previous process, the next step was to incorporate state-of-the-art
-        generative models text-to-image, image-editing, and image-to-video, in any order as needed. This
-        enabled the creation of personalized erotic content for users, from images to videos, based on their
-        specific requests, increasing audience interaction and satisfaction.
+        The next stage added generative models for text-to-image, image editing, and image-to-video workflows. In a public deployment, personalized generation requires explicit consent, age verification, moderation, content restrictions, and careful handling of prompts and generated files.
       </p>
 
       <p>
@@ -168,16 +146,10 @@
       </div>
 
       <p>
-        Beyond appearances, what has gradually taken shape is the first version of a framework that makes
-        sense of social interactions in a virtual environment, something applicable to robots. It builds an
-        understanding of its environment from incoming information, whether from humans, other systems, or
-        Lumina’s internal states, and from that, makes coherent, contextual decisions autonomously.
+        Beyond the avatar, the project has become a framework for coordinating events, conversation, internal state, and presentation in a virtual environment. Its modular architecture could inform social-robotics systems, but that transfer still needs a separate implementation and evaluation.
       </p>
       <p>
-        Social interaction between humans and artificial entities may feel strange to those of us who are older,
-        but amid increasing social fragmentation and loneliness, these systems are becoming more common.
-        If you’re interested in this topic, check out the Blogs section, where several articles on social
-        robotics and artificial intelligence are available.
+        Social interaction with artificial entities raises practical questions about disclosure, user expectations, privacy, moderation, and emotional dependence. Those questions are part of the engineering problem, especially when a system is designed to operate autonomously in a public setting.
       </p>
 
       <div class="video-wrapper">

@@ -8,8 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Primary Meta Tags -->
-    <title>Magical Enginering</title>
-    <meta name="title" content="Magical Enginering" />
+    <title>Control remoto universal | Magical Engineering</title>
+    <meta name="title" content="Control remoto universal | Magical Engineering" />
     <meta name="description" content="Desarrollo de un control remoto universal" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
@@ -23,13 +23,13 @@
         <!-- Navbar -->
         <div id="navbar-placeholder"></div>
 
-        <div id="content-blog">
+        <div id="content-blog" class="project-article">
             <div class="griflan-headline">
                 <h1>Control Remoto Universal</h1>
             </div>
 
             <div class="video-wrapper">
-                <div class="video-label">▶ Miralo en mi canal de Youtube!</div>
+                <div class="video-label">▶ Míralo en mi canal de YouTube</div>
                 <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/cjmR9XVOftA?si=hir7O9lG2FcKUYA2" title="YouTube video player"
                     frameborder="0"
@@ -43,20 +43,14 @@
                 <h3>El Problema</h3>
             </div>
             <p>
-                Todos hemos pasado por esto alguna vez, un control remoto con más botones de los que jamás usaremos! Cansado de los aparatosos monstruos de 30 botones que parecen 
-                atascados en los años 90, decidí tomar cartas en el asunto. Para esta primera iteración, me propuse 
-                diseñar un control remoto universal utilizando únicamente los componentes que tenía a mano, 
-                buscando una interfaz limpia y minimalista.
+                Muchos controles universales resuelven la compatibilidad añadiendo más botones, pero el resultado suele ser una interfaz saturada. Para esta primera iteración quise explorar el enfoque contrario: un control que muestre solo las funciones necesarias para el dispositivo o modo seleccionado.
             </p>
 
             <div class="glow-headline">
                 <h3>Filosofía de Diseño</h3>
             </div>
             <p>
-                Construyendo desde cero, quería alejarme del tradicional formato de "barra". Aunque los componentes 
-                estándar ocupan más espacio que un PCB completamente personalizado, este prototipo inicial prioriza 
-                la accesibilidad y la iteración rápida. El objetivo es un prototipo funcional que demuestre la 
-                viabilidad del diseño.
+                Quería alejarme del formato tradicional de barra. Aunque los módulos comerciales ocupan más espacio que una PCB personalizada, facilitan el montaje, las modificaciones y las pruebas. Por eso, este prototipo prioriza demostrar la idea y permitir iteraciones rápidas antes que miniaturizar el producto.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/cad_elements.png"
@@ -89,10 +83,7 @@
                 alt="Diagrama del circuito de la interfaz de botones para el Control Remoto Universal">
 
             <p>
-                El modelo de interacción central es simple, selecciona un control remoto registrado desde el menú, 
-                y luego usa el encoder magnético para navegar y elegir la función específica que deseas enviar,
-                reemplazando así un mar de botones por una interfaz 
-                inteligente y adaptable.
+                El modelo de interacción tiene dos pasos: seleccionar un dispositivo registrado y navegar con el sensor magnético hasta elegir el comando que se desea enviar. Así, una cantidad pequeña de controles reemplaza un conjunto fijo de botones.
             </p>
 
             <img class="gif" src="/src/project_posts/project13/remote_registered.jpg"
@@ -118,8 +109,7 @@
                 alt="Modo de aprendizaje del Control Remoto Universal">
 
             <p>
-                La interfaz de usuario cobra vida gracias a una pantalla LCD TFT de 1.28", impulsada por el driver GCA9A01. 
-                El uso de la librería gráfica LVGL garantiza una experiencia visual fluida, moderna y rápida.
+                La interfaz se muestra en una pantalla TFT de 1,28 pulgadas controlada por el driver GCA9A01. La librería gráfica LVGL gestiona las pantallas, los menús y los estados visuales del dispositivo seleccionado.
             </p>
 
             <p>
@@ -157,10 +147,7 @@
                 de la carcasa.
             </p>
             <p>
-                De cara al futuro, ya está en marcha una <strong>segunda versión</strong>. La próxima iteración se centrará 
-                en el uso de una pantalla táctil en lugar de botones físicos, refinando aún más la experiencia de usuario 
-                y explorando características adicionales basadas en los comentarios de este prototipo inicial y una nueva 
-                placa de desarrollo ¡Manténganse atentos!
+                La <strong>segunda versión</strong> explorará el uso de una pantalla táctil en lugar de botones físicos. También incorporará los comentarios de este prototipo y evaluará una nueva placa de desarrollo, sin perder la simplicidad de la primera versión.
             </p>
 
             

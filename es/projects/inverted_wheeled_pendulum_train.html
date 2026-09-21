@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magical Enginering</title>
-  <meta name="title" content="Magical Enginering" />
+  <title>Péndulo invertido con ruedas | Magical Engineering</title>
+  <meta name="title" content="Péndulo invertido con ruedas | Magical Engineering" />
   <meta name="description"
     content="Diseño y entrenamiento de un péndulo invertido con ruedas usando aprendizaje por refuerzo profundo y aprendizaje por currículo en Isaac Sim con PPO" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
@@ -18,13 +18,13 @@
 <body>
   <header id="hero">
     <div id="navbar-placeholder"></div>
-    <div id="content-blog">
+    <div id="content-blog" class="project-article">
       <div class="griflan-headline">
         <h1 class="massiveHeading">Este robot puede navegar mientras mantiene el equilibrio</h1>
       </div>
 
       <div class="video-wrapper">
-        <div class="video-label">▶ Watch the demo</div>
+        <div class="video-label">▶ Ver la demo</div>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/gItKZjNL-CE?si=yIOpMPfUmrl1uHkY" title="YouTube video player"
             frameborder="0"
@@ -59,18 +59,15 @@
       <img src="/src/project_posts/project8/adobe_render.jpg" alt="Render del robot en Adobe Substance Painter">
 
       <div class="glow-headline">
-        <h3>Usando Aprendizaje Refuerzo Profundo</h3>
+        <h3>Usando aprendizaje por refuerzo profundo</h3>
       </div>
       <p>
         El robot debe aprender a mantenerse equilibrado, orientarse hacia un objetivo y moverse sin caerse. El
-        Aprendizaje por Refuerzo Profundo (DRL) permite esto mediante el aprendizaje por prueba y error, como un niño
-        aprendiendo a través de experiencias.
+          El aprendizaje por refuerzo profundo (DRL) permite esto mediante la aplicación repetida de acciones, la observación del estado resultante y la actualización de una política según una función de recompensa.
       </p>
 
       <p>
-        Por ejemplo, imagina un niño que intenta evitar comer su almuerzo y huye, solo para ser castigado con una
-        chancla por su madre—una recompensa negativa graciosa pero ilustrativa. La siguiente vez, el niño come la comida
-        y no recibe castigo. Así funciona el DRL, con recompensas y castigos.
+          En este experimento, la función de recompensa proporciona retroalimentación sobre comportamientos útiles, como mantenerse erguido, avanzar hacia el objetivo y evitar una caída. El diseño de esa función influye directamente en lo que aprende la política.
       </p>
       <img src="/src/project_posts/project8/chancla.gif" alt="Madre castigando a su hijo">
 

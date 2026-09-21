@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Primary Meta Tags -->
-  <title>Magical Enginering</title>
-  <meta name="title" content="Magical Enginering" />
+  <title>Rovver X 130 Digital Twin | Magical Engineering</title>
+  <meta name="title" content="Rovver X 130 Digital Twin | Magical Engineering" />
   <meta name="description" content="Making a digital clone of the robo Rovver X 130 from Envirosight" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
     integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
@@ -21,7 +21,7 @@
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
 
-    <div id="content-blog">
+    <div id="content-blog" class="project-article">
       <div class="griflan-headline">
         <h1>Rovver X 130: Digital Twin</h1>
       </div>
@@ -33,49 +33,30 @@
         <h3>The Problem</h3>
       </div>
       <p>
-        The inspection of municipal pipes is a constantly evolving sector, where the maintenance of sanitation and
-        drinking water infrastructure
-        is at the center of interest. This industry has challenges such as: adverse operating conditions, high costs,
-        personnel training, and regulatory
-        compliance, which create a competitive environment.
+        Municipal pipe inspection involves difficult environments, expensive equipment, trained personnel, and strict safety requirements. Inspection robots reduce the need to place people inside pipes while providing visual and dimensional information about the infrastructure.
       </p>
 
       <p>
-        Out of curiosity, I started researching inspection robots and better understanding the industry context. By the
-        end of my research,
-        I had everything I needed to create a proposal, but I had no one to present it to, so, with some enthusiasm, I
-        decided to go ahead
-        and make a digital clone of the Rovver X 130.
+        I researched this field to understand how inspection robots are designed and operated. I then used the available public information to build a digital twin of the ROVVER X 130 and explore its behavior in simulated pipe environments.
       </p>
 
-      <img src="/src/project_posts/project7/pipe_clean_ssample_img.png" alt="A picture of someone cleanning a pipe">
+      <img src="/src/project_posts/project7/pipe_clean_ssample_img.png" alt="Pipe inspection and cleaning example">
 
       <div class="glow-headline">
         <h3>Looking Into the Rovver X 130</h3>
       </div>
       <p>
-        The ROVVER X 130 is a sewer inspection robotic system developed by Envirosight, which is as versatile as it is
-        robust, especially in underground environments.
-        It can travel up to 1640 feet (or around 500 meters for our metric system friends) through pipe systems, has
-        agility thanks to a six-wheel drive system,
-        and is capable of inspecting pipes with diameters between 6 and 96 inches, or around 15 to 244 centimeters
-        respectively.
+        According to Envirosight's public specifications, the ROVVER X 130 is a teleoperated sewer-inspection system for underground environments. It can travel up to 1,640 feet, uses six-wheel drive, and is designed for pipes between 6 and 96 inches in diameter. These values describe the manufacturer's system; the digital twin is an approximation based on the available references.
       </p>
 
       <img src="/src/project_posts/project7/rvx_sizes_s.png" alt="Rovver X 130 Simple">
 
       <p>
-        The design focus is adaptability, so it has interchangeable wheels to adapt to different types and conditions in
-        pipes. The camera can tilt and rotate,
-        providing a wide field of view with 10x optical zoom and 12x digital zoom. Overall, this robot is teleoperated
-        and can encode observations directly into the control interface
-        using PACP, MACP, and LACP catalogs, facilitating the identification of necessary repairs and report generation.
+        The platform uses interchangeable wheels for different pipe conditions. Its camera can tilt and rotate and provides a wide field of view with 10x optical and 12x digital zoom. Envirosight also documents inspection-catalog integrations such as PACP, MACP, and LACP; those systems support recording observations and generating reports, but are outside the scope of this digital twin.
       </p>
 
       <p>
-        The ROVVER X 130 is used in various industries, including municipal inspection to assess the condition of sewers
-        and stormwater systems, critical inspections in underground nuclear systems,
-        and validation of the internal condition of pipes in chemical and pharmaceutical plants.
+        The system is used for municipal sewer and stormwater inspection and can also support inspections in industrial environments. The exact deployment requirements depend on the pipe geometry, terrain, and inspection procedure.
       </p>
 
       <img src="/src/project_posts/project7/rovver_modules.png" alt="Rovver and its accesories">
@@ -84,10 +65,7 @@
         <h3>Digital Twin</h3>
       </div>
       <p>
-        Envirosight provides information about the robot's dimensions, but does not specify exactly which part of it
-        they cover. However, this problem can be accurately circumvented by using a flat image
-        of the robot in Fusion 360. In this tool, the image can be precisely measured and adjusted to the official
-        measurements of the Rovver in the most logical way possible. From this, the CAD model can be generated.
+        Envirosight publishes dimensions for the system, but the reference material does not always identify which component each measurement describes. I used a flat reference image in Fusion 360, scaled it against the available dimensions, and built the CAD model from the resulting proportions. This produces a visual approximation rather than verified production geometry.
       </p>
 
       <img src="/src/project_posts/project7/rovver_cad_1.png" alt="Rovver inverse engineering measurements">
@@ -96,17 +74,11 @@
 
       <img src="/src/project_posts/project7/rpvver_cad_2.png" alt="Rovver cad model">
 
-      <p>We already have the design. Now we will import it into Onshape to add the joints.
-        Then, we will configure the robot's sensors and lights in Isaac Sim to make them work correctly.
-        Once this is done, we save it as USD and it is ready to be tested.</p>
+      <p>After completing the CAD model, I import it into Onshape to configure the joints. I then add the robot's sensors and lights in Isaac Sim, export the assembled scene as USD, and prepare it for simulation tests.</p>
 
       <img src="/src/project_posts/project7/rovver_cad_3.png" alt="Rovver digital twin basic">
 
-      <p>Of course, this is just the process of the basic model, without accessories, used for small pipes. However, in
-        larger environments, greater traction, height, and lighting capacity are needed. To meet these
-        needs, Envirosight offers accessories that can be easily attached to the base model. Following the same
-        procedure used
-        previously:
+      <p>This first model represents the base configuration for smaller pipes. Larger environments require more traction, clearance, or lighting, so I also reconstructed accessory configurations using the same reference-image and CAD workflow:
       </p>
 
       <img src="/src/project_posts/project7/rovver_extended_cad_1.png" alt="Rovver digital twin basic">
@@ -117,11 +89,7 @@
         <h3>Results</h3>
       </div>
       <p>
-        To evaluate the simulation and performance of the digital models of the ROVVER X 130, I have created test
-        circuits that replicate real pipes
-        both in appearance and shape. These circuits allow the evaluation of both robots' ability to navigate through
-        simulated environments
-        with precision and efficiency.
+        To evaluate the digital models, I created test circuits that approximate real pipe shapes and appearances. These scenes test whether the reconstructed robot and its accessories can traverse the simulated environments; they do not yet measure real-world traction, sensor fidelity, or inspection accuracy.
       </p>
 
       <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1.png" alt="DCircuito de prueba 1">
@@ -130,10 +98,7 @@
 
       <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_1B.gif" alt="Circuito de prueba 1B gif">
 
-      <p>These tests also serve to validate the robot's concept before building it, significantly reducing costs by
-        saving resources on errors
-        and possible corrections. Additionally, the development and research process becomes faster, as failures can be
-        identified early in the simulation phase.
+      <p>Simulation can reveal clearance problems, unsuitable accessory configurations, and control issues before a physical prototype is built. The current tests therefore reduce early design risk, while physical validation remains necessary before making claims about field performance.
       </p>
 
       <img class="gif" src="/src/project_posts/project7/circuito_de_prueba_2.png" alt="DCircuito de prueba 1">

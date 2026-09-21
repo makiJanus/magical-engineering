@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Primary Meta Tags -->
-    <title>Magical Enginering</title>
-    <meta name="title" content="Magical Enginering" />
+    <title>3V3 Charger Circuit | Magical Engineering</title>
+    <meta name="title" content="3V3 Charger Circuit | Magical Engineering" />
     <meta
       name="description"
-      content="This circuit charges a 3.7V LiPo battery and serves as a 3.3V power supply if needed." />
+      content="A compact load-sharing circuit that charges a 3.7V LiPo battery and supplies a stable 3.3V output." />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -27,59 +27,53 @@
       <div id="content-blog">
 
         <div class="griflan-headline">
-          <h1 >Make every 3v3 device rechargeable</h1>
+          <p class="project-kicker">POWER SYSTEMS / 2020</p>
+          <h1>Make every 3.3V device rechargeable</h1>
         </div>
 
         <h2 class="subtitle">
-          This is a circuit that was design to charge a 3.7 V
-          lipo battery and, if is necessary, act as a power supply, in both
-          cases the the output voltage is 3.3 V.
+          A compact load-sharing circuit that charges a 3.7 V LiPo battery and
+          delivers a regulated 3.3 V supply while the device is in use.
         </h2>
 
         <h3 class="under-subtitle-link">
           <a
             href="https://hackaday.io/project/171723-2020-make-every-3v3-device-rechargeable">Download
-            the files
-            here!
+            the design files
           </a>
           </h3>
 
-        <img class="gif" src="/src/project_posts/project4/circuit_eagle_3.png" alt="Isaac Sim Deep Learning simmulation with Kaya">
+        <img class="gif" src="/src/project_posts/project4/circuit_eagle_3.png" alt="3.3V rechargeable power circuit board layout">
 
         <div class="glow-headline">
-          <h3>The Circuit and How It Works</h3>
+          <h3>Design goals</h3>
         </div>
 
         <p>
-          For this design I wanted to address these requirements:
+          The circuit was designed around three requirements:
         </p>
         <ol>
-          <li>Charge a 3.7 V Li-Ion/Li-Po Battery at maximum 4.2 V through
-            USB.</li>
-          <li>Be able to use a device with the circuit while it's recharging the
-            battery.</li>
-          <li>The circuit must have an output of 3.3 V.</li>
+          <li>Charge a 3.7 V Li-Ion/Li-Po battery from USB, with a maximum charge voltage of 4.2 V.</li>
+          <li>Keep the device running while the battery is charging.</li>
+          <li>Provide a regulated 3.3 V output for the device.</li>
         </ol>
 
         <p>
-          This is the final scheme of the circuit:
+          The final schematic is shown below. It has two main jobs: managing the battery charge and selecting the correct power source for the load.
         </p>
 
         <img src="/src/project_posts/project4/circuit_eagle.png" alt="Isaac Sim robots and environments">
 
+        <h3>Charging the battery</h3>
+
         <p>
-          The heart of the design is the MCP73838, this IC is a battery charge
-          management controller, it requires a few elements to work, the typical
-          application (available in the datasheet) circuit is:
+          The MCP73838 is the heart of the charging section. It is a dedicated battery-charge controller that needs only a small number of external components. The reference design from its datasheet is shown below:
         </p>
 
         <img src="/src/project_posts/project4/mcp73838_typlical_application.png" alt="Isaac Sim robots and environments">
 
         <p>
-          As my intention is charge through USB I just ignored all the AC
-          configuration like the double diode with common cathode and the Vc
-          connection, pin 3 and 4 indicates the actual state of the charging
-          process and faults:
+          Because this version is powered through USB, the AC-related parts of the reference design, including the common-cathode dual diode and the V<sub>C</sub> connection, are not used. Pins 3 and 4 report the charging state and fault conditions through the STAT1 and STAT2 outputs:
         </p>
         <table>
           <tbody>
@@ -114,84 +108,46 @@
           </tbody>
         </table>
 
-        <p>As you can see, the information provided by the LEDs can be
-          misunderstood, like standby and temperature fault, but it's easy to
-          see what state it really is because standby occurs when you haven't
-          connected the battery. In my design, the STAT2 pin is connected to a
-          green LED, and the STAT1 LED is connected to a blue LED (why not red?
-          I don't remember, I'm still wondering).</p>
+        <p>The LED indicators are not completely unambiguous: both standby and a temperature fault produce the same output state. In practice, standby is easy to identify because it occurs when no battery is connected. In this design, STAT2 drives a green LED and STAT1 drives a blue LED.</p>
 
-        <p>The TE pin is set to low to activate the built-in safety timer of
-          four, six, or eight hours (depending on the model) that puts the
-          charge IC in standby. The ROG2 pin is also set to low because the AC
-          functionalities are not used. PROG1 is connected to a resistance to
-          set the current that is supplied to the battery. In this case, a value
-          of 2K ohms was selected to provide 500 mA (recommended 0.5C of the
-          battery). The equation used is equation 4.1 available in the
-          datasheet:</p>
+        <h3>Setting the charge current</h3>
+
+        <p>The TE pin is pulled low to enable the built-in safety timer, which places the charger in standby after four, six, or eight hours depending on the device variant. The AC-related control pin is also pulled low because those functions are not used. PROG1 sets the battery-charge current through an external resistor. Here, a 2 kOhm resistor sets the current to 500 mA, or approximately 0.5C for the selected battery. The datasheet gives the following relationship:</p>
 
         <p style="text-align: center;"><b><i> I<sub>REG</sub> =
               1000V/R<sub>PROG</sub> </i></b></p>
 
-        <p>The other part of the circuit is intended to be a load-sharing system
-          (more detailed information is available in the application note; some
-          pictures presented are from it). The VBUS (voltage supply from the
-          USB) must supply the load when it's present. If not, the battery
-          energizes the load:</p>
+        <h3>Load sharing</h3>
+
+        <p>The second part of the circuit manages the transition between USB power and the battery. When USB is connected, VBUS supplies the load. When USB is removed, the battery takes over automatically. The following application-note diagrams explain the intended power path:</p>
 
         <img src="/src/project_posts/project4/application_note_1.png"
           alt="Isaac Sim robots and environments">
 
-        <p>It is important to follow the schematic in the image above because if
-          you connect the load directly to the battery, a very important issue
-          appears. The battery charger can become confused and keep recharging
-          the battery even if it is already fully charged. This is dangerous.
-          This phenomenon happens because the MCP73838 automatically ends the
-          charging process at a specific current value.</p>
+        <p>This power path is important. If the load is connected directly to the battery, the charger can interpret the device current as part of the charging current and fail to terminate charging correctly. The MCP73838 ends a charge cycle when the current falls below a defined threshold, so the load must be isolated from the battery-charge path.</p>
 
         <img src="/src/project_posts/project4/application_note_2.png"
           alt="Isaac Sim robots and environments">
 
-        <p>So a PMOS circuit based is designed to avoid any current issues:</p>
+        <p>A PMOS-based circuit provides that isolation while allowing the battery to power the device when USB is absent:</p>
         <img src="/src/project_posts/project4/circuit_eagle_2.png"
           alt="Isaac Sim robots and environments">
 
         <p>
-          The PMOS gate is set to 0V through a pull-down resistor (R5). This
-          ensures that the MOS turns on when VBUS is absent. In this situation,
-          the battery energizes the load. Due to the fact that the transistor is
-          not ideal, it has a maximum dropout voltage of 1.1V (typically 750mV).
-          This is one of my major issues because in the worst-case scenario, the
-          maximum voltage supply for the 3.3V regulator is 3.6V (and typically
-          3.95V), but in practice, I have never noticed it. In the example log,
-          the device works just well for a week or more until it gets
-          discharged. Continuing with the circuit, if the VBUS is at 5V (maximum
-          6V due to the IC battery management system specifications), the PMOS
-          gets turned off, and the load is energized by the USB supply. The
-          diode has a forward voltage of a maximum of 520mV, so the voltage on
-          the IN pin of the 3.3V regulator is 4.48V. It really doesn't matter
-          because it is a constant voltage. Another factor that this diode is
-          useful for is to avoid a current flow from the source to the gate or
-          from VBATT to VBUS. Nevertheless, there is still a leakage of 50uA
-          (worst-case scenario), which generates a voltage across R5 of 500mV.
-          It's a safe value because it doesn't turn off the MOS. Finally, the
-          3.3V regulator has a maximum dropout voltage of 400mV, so the input
-          must be above 3.7V (typically, it is 250mV, which implies a Vin of
-          3.55V). The biggest allowed current is 600mA, so keep that in mind if
-          you want to use it.
+          With USB disconnected, resistor R5 pulls the PMOS gate to 0 V and turns the transistor on, allowing the battery to power the load. The transistor is not ideal: its dropout voltage is up to 1.1 V, typically about 750 mV. This means the regulator input can fall to approximately 3.6 V in the worst case, or about 3.95 V under typical conditions.
+
+          When USB supplies 5 V, the PMOS turns off and the load is powered from VBUS through the diode. With a maximum forward drop of 520 mV, the regulator input is approximately 4.48 V. The diode also prevents current from flowing back toward the USB input or the MOSFET gate. Its worst-case leakage current is 50 uA, which creates about 500 mV across R5, safely below the level that would turn the PMOS off.
+
+          Finally, the 3.3 V regulator has a maximum dropout voltage of 400 mV, so its input should remain above 3.7 V. Under typical conditions, the dropout is closer to 250 mV, corresponding to an input of about 3.55 V. The regulator is rated for a maximum load of 600 mA.
         </p>
 
         <div class="glow-headline">
-          <h3>Use Example: Inexpensive 2.4MHz Mouse Converted to Rechargeable</h3>
+          <h3>Validation: a rechargeable wireless mouse</h3>
         </div>
 
 
         <p>
-          As an example, a cheap wireless mouse is used. The idea is to replace
-          the AAA batteries with a rechargeable one. I didn't find the datasheet
-          of the IC in the mouse, but since it uses 3V, I assumed a Vin of 3.3V
-          would be just fine. So, I simply tore apart the battery holder and
-          placed the circuit with the new battery in that space.
+          To test the design, I converted an inexpensive 2.4 MHz wireless mouse from disposable AAA batteries to a rechargeable battery. I could not identify the mouse's internal IC, but because the original supply was 3 V, I expected a regulated 3.3 V input to be suitable. I removed the battery holder and installed the charger, regulator, and new battery in its place.
         </p>
 
         <img src="/src/project_posts/project4/mouse_1.JPG" 
@@ -204,25 +160,11 @@
         alt="Isaac Sim robots and environments">
 
         <p>
-          The mouse consumes 25 mA at 3.0V, and the battery can provide 250
-          mAh. Ideally, with this setup, the mouse can be used for approximately
-          10 hours on a single charge. To enhance the design, the mouse case can
-          be modified for easier access to the USB charger port. For this
-          modification, a 3D-printed case would be recommended. Creating a
-          custom-designed case would allow for a seamless integration of the
-          charging port while maintaining the mouse's ergonomics and
-          aesthetics.
+          The mouse draws approximately 25 mA at 3.0 V, and the battery has a capacity of 250 mAh. Ignoring conversion losses and variation in current consumption, that gives an ideal runtime of about 10 hours per charge. A future revision could add a dedicated opening for the USB connector or a redesigned 3D-printed enclosure.
         </p>
 
         <p>
-          While the initial conversion demonstrates the feasibility of
-          converting a disposable battery device into a rechargeable one,
-          further refinements through case modifications can significantly
-          improve the user experience and overall functionality of the
-          rechargeable wireless mouse. However, for the purposes of this
-          example, the demonstration concludes with the successful integration
-          of the rechargeable battery and charging circuit into the existing
-          mouse case.
+          The conversion demonstrates that the circuit can replace disposable batteries in a low-power device while preserving normal operation. The electrical design worked in the original enclosure; the remaining improvements are mainly mechanical, especially making the charging port easier to access.
         </p>
 
         <img src="/src/project_posts/project4/mouse_gif.gif" 

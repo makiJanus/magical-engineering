@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Magical Enginering</title>
-  <meta name="title" content="Magical Enginering" />
+  <title>Inverted Wheeled Pendulum Robot | Magical Engineering</title>
+  <meta name="title" content="Inverted Wheeled Pendulum Robot | Magical Engineering" />
   <meta name="description"
-    content="Desing and training of an inverted wheeled pendulum with curriculum learning and deep reinforcement learning Isaac Sim PPO" />
+    content="Training an inverted-wheeled pendulum robot with curriculum learning and deep reinforcement learning in Isaac Sim." />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
   <link rel="stylesheet" href="/src/css/style.css" />
   <link rel="stylesheet" href="/src/css/utilities.css" />
@@ -18,7 +18,7 @@
 <body>
   <header id="hero">
     <div id="navbar-placeholder"></div>
-    <div id="content-blog">
+    <div id="content-blog" class="project-article">
       <div class="griflan-headline">
         <h1>This robot can navigate while keeping its balance</h1>
       </div>
@@ -41,14 +41,7 @@
         <h3>The Problem</h3>
       </div>
       <p>
-        <a href="https://www.linkedin.com/in/mohammad-shoaib-babar-339128177/">Mohammad Shoaib Babar</a> is a master's
-        candidate conducting research on enabling a two-wheeled inverted pendulum robot to balance and perform simple
-        movements (such as moving forward and backward) using Isaac Sim and Isaac Lab. He needed guidance in building
-        the training pipeline necessary for his project and graduation. Fortunately, I was able to significantly speed
-        up his progress by helping him set up all the scripts related to simulation, training, and testing.
-        <br><br>
-        Since this work is part of an ongoing research project (at the time of writing this blog), I’m presenting a
-        spin-off of our collaboration, showcasing results with my own two-wheeled inverted pendulum robot.
+        <a href="https://www.linkedin.com/in/mohammad-shoaib-babar-339128177/">Mohammad Shoaib Babar</a> is a master's candidate studying how a two-wheeled inverted-pendulum robot can balance and perform basic movements in Isaac Sim and Isaac Lab. I helped build the simulation, training, and testing pipeline for that research. This article presents a related experiment using my own two-wheeled robot; it is a spin-off of the collaboration rather than a complete account of the original research project.
       </p>
       <img src="/src/project_posts/project8/adobe_render.jpg" alt="Adobe substance painte render of the robot">
 
@@ -56,21 +49,16 @@
         <h3>Using Plain Deep Reinforcement Learning</h3>
       </div>
       <p>
-        The robot must learn to balance itself, orient toward a goal, and move without falling. Deep Reinforcement
-        Learning (DRL) enables this by letting the robot learn from trial and error—similar to how a child learns
-        through experiences.
+        The robot must learn to balance, orient toward a goal, and move without falling. Deep reinforcement learning (DRL) addresses this by repeatedly applying actions, observing the resulting state, and updating a policy according to a reward function.
       </p>
 
       <p>
-        For instance, imagine a child trying to avoid eating lunch and running away, only to get hit by a sandal thrown
-        by their mom—a humorous but illustrative negative reward. The next time, the child eats the food and receives no
-        negative response. This learning through rewards and punishments is how DRL functions.
+        In this experiment, the reward function provides feedback for useful behavior such as remaining upright, moving toward a target, and avoiding failure. The quality of that reward design strongly affects what the policy learns.
       </p>
       <img src="/src/project_posts/project8/chancla.gif" alt="Mother punishing a child">
 
       <p>
-        Initially, I attempted to train the robot to do everything—balance, navigate, and stop at the goal—in a single
-        session. However, this failed due to the limited learning capacity of the robot’s neural network.
+        Initially, I attempted to train balance, navigation, and goal stopping in a single stage. The combined task was too difficult to learn reliably with the chosen training setup, so the policy did not acquire a stable sequence of behaviors.
       </p>
       <img src="/src/project_posts/project8/RL_train.gif"
         alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
@@ -94,8 +82,7 @@
         alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
 
       <p>
-        Each stage builds on the previous one. This allows the neural network to compete and prioritize among different
-        behaviors, gradually solidifying the most useful ones.
+        Each stage builds on the previous one. The policy first preserves the skills already learned, then adapts them to the next objective instead of discovering every behavior from scratch.
       </p>
       <img src="/src/project_posts/project8/behaviors.gif"
         alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
@@ -120,8 +107,7 @@
         alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
 
       <p>
-        The paths from A* are smoothed using Bezier curves and then damped to create goal points the robot can follow
-        naturally, enabling it to move fluidly through complex environments.
+        The paths from A* are smoothed with Bezier curves. The resulting trajectory is then sampled and damped into a sequence of goal points that the robot can follow, reducing abrupt changes in direction.
       </p>
       <img src="/src/project_posts/project8/a_1.png"
         alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
@@ -136,15 +122,13 @@
         <h3>Results</h3>
       </div>
       <p>
-        The robot can successfully move from one point to another without falling. More impressively, it can follow
-        predefined paths through a house, navigating around furniture and tight corners.
+        In simulation, the robot can move between selected points without falling and follow predefined paths through a house while navigating around furniture and tight corners. These results demonstrate the behavior in Isaac Sim; they do not yet establish performance on the physical robot.
       </p>
       <img src="/src/project_posts/project8/house_nav.gif"
         alt="Gif teleoperated robot Rovver X 130 with accessories in simulation">
 
       <p>
-        This blog marks the first phase of a larger project. The next stage will involve transferring everything from
-        simulation to a real robot—a challenging but exciting Sim2Real transition.
+        This is the first phase of a larger project. The next stage is a sim-to-real transfer, which will require validating the dynamics model, sensors, latency, and control behavior on the physical robot.
       </p>
 
     </div>

@@ -191,6 +191,69 @@ td {
   }
 
 /* Responsive Styles */
+#content-blog.aina-article > img,
+#content-blog.aina-article .gif {
+    width: min(100%, 920px);
+    max-width: 100%;
+    padding: 0;
+    margin: 2.5rem auto;
+    object-fit: contain;
+}
+
+#content-blog.asd-article > img,
+#content-blog.asd-article .gif {
+    width: min(100%, 920px);
+    max-width: 100%;
+    padding: 0;
+    margin: 2.5rem auto;
+    object-fit: contain;
+}
+
+#content-blog.asd-article .glow-headline {
+    width: 90%;
+    max-width: none;
+    margin: 4rem auto 1.5rem;
+}
+
+#content-blog.asd-article .glow-headline h3 {
+    max-width: 100%;
+}
+
+#content-blog.project-article > img,
+#content-blog.project-article .gif {
+    width: min(100%, 920px);
+    max-width: 100%;
+    padding: 0;
+    margin: 2.5rem auto;
+    object-fit: contain;
+}
+
+#content-blog.project-article .glow-headline {
+    width: 90%;
+    max-width: none;
+    margin: 4rem auto 1.5rem;
+}
+
+#content-blog.project-article .glow-headline h3 {
+    max-width: 100%;
+}
+
+#content-blog.aina-article .resized-image {
+    width: min(100%, 760px);
+    max-width: 100%;
+    padding: 0;
+}
+
+#content-blog.aina-article .glow-headline {
+    width: 90%;
+    max-width: none;
+    margin: 4rem auto 1.5rem;
+}
+
+#content-blog.aina-article .glow-headline h3 {
+    max-width: 100%;
+}
+
 @media (max-width: 768px) {
 
     #content-blog h2,

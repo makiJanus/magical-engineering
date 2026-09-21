@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Primary Meta Tags -->
-  <title>Magical Enginering</title>
-  <meta name="title" content="Magical Enginering" />
+  <title>LIM2N: Robot Navigation with LLMs | Magical Engineering</title>
+  <meta name="title" content="LIM2N: Robot Navigation with LLMs | Magical Engineering" />
   <meta name="description"
     content="Exploración de cómo usar LLM para generar comportamientos de navegación usando DeepSeek R1 y Isaac Sim." />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -23,22 +23,19 @@
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
 
-    <div id="content-blog">
+    <div id="content-blog" class="project-article">
       <div class="griflan-headline">
         <h1>Robots That Understand and Follow Human Instructions</h1>
       </div>
 
-      <h3 class="under-subtitle-link"><a href="https://discovery.ucl.ac.uk/id/eprint/10206799/">Read the article in
-          which this porject is inspired here!</a></h3>
+        <h3 class="under-subtitle-link"><a href="https://discovery.ucl.ac.uk/id/eprint/10206799/">Read the paper that inspired this project</a></h3>
 
       <div class="glow-headline">
         <h3>The Problem</h3>
       </div>
 
       <p>
-        Wouldn't it be amazing to just tell a robot, "go get that" and have it actually do it, just like in the movies?
-        Well, thanks to large language models (LLMs), that's now a real possibility. But how can a model that only
-        processes text actually control a robot in the physical world?
+        A useful robot should be able to interpret instructions such as “go get that” and turn them into physical actions. Large language models make the language part possible, but they still need maps, sensors, and a navigation system to connect a text instruction to the real world.
       </p>
 
       <div class="glow-headline">
@@ -46,9 +43,8 @@
       </div>
 
       <p>
-        Weiqin Zu and their team had the same question. Their proposal? A system called:
-        "Language and Sketching: An LLM-driven Interactive Multimodal Multitask Robot Navigation Framework"
-        A long title that basically means: you can give orders to a robot using text and little drawings.</p>
+        Weiqin Zu and their team explored this problem in “Language and Sketching: An LLM-driven Interactive Multimodal Multitask Robot Navigation Framework.” The system combines natural-language instructions, user sketches, semantic maps, and robot sensing to produce navigation behavior.
+      </p>
 
       <img src="/src/project_posts/project10/intro_1.png" alt="Isaac Sim research diagram">
 
@@ -89,7 +85,7 @@
           <li>Users can mark preferred routes, danger zones, or places to avoid through an interface.</li>
           <li>The system combines these drawings with real-time data from the lidar and camera.</li>
           <li>The result is an <strong>enriched map</strong> that the robot can use to navigate more safely.</li>
-        </ul class="custom-list">
+        </ul>
 
         <p><strong>Reinforcement Learning Module (RL)</strong>: This is the decision-making engine. It is responsible
           for turning the previously gathered information into concrete actions. This module ensures that the robot not
@@ -131,9 +127,6 @@
         but its structure is clear:
       </p>
 
-      <p>
-        This prompt is long and detailed, but its structure is clear:
-      </p>
       <ol class="custom-list">
         <li>System role.</li>
         <li>Spatial considerations.</li>
@@ -143,7 +136,7 @@
       </ol>
 
       <p>
-        This allows the model to use "chain-of-thought" to generate a robust and reliable response.
+        This structure encourages a consistent intermediate interpretation and a bounded list of waypoints. It does not guarantee a correct response, so the output still needs validation before it is sent to the robot.
       </p>
 
       <div class="glow-headline">
@@ -160,8 +153,7 @@
       <img src="/src/project_posts/project10/re_3.png" alt="Isaac Sim research outcome paths">
 
       <p>
-        The paper compares three methods: manual control, unconstrained RL, and the LLM+RL system. The latter achieves a
-        higher overall success rate.
+        The paper compares three methods: manual control, unconstrained RL, and its LLM+RL system. The higher success rate reported here belongs to the paper's evaluation, not to my Jetbot experiment.
       </p>
 
       <img src="/src/project_posts/project10/re_4.png" alt="Isaac Sim research outcome paths">
@@ -173,10 +165,7 @@
       <img src="/src/project_posts/project10/re_5.png" alt="Isaac Sim research outcome paths">
 
       <p>
-        The results show that the robot follows the path well. The small deviations are due to its non-holonomic base.
-        In tests 1 through 4, the instructions are correctly followed. In tests 5 and 6, the LLM interprets the commands
-        very literally (for example, going to the last mentioned object). This indicates that the prompt could be
-        improved for better contextual understanding.
+        In my experiment, the Jetbot follows the generated path with small deviations caused in part by its non-holonomic constraints. Tests 1 through 4 follow the intended instructions. In tests 5 and 6, the model interprets the commands too literally, such as moving toward the last-mentioned object. These failures show where the prompt and output validation need improvement.
       </p>
 
       <p>🎉 Thanks for reading! Feel free to contact me if you have any questions.</p>

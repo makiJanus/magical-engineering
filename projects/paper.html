@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Primary Meta Tags -->
-  <title>Magical Enginering</title>
-  <meta name="title" content="Magical Enginering" />
+  <title>Autonomous Mobile Robotics Research | Magical Engineering</title>
+  <meta name="title" content="Autonomous Mobile Robotics Research | Magical Engineering" />
   <meta name="description"
     content="Researching a Python library to generate navigation strategies for various mobile robots using Deep Reinforcement Learning in Nvidia Isaac Sim." />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -22,7 +22,7 @@
     <!-- Navbar -->
     <div id="navbar-placeholder"></div>
 
-    <div id="content-blog">
+    <div id="content-blog" class="project-article">
       <div class="griflan-headline">
         <h1>Published Research: Autonomous Mobile Robotics</h1>
       </div>
@@ -36,48 +36,16 @@
       <div class="glow-headline">
         <h3>The Problem</h3>
       </div>
-      <p>Mobile robots are becoming increasingly popular for various personal
-        and industrial applications. To develop and test these robots,
-        engineers often rely on advanced robot simulators like Isaac Sim,
-        which offer high-quality graphics and realistic simulations. However,
-        when it comes to training mobile robots using deep reinforcement
-        learning, it can be challenging and time-consuming, especially when
-        designing custom experiments. This process typically requires a deep
-        understanding of multiple libraries and APIs to ensure they are used
-        together correctly.</p>
+      <p>Training mobile robots with deep reinforcement learning often requires several libraries, simulators, and custom interfaces to work together. Setting up a new robot, environment, observation space, and training loop can take more time than the experiment itself. This paper presents a library intended to reduce that integration work for Isaac Sim experiments.</p>
 
-      <p>In this study, I propose a solution to address these difficulties by
-        creating a user-friendly library. By simplifying the setup process for
-        creating robots, environments, and training scenarios, significantly
-        reducing the time spent on programming. Each method developed in this
-        library corresponds to a maximum of sixty-five lines of code, or even
-        just five lines. By leveraging this library, researchers and
-        professionals can save valuable time during simulated experiments and
-        data collection. Consequently, this approach accelerates the
-        production and testing of effective algorithms for mobile robots in
-        both industrial and personal environments.</p>
+      <p>The proposed library simplifies the setup of robots, environments, and training scenarios so researchers can spend more time evaluating algorithms. The paper reports compact helper methods, some requiring only a few lines of user code; the exact effort depends on the experiment and what is included in the method definition.</p>
 
       <img src="/src/project_posts/project1/isaac_assets.png" alt="Isaac Sim robots and environments">
 
       <div class="glow-headline">
         <h3>Making the Process Faster and Easier</h3>
       </div>
-      <p>The presented solution focuses on the composition and integration of
-        various technologies to streamline the training process. Multiple
-        tools were employed as fundamental components in this endeavor. One of
-        the most significant is Isaac Sim, a photorealistic simulator powered
-        by Nvidia's physics engine. It stands out as one of the most
-        comprehensive and advanced simulators available for robotics today,
-        gaining increasing relevance in the industry. This software offers a
-        wide variety of robots and environments, as well as software
-        flexibility that allows for the creation of custom code to execute
-        within the simulator. To complement these capabilities, Python
-        libraries such as Gym and Stable Baselines 3 (SB3) were utilized. Gym
-        provides the structure of the training code, while SB3 offers Deep
-        Reinforcement Learning Agents like DQN or PPO, enabling the use of
-        variables associated with these agents. For the creation of Neural
-        Networks, which serve as the brain of the agents, PyTorch was
-        employed.</p>
+      <p>The workflow combines Isaac Sim for physics and rendering, a Gym-style environment interface, Stable-Baselines3 agents such as DQN or PPO, and PyTorch models. Isaac Sim provides the simulated robot and scene; the surrounding Python libraries connect observations, actions, rewards, and training updates into one experiment.</p>
 
       <img src="/src/project_posts/project1/Complete-lib-diagramV3.png" alt="Isaac Sim research diagram">
 
@@ -97,8 +65,7 @@
         testing when searching for navigation strategies using Deep
         Reinforcement Learning. Additionally, the training process can be
         performed without rendering images, further increasing training speed.
-        Moreover, being photorealistic, it facilitates the transfer of the
-        neural network to real robots.</p>
+        These interfaces support reproducible experiments across differential and holonomic bases and allow training without rendering images when visual observations are not required. Photorealistic rendering may help with visual-domain experiments, but it does not by itself validate transfer to a physical robot.</p>
 
       <img src="/src/project_posts/project1/DH_draw.png" alt="Isaac Sim robots and Kaya and Jetson">
 
@@ -120,14 +87,7 @@
         robot's base into wheel movements.</p>
       <img src="/src/project_posts/project1/trayectories.png" alt="Isaac Sim research outcome paths">
 
-      <p>Between steps 800k and 1400k, the average reward shows a significant
-        increase, indicating the policy's progression towards a local optimum.
-        However, this alone does not suffice to demonstrate the robot's
-        ability to navigate to the target point. To complement this analysis,
-        the average episode length is considered. The decrease in episode
-        length indicates that the robot has learned how to successfully reach
-        the goal, thereby confirming the acquisition of a navigation
-        strategy.</p>
+      <p>Between 800k and 1400k training steps, the average reward increases. That trend suggests improvement, but reward alone does not establish successful navigation. Episode length provides a second signal: if episodes terminate when the goal is reached or the robot fails, a decreasing average length can indicate faster task completion. The termination conditions and additional evaluation runs are necessary to confirm that interpretation.</p>
       <img src="/src/project_posts/project1/DQN24V2.png" alt="Isaac Sim research learning curves">
 
     </div>
