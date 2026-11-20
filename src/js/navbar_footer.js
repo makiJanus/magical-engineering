@@ -26,6 +26,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         hamburger.addEventListener("click", mobileMenu);
 
+        // ── Hide navbar on scroll down, reveal on scroll up ──
+        const navbar = document.querySelector(".navbar");
+        if (navbar) {
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener("scroll", () => {
+                const y = window.scrollY;
+                if (navMenu.classList.contains("active")) {
+                    navbar.classList.remove("hidden");
+                } else if (y > lastScrollY && y > 80) {
+                    navbar.classList.add("hidden");
+                } else if (y < lastScrollY || y <= 80) {
+                    navbar.classList.remove("hidden");
+                }
+                lastScrollY = y;
+            }, { passive: true });
+        }
+
         function mobileMenu() {
             hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");

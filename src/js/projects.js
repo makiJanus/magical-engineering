@@ -347,7 +347,7 @@ function renderProjects() {
   const all = PROJECTS;
 
   const seeMoreHref = lang === "es" ? "/es/projects.html" : "/projects.html";
-  const seeMoreLabel = lang === "es" ? "Ver más" : "See More";
+  const seeMoreLabel = lang === "es" ? "Ver más" : "See more";
 
   const container = document.getElementById("projects-container");
   if (container) {
@@ -356,7 +356,7 @@ function renderProjects() {
         <div class="content-text"><h2>${heading.h}</h2><p>${heading.cherry}</p></div>
         <article class="project">${cherry.map((p) => cardHTML(p, lang)).join("")}</article>
         <div class="see-more">
-          <a href="${seeMoreHref}" class="btn btn-secondary">${seeMoreLabel} <i class="fas fa-arrow-right"></i></a>
+          <a href="${seeMoreHref}" class="btn-ghost">${seeMoreLabel} <i class="fas fa-arrow-right"></i></a>
         </div>
       </section>`;
   }
