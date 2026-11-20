@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emily — A Social Robot | Magical Engineering</title>
+  <meta name="title" content="Emily — A Social Robot | Magical Engineering" />
+  <meta name="description"
+    content="Emily is a Raspberry Pi social robot that unifies a conversational voice brain, a 24-servo expressive head, and two operator displays into one talking, looking, feeling face." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <div id="navbar-placeholder"></div>
+    <div id="content-blog" class="project-article">
+
+      <div class="griflan-headline">
+        <h1>Emily: a fully autonomous social robot and development platform</h1>
+      </div>
+
+      <div class="video-wrapper">
+        <div class="video-label">▶ Watch it on my YouTube channel!</div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/_qAgr4LeKcA" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="glow-headline">
+        <h3>Why I built her</h3>
+      </div>
+
+      <p>
+        The mouth could talk. The eyes could look. But they were two separate toys, each with its own computer, 
+        its own code, its own idea of what "now" means. Now its time to integrate and evolve into a fully autonomous social robot.
+      </p>
+
+      <p>
+        So Emily is the project where I stopped assembling and started integrating. She takes the two things I 
+        had already built and makes them one robot. She 
+        listens, thinks, speaks, looks at you, blinks, and shows you what she's doing on a little screen, all as 
+        one continuous gesture.
+      </p>
+
+      <img src="/src/project_posts/project16/cover.gif" alt="Emily, the social robot head">
+
+      <p>
+        The name is deliberate. I wanted her to feel like a character with a mind of her own, someone you can have a 
+        turn with, not a machine you operate. Everything in the design, from the push-to-talk button to the calm way 
+        she settles to rest, is in service of that single feeling: that you're talking to a being.
+      </p>
+
+      <div class="glow-headline">
+        <h3>What she is</h3>
+      </div>
+
+      <p>
+        At her core Emily is one command: <code>python emily.py</code>. That single program is the whole robot. 
+        Around it are four cooperating computers: a Raspberry Pi 5 running the brain and body, an Arduino Nano 
+        driving the head, and two little ESP32 boards that each carry a screen with its own job.
+      </p>
+
+      <img src="/src/project_posts/project16/emily_showcase.gif" alt="Emily, the social robot, showing off her expressive head and two operator screens">
+
+      <p>
+        Her head is 24 servos: twelve for the eyes (six per eye, pan, tilt, two eyelids, two brows), three for 
+        the neck so her head can follow you, and nine for the mouth so she can shape real sounds. The front screen 
+        is a round state mirror that says, in a single word, what Emily is doing (Listening, Thinking, Talking). 
+        The back screen is dull control deck: menus for demos, calibration, Wi-Fi, and self-diagnosis, on an encoder 
+        and a back button.
+      </p>
+
+      <div class="glow-headline">
+        <h3>How she's wired</h3>
+      </div>
+
+      <p>
+        Under the hood it's the same family as the mouth and the eyes: Python on the Pi, an Arduino in the middle, 
+        and a pair of PCA9685 PWM boards translating pulses into servo positions. The head is one serial chain. 
+        Each display hangs off its own I2C address, 0x42 for the front, 0x43 for the back, and the whole thing 
+        shares one configuration file and one directory of JSON data.
+      </p>
+
+      <img src="/src/project_posts/project16/architecture.png" alt="System architecture of Emily, the social robot">
+
+      <p>
+        The detail I'm proudest of is how cleanly the pieces stay out of each other's way. The head bus has a 
+        single owner at a time, the calibration files are shared on disk but only written on an explicit save, 
+        and every screen can simply be missing without breaking the voice loop. Emily degrades gracefully: lose 
+        the head and she keeps talking, lose a screen and she keeps her mind.
+      </p>
+
+      <div class="glow-headline">
+        <h3>The head</h3>
+      </div>
+
+      <p>
+        The head is modeled as one shared pose: a flat vector of 24 angles. Every controller (eyes, neck, mouth) writes 
+        only its own slice, and the bus merges them into a single frame. That's the whole trick that keeps 24 servos from 
+        ever fighting over each other.
+      </p>
+
+
+      <img src="/src/project_posts/project16/head.gif" alt="The 24-servo head: eyes, neck and mouth">
+
+      <p>
+        What about the lip sync? Her spoken reply text becomes a timed track of visemes, 
+        and the mouth animates against the audio as it plays, long vowels hold longer than consonants, 
+        the way a real mouth does. When she finishes, she settles the mouth to rest. This is the difference between a 
+        mouth that moves and a mouth that's talking.
+      </p>
+
+      <div class="glow-headline">
+        <h3>The conversation brain</h3>
+      </div>
+
+      <p>
+        A turn with Emily goes like this: hold the button and she listens, release and she thinks, 
+        then she speaks ,and her face does everything a face should while she speaks. That last part is 
+        a real agent loop, not a canned response. She has personas I can hot-swap, tools she can call 
+        on her own, and a working memory for the session.
+      </p>
+
+      <p>
+        She's built to be swappable at every seam. The speech recognition, the synthesis, the LLM, each one is 
+        just configuration. Right now she runs on Deepgram for listening and speaking with an OpenAI-compatible 
+        endpoint for thinking, but the local fallbacks are all there (but not active), waiting in the code.
+      </p>
+
+      <img src="/src/project_posts/project16/pipeline.png" alt="Emily's conversation pipeline: listen, think, speak">
+
+      <p>
+        The behavior model is intentionally simple. She has a few states (initializing, 
+        listening, thinking, talking) and she owns exactly one of them at a time. And she's never 
+        always-listening: the microphone only listens while you hold the button, which is a deliberate 
+        choice about privacy and about what it means to be talked to.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Her two interfaces and how I tune her</h3>
+      </div>
+
+      <p>
+        The front screen is for everyone: one word over an animated gradient that says how she's 
+        feeling right now. The back screen is for me — a full operator plane with a menu map, a 
+        self-diagnosis page, and entry points to everything. Two displays, two roles, and 
+        neither one can take her down.
+      </p>
+
+      <p>
+        And because a face this expressive is only as good as its calibration, I built a browser tool 
+        where I can drive all 24 servos, tune the eye mirror, and shape the mouth's lip-corner anchors 
+        by hand, live-previewing a pose and only saving it when it's right.
+      </p>
+
+      <img src="/src/project_posts/project16/screens.gif" alt="Emily's front state screen and back operator screen">
+
+      <div class="glow-headline">
+        <h3>Where it goes next</h3>
+      </div>
+
+      <p>
+        Emily is the face I'd been building toward all along, the eyes, the mouth, the brain, 
+        and the body finally agreeing on the same "being" The next step is to make that 
+        agreement tighter: fewer seams, smoother handoffs, and a memory that lasts past the session, 
+        so she starts to feel less like a platform and more like someone you've met before.
+      </p>
+
+    </div>
+    <div class="division-space-only"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

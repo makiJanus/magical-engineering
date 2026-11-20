@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boca de Silicona Robótica | Magical Engineering</title>
+  <meta name="title" content="Boca de Silicona Robótica | Magical Engineering" />
+  <meta name="description"
+    content="Una boca de silicona y la mitad inferior de una cara con 9 servos que hace expresiones reales, sincroniza los labios con el audio que habla y refleja tu cara en tiempo real." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <div id="navbar-placeholder"></div>
+    <div id="content-blog" class="project-article">
+
+      <div class="griflan-headline">
+        <h1>Boca Robótica con Piel (de Silicona)</h1>
+      </div>
+
+      <h3 class="under-subtitle-link"><a href="https://github.com/makiJanus/robotic_silicone_mouth">Revisa el código acá!</a></h3>
+
+      <div class="video-wrapper">
+        <div class="video-label">▶ Míralo en mi canal de YouTube</div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/umbK8q5Wsfw" title="Reproductor de video de YouTube"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="glow-headline">
+        <h3>Por qué lo hice</h3>
+      </div>
+
+      <p>
+        Siempre me topaba con el mismo problema con los robots que hablan: la voz llegaba,
+        pero la cara se quedaba ahí, muerta. Las palabras estaban; la vida no. Así que decidí diseñar
+        una boca robótica que de verdad pudiera sentirse viva.
+      </p>
+
+      <p>
+        Lo que acabé construyendo es la mitad inferior de una cara (la boca y todo lo que la rodea) hecha de
+        silicona blanda y dirigida por nueve servos. No pretende ser una cabeza entera, así me deja más espacio
+        para experimentar. Es una pieza pequeña de un rostro capaz de tres cosas que de verdad importan:
+        hacer una expresión real, moverse en tiempo real mientras habla (acompañada por el altavoz, en sincronía),
+        y devolverte en silencio lo que tú mismo estás haciendo.
+      </p>
+
+      <img src="/src/project_posts/project14/mouth_cover.gif" alt="La boca de silicona robótica terminada">
+
+      <p>
+        Quise que cada una de esas tres habilidades pudiera vivir por su cuenta, así que partí la construcción en programas pequeños y separados (hilos y/o scripts independientes). Uno es el panel de control principal, donde calibro, diseño expresiones y le meto audio (calibración y habla).
+        Otro es un modo solo de webcam, en el que el robot me copia en tiempo real (reconocimiento de emociones de Ekman). Un par de herramientas más pequeñas
+        existen únicamente para que pueda ver y ajustar las matemáticas. Y un único sketch de Arduino se ocupa en silencio de mover los
+        nueve servos. Lo bonito de esa división es que puedo romper una cosa sin tumbar toda la
+        máquina.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Cómo está cableado</h3>
+      </div>
+
+      <p>
+        En el fondo es una conversación sencilla: Python en mi ordenador charla con un Arduino por USB, y el
+        Arduino le habla a una placa PCA9685 (PWM), que es la que alimenta los servos. La mayoría de los servos reciben un
+        ángulo y punto. Pero los cuatro de las comisuras de los labios funcionan distinto: no les digo un ángulo, les
+        digo un punto del espacio al que llegar. Ese único cambio es el que permite que la boca se mueva de lado, y ahí es donde
+        vive casi toda la expresión real.
+      </p>
+
+      <img src="/src/project_posts/project14/architecture.svg" alt="Arquitectura del sistema de la boca de silicona robótica">
+
+      <p>
+        Hay un detalle del que estoy orgulloso: puedo mandarle a los nueve servos una posición nueva en un solo
+        comando en lugar de nueve por separado. Eso convierte un movimiento torpe y saltarín en algo que se siente
+        continuo. Cuando la boca pasa de la sorpresa a una mueca triste, fluye en vez de tropezar, y eso se debe casi por completo
+        a agrupar los comandos.
+      </p>
+
+      <div class="glow-headline">
+        <h3>El truco bajo la silicona</h3>
+      </div>
+
+      <p>
+        Cada comisura del labio está montada sobre un mecanismo de cinco barras: dos bracitos de servo, dos pivotes fijos,
+        y la pieza de silicona del labio que une las puntas. Está deliberadamente sobre-restringido, lo cual significa
+        que no hay un único ángulo que ponga el labio donde yo quiero. En vez de pelear con eso, dejé que
+        el software hiciese lo difícil: le doy un punto objetivo y él trabaja al revés, calculando qué dos
+        servos tienen que girarse, usando nada más que la ley de cosenos: es decir, hice las ecuaciones clásicas de
+        cinemática inversa para un mecanismo de cinco barras, y funciona de maravilla.
+      </p>
+
+      <img src="/src/project_posts/project14/mechanism_a.png" alt="Mecanismo de cinco barras de la comisura del labio">
+
+      <p>
+        El lado izquierdo y el derecho corren cada uno con su propio calculador, y cada uno puede pasar a posición de codo arriba o codo abajo
+        de forma independiente. Esa es la parte que hace que una sonrisa de felicidad funcione de verdad: una comisura sube, la otra se queda baja,
+        y de pronto la cara se lee como algo humano en vez de como algo mecánico.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Enseñándole sentimientos</h3>
+      </div>
+
+      <p>
+        Construí la biblioteca de expresiones en torno a las emociones clásicas de Ekman (neutra, felicidad, tristeza, ira, miedo,
+        sorpresa, asco, y esa otra más callada, el desprecio). Cada una no es más que un conjunto de ángulos de servo guardados más los dos
+        puntos de las comisuras que calibré a mano. Como los servos de las comisuras siempre se deducen de esos puntos,
+        las poses guardadas quedan pequeñas y limpias, incluso si luego retoco la geometría.
+      </p>
+
+      <p>
+        Después hice que pudiera mezclar. Elijo dos o tres expresiones, les doy un peso, y la boca se desliza
+        a un punto entre las dos. Así que una mirada "divertida pero un poco molesta" es una cara real y alcanzable — no
+        algo que tenga que fingir. Hay una pequeña gráfica de radar que muestra la mezcla en vivo, que es mucho más honesta que intentarlo
+        en palabras.
+      </p>
+
+      <img src="/src/project_posts/project14/mechanism_b.gif" alt="La interfaz de control de Gradio para expresiones y mezcla">
+
+      <div class="glow-headline">
+        <h3>Haciéndola hablar</h3>
+      </div>
+
+      <p>
+        Esta es mi parte favorita. Le doy cualquier audio y ella escucha como lo haría una persona: primero transcribe
+        lo que se está diciendo, luego descompone las palabras en sus sonidos, y a partir de esos sonidos elige la
+        forma de boca correcta y el momento correcto. Para cuando el audio se reproduce, la boca ya sabe exactamente
+        cuándo abrirse, cuándo redondearse, cuándo cerrarse.
+      </p>
+
+      <img src="/src/project_posts/project14/pipeline.gif" alt="Pipeline de extracción de visemas desde audio">
+
+      <p>
+        Todo el conjunto funciona en local, así que nada de lo que se habla sale nunca de la máquina. La reproducción ocurre en su
+        propio hilo para que la interfaz no se trabe nunca, y añado una pequeña anticipación para que el audio y el movimiento lleguen al
+        mismo compás. Y si no logra entender un sonido, simplemente se relaja de vuelta al reposo en vez de fallar: la
+        boca nunca se queda congelada a mitad de frase.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Devolviéndote tu cara</h3>
+      </div>
+
+      <p>
+        Apunto una webcam a mí y el robot empieza a hacer lo que yo estoy haciendo. Lee mi cara, suaviza la lectura para
+        que no tiemble, y mapea lo que ve a la expresión que mejor conoce. En cuanto me relajo por debajo de
+        cierto umbral de confianza, ella se relaja también de vuelta a neutra: todo el intercambio suena menos a demostración
+        y más a una conversación, o eso creo, jeje.
+      </p>
+
+      <img src="/src/project_posts/project14/mirror_sequence.svg" alt="El modo espejo en acción">
+
+      <p>
+        Dejé esta como un programa por su cuenta, hasta con una copia privada de la cinemática. Es un poco redundante,
+        pero significa que el modo espejo puede rodar en cualquier parte, en cualquier máquina, y nunca se queda atascada esperando al puerto serie
+        mientras me está mirando.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Las piezas que lo sostienen</h3>
+      </div>
+
+      <p>
+        Un par de decisiones pequeñas hacen un trabajo enorme. El firmware es la última línea de defensa y en silencio
+        recorta cualquier ángulo que se salga de rango antes de que llegue a un servo. Un pellizco de histéresis evita
+        que los servos vibren por cambios minúsculos e inútiles durante una mezcla. Y como todo lo que
+        ajusto vive en archivos JSON de texto plano, todo el sistema se puede copiar, comparar y versionar igual que
+        el código que lo mueve.
+      </p>
+
+      <img src="/src/project_posts/project14/calibration_ui.png" alt="La interfaz de calibración y ajuste de la boca de silicona robótica">
+
+      <div class="glow-headline">
+        <h3>Hacia dónde va</h3>
+      </div>
+
+      <p>
+        Lo que esta bocota me ha enseñado es que no hace falta una cara entera para que algo se sienta vivo: hace falta un pequeño,
+        honesto conjunto de movimientos, bien elegidos. Nueve servos, dos calculadores y un pipeline de audio local fueron suficientes para producir
+        expresión real, ritmo real y una sensación auténtica de ser devuelto.
+      </p>
+
+      <img src="/src/project_posts/project14/results.gif" alt="La boca de silicona robótica en acción">
+
+      <p>
+        El siguiente paso es hacerle un par de ojos que puedan hacer lo mismo, y luego una cabeza entera que pueda hacerlo todo a la vez.
+        Pero por ahora, esta bocota pequeña es suficiente para hacerme sonreír.
+      </p>
+
+    </div>
+    <div class="division-space-only"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

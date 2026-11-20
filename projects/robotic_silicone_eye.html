@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotic Silicone Eye | Magical Engineering</title>
+  <meta name="title" content="Robotic Silicone Eye | Magical Engineering" />
+  <meta name="description"
+    content="A pair of 12-servo silicone robot eyes that track your face, blink, hold expressions, and wander on their own." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <div id="navbar-placeholder"></div>
+    <div id="content-blog" class="project-article">
+
+      <div class="griflan-headline">
+        <h1>Modular Robotic Silicone Eye</h1>
+      </div>
+
+      <h3 class="under-subtitle-link"><a href="https://github.com/makiJanus/robotic_silicone_eye">Check out the code here!</a></h3>
+
+      <div class="video-wrapper">
+        <div class="video-label">▶ Watch it on my YouTube channel!</div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/__ouPA_gdw8" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="glow-headline">
+        <h3>Why I built it</h3>
+      </div>
+
+      <p>
+        The mouth I built before this one could speak, but a talking robot with no eyes still felt a little uncanny. 
+        So this is the other half of the face: a pair of modular silicone eyes that can actually look at you.
+      </p>
+
+      <p>
+        These are not just two servos per eye. Each eye has six of them for pan, tilt, an upper and lower eyelid, and an inner and 
+        outer brow, so that's twelve servos working together. That's what lets them do more than glance: they can blink, 
+        frown, look suspicious, sleep, or just wander around while holding an expression. The whole point is that the 
+        eyes feel awake.
+      </p>
+
+      <img src="/src/project_posts/project15/eyes_cover.gif" alt="The pair of robotic silicone eyes">
+
+      <p>
+        Everything is built around one idea: calibration is the single source of truth. Every neutral angle, 
+        every fine trim, and every rule for how the left eye mirrors the right lives in one JSON file, and every part 
+        of the software reads it at startup. That means the control interface, the face tracker, and the wander demo 
+        all agree with each other without any of them needing to talk to each other.
+      </p>
+
+      <div class="glow-headline">
+        <h3>How it's wired</h3>
+      </div>
+
+      <p>
+        Under the hood it's the same family as the mouth: Python on the computer, an Arduino in the middle, and a 
+        PCA9685 PWM board powering the servos. The right eye takes channels 0–5 and the left takes 8–13. The Arduino 
+        is really just a thin serial server, it turns an angle into a pulse and hands it to the board, nothing more.
+      </p>
+
+      <img src="/src/project_posts/project15/architecture.svg" alt="System architecture of the robotic silicone eyes">
+
+      <p>
+        One thing I kept from the mouth and doubled down on is the batched command. I can send all twelve servos a 
+        new position in a single line, and that's what keeps the loop fast enough to feel real-time. One slider 
+        change is one write, not twelve, and that's the whole reason the gaze stays smooth instead of jerky.
+      </p>
+
+      <div class="glow-headline">
+        <h3>The trick: one eye drives the other</h3>
+      </div>
+
+      <p>
+        This is the part I'm proudest of. I never command the left eye directly. I command the right, and the left is 
+        derived from it, each axis gets a flip and a gain, and it all pivots on that eye's own neutral. So if I turn 
+        my right eye a certain amount, the left turns the same amount the other way, scaled to whatever I've tuned.
+      </p>
+
+      <img src="/src/project_posts/project15/mechanism.gif" alt="The six-servo layout of a single eye">
+
+      <p>
+        Because the mirror pivots on each side's own neutral, I can move the rest position around in 
+        calibration and the mirroring keeps working. That's why the calibration tab and the live-control 
+        tab are completely independent, and that's exactly on purpose, because it means I can tune the 
+        shape of the gaze without breaking where the eyes rest.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Eyelids, blinks, and feeling</h3>
+      </div>
+
+      <p>
+        An eye that can't blink is just a camera. So the eyelids get their own care. I stored a handful of 
+        expressions (neutral, happy, sad, angry, surprised, suspicious, and sleepy) and each one is a full 
+        twelve-angle pose. The sleepy one is my favorite: the lids sit low and the whole thing reads as tired 
+        instead of mechanical.
+      </p>
+
+      <p>
+        On top of the expressions I built a small blink machine: close, hold, open, and the occasional double blink. 
+        It's deliberately simple, but it's the difference between an eye that feels alive and one that's just pointing 
+        at things.
+      </p>
+
+      <img src="/src/project_posts/project15/ui.gif" alt="The Gradio control interface for the robotic eyes">
+
+      <div class="glow-headline">
+        <h3>Making them move</h3>
+      </div>
+
+      <p>
+        Expressions are still poses. To make the eyes feel alive on their own, I wrote a set of motion 
+        patterns (quick saccades, smooth tracking, a slow circle, a dizzy spiral, and the four look directions). 
+        Each one runs on its own thread and can be mirrored to both eyes or kept on the right. Those are very useful
+        for calibration purposes, when we can see on real time how the eyes coordinate on diffrent scenarios.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Following you</h3>
+      </div>
+
+      <p>
+        Point a webcam at me and the eyes follow my face. It's not fancier than it needs to be, a classic face detector 
+        each frame, a little smoothing so the gaze doesn't twitch, and the blink machine layered on top. When I step 
+        out of frame for long enough, they ease themselves back to neutral, as if they've given up on me 
+        and gone to rest.
+      </p>
+
+      <p>
+        I like that it uses the exact same controller and the same mirror math as the interface. There's one 
+        definition of how the eyes move, and every mode just feeds it a different target.
+      </p>
+
+      <img src="/src/project_posts/project15/tracker.gif" alt="The robotic eyes following a face through a webcam">
+
+      <div class="glow-headline">
+        <h3>On their own</h3>
+      </div>
+
+      <p>
+        The wander demo is my playground. Every tick it blends three independent engines into a single pose: 
+        one that wanders the gaze around, one that slowly eases into a new expression, and one that handles the blinks. 
+        The blinks only ever add closure (they never force the lids open past where the expression already put 
+        them) so a sleepy face doesn't accidentally snap wide open.
+      </p>
+
+
+      <img src="/src/project_posts/project15/results.gif" alt="The robotic silicone eyes wandering, blinking and holding an expression">
+
+      <div class="glow-headline">
+        <h3>Where it goes next</h3>
+      </div>
+
+      <p>
+        Put the eyes and the mouth together and you have a face. That's where I want this to go 
+        next, the eyes and the mouth sharing the same sense of 'now', so the gaze, the blink, and 
+        the words all land as one gesture instead of three separate ones.
+      </p>
+
+    </div>
+    <div class="division-space-only"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

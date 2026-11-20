@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robotic Silicone Mouth | Magical Engineering</title>
+  <meta name="title" content="Robotic Silicone Mouth | Magical Engineering" />
+  <meta name="description"
+    content="A 9-servo silicone mouth and lower face that pulls real expressions, lip-syncs to spoken audio, and mirrors the user's face in real time." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <div id="navbar-placeholder"></div>
+    <div id="content-blog" class="project-article">
+
+      <div class="griflan-headline">
+        <h1>Robotic Silicone Mouth</h1>
+      </div>
+
+      <h3 class="under-subtitle-link"><a href="https://github.com/makiJanus/robotic_silicone_mouth">Check out the code here!</a></h3>
+
+      <div class="video-wrapper">
+        <div class="video-label">▶ Watch it on my YouTube channel!</div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/umbK8q5Wsfw" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="glow-headline">
+        <h3>Why I built it</h3>
+      </div>
+
+      <p>
+        I kept running into the same problem with talking robots: the voice came through, 
+        but the face just sat there, dead. The words were there; the life wasn't. So I decided to design 
+        a robotic mouth that could actually feels alive.
+      </p>
+
+      <p>
+        What I ended up with is the lower half of a face (the mouth and the area around it) made of 
+        soft silicone and driven by nine servos. It isn't trying to be a whole head, giving me more room
+        for experimentation. It's a small, honest 
+        piece of a face that can do three genuinely useful things: pull a real expression, move in real
+        time when speaking (audio speaker in sync), and quietly mirror back whatever you're doing.
+      </p>
+
+      <img src="/src/project_posts/project14/mouth_cover.gif" alt="The finished robotic silicone mouth">
+
+      <p>
+        I wanted each of those three skills to stand on its own, so I split the build into small, separate 
+        programs (threads and/or independent scripts). One is the main control panel where I calibrate, design expressions, and feed in audio (calibration and speaking). 
+        Another is a webcam-only mode where the robot copies me in real time (Ekman emotion recognition). A couple of smaller tools 
+        exist just to let me see and tune the math. And a single Arduino sketch quietly drives all nine 
+        servos. The nice side effect of that split is that I can break one thing without breaking the whole 
+        machine.
+      </p>
+
+      <div class="glow-headline">
+        <h3>How it's wired</h3>
+      </div>
+
+      <p>
+        At the core it's a simple conversation: Python on my computer talks to an Arduino over USB, and the 
+        Arduino talks to a PCA9685 PWM board, which powers the servos. Most of the servos are pointed at an 
+        angle and go. But the four at the corners of the lips work differently, I don't tell them an angle, I 
+        tell them a spot in space to reach. That one change is what lets the mouth go lopsided, which is where 
+        all the real expression lives.
+      </p>
+
+      <img src="/src/project_posts/project14/architecture.svg" alt="System architecture of the robotic silicone mouth">
+
+      <p>
+        One detail I'm proud of: I can send all nine servos a new position in a single command instead of 
+        nine separate ones. That turns a clumsy, jumpy motion into something that feels continuous. When the 
+        mouth goes from surprise to a frown, it flows rather than stutters, and that's almost entirely thanks 
+        to batching the commands.
+      </p>
+
+      <div class="glow-headline">
+        <h3>The trick under the silicone</h3>
+      </div>
+
+      <p>
+        Each lip corner is built from a five-bar linkage, two little servo arms, two fixed pivots, 
+        and the silicone lip piece tying the tips together. It's deliberately over-constrained, which means 
+        there's no single angle that puts the lip where I want it. So instead of fighting that, I let the 
+        software do the hard part: I give it a target point and it works backwards to figure out which two 
+        servos need to twist, using nothing but the law of cosines, that means, I did the clasic inverse kinematics
+        equations for a five-bar linkage, and it works beautifully. 
+      </p>
+
+      <img src="/src/project_posts/project14/mechanism_a.png" alt="Five-bar linkage of the lip corner">
+
+      <p>
+        The left and right sides each run their own little solver, and each can flip to an elbow-up or elbow-down pose 
+        independently. That's the part that makes a happy smile work at all, one corner climbs, the other stays low, 
+        and the face suddenly reads as something human instead of something mechanical.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Teaching it feelings</h3>
+      </div>
+
+      <p>
+        I built the expression library around Ekman's classic emotions (neutral, happiness, sadness, anger, fear, 
+        surprise, disgust, and that quiet one, contempt). Each one is just a saved set of servo angles plus the two 
+        lip-corner targets I calibrated by hand. Because the corner servos are always re-derived from those targets, 
+        the saved poses stay tiny and stay clean, even when I tweak the geometry later.
+      </p>
+
+      <p>
+        Then I made it possible to blend. Pick any two or three expressions, give them weights, and the mouth slides 
+        somewhere in between. So an "amused but a little annoyed" look is a real, reachable face — not a thing I 
+        have to fake. There's a little radar chart that shows the mix live, which is far more honest than trying to 
+        describe it in words.
+      </p>
+
+      <img src="/src/project_posts/project14/mechanism_b.gif" alt="The Gradio control interface for expressions and blend">
+
+      <div class="glow-headline">
+        <h3>Getting it to speak</h3>
+      </div>
+
+      <p>
+        This is my favorite part. Feed it any audio, and it listens the way a person would: first it transcribes 
+        what's being said, then it breaks the words down into their sounds, and from those sounds it picks the 
+        right mouth shape and the right moment. By the time the audio plays out, the mouth already knows exactly 
+        when to open, when to round, when to close.
+      </p>
+
+      <img src="/src/project_posts/project14/pipeline.gif" alt="Audio to viseme extraction pipeline">
+
+      <p>
+        The whole thing runs locally, so nothing about the speech ever leaves the machine. Playback happens on its 
+        own thread so the interface never freezes, and I add a small pre-roll so the audio and the movement land on 
+        the same beat. And if it can't figure out a sound, it just settles back to rest instead of glitching, the 
+        mouth never freezes mid-sentence.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Mirroring you back</h3>
+      </div>
+
+      <p>
+        Point a webcam at me and the robot starts to do what I'm doing. It reads my face, smooths the reading so 
+        it doesn't twitch, and maps whatever it sees onto the closest expression it knows. The moment I relax below 
+        a certain confidence, it eases itself back to neutral, the whole exchange feels less like a demo and 
+        more like a conversation, or that I like to think haha.
+      </p>
+
+      <img src="/src/project_posts/project14/mirror_sequence.svg" alt="Mirror mode in action">
+
+      <p>
+        I kept this one as its own program, even down to a private copy of the kinematics. It's a little redundant, 
+        but it means the mirror mode can run anywhere, on any machine, and it never gets stuck waiting on the serial 
+        port while it's watching me.
+      </p>
+
+      <div class="glow-headline">
+        <h3>The pieces that hold it together</h3>
+      </div>
+
+      <p>
+        A few small decisions do a lot of heavy lifting. The firmware is the last line of defense and quietly 
+        clamps any angle that strays out of range before it reaches a servo. A tiny bit of hysteresis stops 
+        the servos from buzzing over tiny, pointless changes during a blend. And because everything I tune 
+        lives in plain JSON files, the whole system can be backed up, diffed, and versioned just like the 
+        code that drives it.
+      </p>
+
+      <img src="/src/project_posts/project14/calibration_ui.png" alt="Calibration and tuning interface for the robotic silicone mouth">
+
+      <div class="glow-headline">
+        <h3>Where it goes next</h3>
+      </div>
+
+      <p>
+        What this little mouth taught me is that you don't need a whole face to make something feel alive, you need a small, 
+        honest set of moves, chosen well. Nine servos, two solvers, and a local audio pipeline were enough to produce 
+        real expression, real timing, and a real sense of being mirrored back.
+      </p>
+
+      <img src="/src/project_posts/project14/results.gif" alt="The robotic silicone mouth in action">
+
+      <p>
+        The next step is to make a pair of eyes that can do the same thing, and then a whole head that can do it all together. 
+        But for now, this little mouth is enough to make me smile.
+      </p>
+
+    </div>
+    <div class="division-space-only"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

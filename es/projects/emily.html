@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emily — Un robot social | Magical Engineering</title>
+  <meta name="title" content="Emily — Un robot social | Magical Engineering" />
+  <meta name="description"
+    content="Emily es un robot social sobre Raspberry Pi que une una mente conversacional, una cabeza expresiva de 24 servos y dos pantallas de operador en una sola cara que habla, mira y siente." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <div id="navbar-placeholder"></div>
+    <div id="content-blog" class="project-article">
+
+      <div class="griflan-headline">
+        <h1>Emily: un robot social completamente autónomo y una plataforma de desarrollo</h1>
+      </div>
+
+      <div class="video-wrapper">
+        <div class="video-label">▶ Míralo en mi canal de YouTube</div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/_qAgr4LeKcA" title="Reproductor de video de YouTube"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="glow-headline">
+        <h3>Por qué la hice</h3>
+      </div>
+
+      <p>
+        La boca podía hablar. Los ojos podían mirar. Pero eran dos juguetes por separado, cada uno con su propio
+        ordenador, su propio código y su propia idea de lo que significaba "ahora". Ya era hora de integrarlos y dejarlos
+        evolucionar hasta un robot social completamente autónomo.
+      </p>
+
+      <p>
+        Emily es el proyecto en el que dejé de montar piezas y empecé a integrar. Toma las dos cosas que ya tenía
+        construidas y las convierte en un solo robot. Escucha, piensa, habla, te mira, parpadea y te muestra lo que
+        está haciendo en una pantallita, todo como un solo gesto continuo.
+      </p>
+
+      <img src="/src/project_posts/project16/cover.gif" alt="Emily, la cabeza de la robot social">
+
+      <p>
+        El nombre no es casualidad. Quería que se sintiera como un personaje con mente propia, alguien con quien tener
+        una conversación, no como una máquina que uno controla. Todo el diseño, desde el botón de pulsar para hablar
+        hasta la calma con la que se va a descansar, sirve a esa única sensación: que estás hablando con un ser.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Lo que es</h3>
+      </div>
+
+      <p>
+        En el fondo, Emily es un solo comando: <code>python emily.py</code>. Ese único programa es el robot entero.
+        Alrededor hay cuatro "cerebros" cooperando: una Raspberry Pi 5 que lleva la mente y el cuerpo, un Arduino Nano
+        que mueve la cabeza, y dos pequeñas ESP32, cada una con su pantalla y su propia función.
+      </p>
+
+      <img src="/src/project_posts/project16/emily_showcase.gif" alt="Emily, la robot social, mostrando su cabeza expresiva y sus dos pantallas de operador">
+
+      <p>
+        Su cabeza son 24 servos: doce para los ojos (seis por ojo horizontal, vertical, dos párpados, dos cejas),
+        tres para el cuello (para que su cabeza te siga), y nueve para la boca para que forme sonidos de verdad. La
+        pantalla frontal redondo e indica el estado interno en una sola palabra, lo que Emily está haciendo
+        (Escuchando, Pensando, Hablando). La trasera es el panel de control: menús para demos, calibración, Wi-Fi y
+        autodiagnóstico, sobre un encoder y un botón de atrás.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Cómo está cableada</h3>
+      </div>
+
+      <p>
+        Por dentro esfunciona bajos los mismos principios que la boca y los ojos: Python en la Pi, un Arduino en el medio y un par de
+        placas PCA9685 PWM que traducen pulsos en posiciones de servo. La cabeza es una sola interfaz serial. Cada
+        pantalla posee de su propia dirección I2C (0x42 la frontal, 0x43 la trasera), y todo el conjunto comparte un
+        único archivo de configuración y un directorio de datos en JSON.
+      </p>
+
+      <img src="/src/project_posts/project16/architecture.png" alt="Arquitectura del sistema de Emily, la robot social">
+
+      <p>
+        El detalle del que más me alegro es lo limpiamente que las piezas cooperan y sigen funcionando si una parte falla. 
+        Los archivos de calibración se comparten en memoria pero solo se escriben con un guardado
+        explícito, y cualquier pantalla puede simplemente no estar sin que se rompa el bucle de voz. Emily se degrada
+        con elegancia: si pierdes la cabeza, sigue hablando; si pierdes una pantalla, conserva la mente.
+      </p>
+
+      <div class="glow-headline">
+        <h3>La cabeza</h3>
+      </div>
+
+      <p>
+        La cabeza se modela como una pose compartida: un vector plano de 24 ángulos. Cada controlador (ojos, cuello,
+        boca) solo escribe sus propios ángulos, y el bus los funde en un único fotograma. Ese es todo el truco para que 24
+        servos no se peleen nunca entre sí.
+      </p>
+
+      <img src="/src/project_posts/project16/head.gif" alt="La cabeza de 24 servos: ojos, cuello y boca">
+
+      <p>
+        ¿Y la sincronía de labios? El texto de respuesta se convierte en una pista de visemas con tiempos, y la boca
+        se anima siguiendo el audio mientras suena: las vocales largas se sostienen más que las consonantes, como en una
+        boca de verdad. Cuando termina, deja la boca en reposo. Esa es la diferencia entre una boca que se mueve y una
+        boca que habla.
+      </p>
+
+      <div class="glow-headline">
+        <h3>La mente conversacional</h3>
+      </div>
+
+      <p>
+        Una interacción con Emily va así: mantienes el botón y ella escucha, lo sueltas y ella piensa, y después habla, luego su cara 
+        de silicona hace
+        todo lo que una cara humana debería. Este bucle de interaccción llega a ser un agente conversacional real, no una
+        respuesta enlatada. Tiene personalidades que puedo cambiar sobre la marcha, herramientas que puede llamar por
+        sí sola y una memoria de trabajo por sesión.
+      </p>
+
+      <p>
+        Está hecha para poder cambiar de piezas facilmente, tanto física como en código. El reconocimiento de voz, la síntesis, el LLM, cada uno
+        es solo configuración. Ahora mismo corre sobre Deepgram para escuchar y hablar, con un endpoint compatible con
+        OpenAI para pensar, pero las alternativas locales están todas ahí (aunque inactivas), esperando en el código.
+      </p>
+
+      <img src="/src/project_posts/project16/pipeline.png" alt="La tubería de conversación de Emily: escuchar, pensar, hablar">
+
+      <p>
+        El modelo de comportamiento es intencionalmente simple. Tiene unos pocos estados (distraida, escuchando,
+        pensando, hablando) y está en cada uno de ellos cuando corresponde,  jamás escucha en continuo: el micrófono solo se
+        mueve mientras mantienes el botón, una elección deliberada de privacidad y de lo que significa "quere hablar" con Emily.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Sus dos pantallas y cómo la afino</h3>
+      </div>
+
+      <p>
+        La pantalla frontal es para mostrar los estados internos de Emily: una palabra sobre un degradado animado que dice cómo se siente en ese
+        momento. La trasera es para el operador, posee un menú con demostraciones, una página de autodiagnóstico
+        y todas las configuraciones que se puedan necesitar e interfaces activar. Dos pantallas, dos roles.
+      </p>
+
+      <p>
+        Y como una cara tan expresiva solo es tan buena como su calibración, monté una herramienta de navegador donde
+        puedo mover los 24 servos, ajustar el espejo de los ojos y dar forma a los anclajes de las comisuras de la boca a
+        mano, previsualizando una pose en tiempo real y guardándola solo cuando está bien.
+      </p>
+
+      <img src="/src/project_posts/project16/screens.gif" alt="La pantalla frontal de estado y la pantalla trasera de operador de Emily">
+
+      <div class="glow-headline">
+        <h3>Hacia dónde va</h3>
+      </div>
+
+      <p>
+        Emily es la cara que llevaba tiempo construyendo: los ojos, la boca, la mente y el cuerpo por fin de
+        acuerdo en el mismo "ser". El siguiente paso es hacer ese acuerdo más fino: menos costuras, transiciones más
+        suaves y una memoria que sobreviva a la sesión, para que deje de sentirse como una plataforma y empiece a
+        sentirse como alguien a quien has conocido antes.
+      </p>
+
+    </div>
+    <div class="division-space-only"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>

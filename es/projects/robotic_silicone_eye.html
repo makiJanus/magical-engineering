@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ojo de Silicona Robótico Modular | Magical Engineering</title>
+  <meta name="title" content="Ojo de Silicona Robótico Modular | Magical Engineering" />
+  <meta name="description"
+    content="Un par de ojos robóticos de silicona de 12 servos que siguen tu cara, parpadean, sostienen expresiones y deambulan por su cuenta." />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/src/css/style.css" />
+  <link rel="stylesheet" href="/src/css/utilities.css" />
+  <link rel="stylesheet" href="/src/css/blog_posts.css" />
+</head>
+
+<body>
+  <header id="hero">
+    <div id="navbar-placeholder"></div>
+    <div id="content-blog" class="project-article">
+
+      <div class="griflan-headline">
+        <h1>Ojos Robóticos Modular con Silicona?</h1>
+      </div>
+
+      <h3 class="under-subtitle-link"><a href="https://github.com/makiJanus/robotic_silicone_eye">¡Mira el código aquí!</a></h3>
+
+      <div class="video-wrapper">
+        <div class="video-label">▶ Míralo en mi canal de YouTube</div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/__ouPA_gdw8" title="Reproductor de video de YouTube"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <div class="glow-headline">
+        <h3>Por qué lo hice</h3>
+      </div>
+
+      <p>
+        La boca que hice justo antes de esta podía hablar, pero un robot que habla sin ojos seguía dándome un poco de
+        escalofrío. Así que esta es la otra mitad de la cara: un par de ojos modulares de silicona que de verdad
+        pueden mirarte.
+      </p>
+
+      <p>
+        No son solo dos servos por ojo. Cada uno lleva seis, uno para el horizontal, uno para el vertical, un párpado
+        de arriba y otro de abajo, y una ceja interior y otra exterior; en total, doce servos trabajando a la vez. Lo
+        que les permiten: parpadear, fruncir el ceño, mirar con recelo, dormirse, o
+        simplemente deambular por ahí sosteniendo una expresión. Todo apunta a una sola cosa: que los ojos se sientan
+        "llenos de vida".
+      </p>
+
+      <img src="/src/project_posts/project15/eyes_cover.gif" alt="El par de ojos robóticos de silicona">
+
+      <p>
+        Todo está construido en torno a una sola idea: la calibración es la única fuente de verdad. Cada ángulo
+        neutro, cada ajuste fino y cada regla de cómo el ojo izquierdo espeja al derecho vive en un único archivo JSON,
+        y cada parte del software lo lee al arrancar. Eso significa que la interfaz de control, el seguidor de caras y
+        la demo de deambulación se llevan bien entre sí sin que ninguno tenga que hablar con los otros.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Cómo está cableado</h3>
+      </div>
+
+      <p>
+        Por dentro funciona de la misma manera que la boca: Python en el ordenador, un Arduino en medio y una placa PCA9685 de
+        PWM que alimenta los servos. El ojo derecho se lleva los canales 0 a 5 y el izquierdo los 8 a 13. El Arduino
+        en el fondo es apenas un servidor serie delgado: convierte un ángulo en un pulso y se lo entrega a la placa,
+        nada más.
+      </p>
+
+      <img src="/src/project_posts/project15/architecture.svg" alt="Arquitectura del sistema de los ojos robóticos de silicona">
+
+      <p>
+        Hay algo que heredé de la boca y que funciona bastante bien: el comando por lotes. Puedo mandarle a los doce
+        servos una posición nueva en una sola línea, y es lo que mantiene el bucle lo bastante rápido como para que se
+        sienta en tiempo real. Cambiar un slider es una sola escritura, no doce, y esa es la razón entera de que la
+        mirada se mueva lisa en vez de a tirones.
+      </p>
+
+      <div class="glow-headline">
+        <h3>El truco: un ojo manda en el otro</h3>
+      </div>
+
+      <p>
+        Esta es la parte de la que más me alegro. Nunca mando el ojo izquierdo directamente. Mando el derecho, y el
+        izquierdo sale de él: cada eje recibe su giro y su ganancia, y todo pivota sobre el neutro propio de ese ojo.
+        Así que si giro mi ojo derecho una cantidad, el izquierdo gira la misma cantidad hacia el otro lado, a la
+        escala que yo haya afinado.
+      </p>
+
+      <img src="/src/project_posts/project15/mechanism.gif" alt="El esquema de seis servos de un solo ojo">
+
+      <p>
+        Como el espejo pivota sobre el neutro de cada lado, puedo mover la posición de reposo por ahí en la calibración
+        y el reflejo sigue funcionando. Por eso la pestaña de calibración y la de control en vivo son completamente
+        independientes, y es exactamente a propósito, porque significa que puedo retocar la forma de la mirada sin
+        romper dónde descansan los ojos.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Párpados, parpadeos y sentimiento</h3>
+      </div>
+
+      <p>
+        Un ojo que no puede parpadear es solo una cámara, por lo que los estos llevan su propio movimiento. Guardé
+        unas cuantas expresiones (neutral, feliz, triste, enfadado, sorprendido, receloso y dormido) y cada una es una
+        pose completa de doce ángulos. La dormida es mi favorita: los párpados se quedan bajos y el conjunto entero se
+        lee cansado en vez de mecánico.
+      </p>
+
+      <p>
+        Por encima de las expresiones monté una pequeña máquina de parpadeos: cerrar, mantener, abrir, y de vez en
+        cuando un doble parpadeo. Es deliberadamente simple, pero es lo que separa un ojo que se siente vivo de uno
+        que simplemente señala cosas.
+      </p>
+
+      <img src="/src/project_posts/project15/ui.gif" alt="La interfaz de control Gradio para los ojos robóticos">
+
+      <div class="glow-headline">
+        <h3>Haciéndolos moverse</h3>
+      </div>
+
+      <p>
+        Las expresiones al fin y al cabo siguen siendo poses. Para que los ojos se sintieran vivos por sí solos, escribí
+        un set de patrones de movimiento (sacádicas rápidas, un seguimiento suave, un círculo lento, una espiral que
+        marea y las cuatro miradas de dirección). Cada uno corre en su propio hilo y se puede espejar en los dos ojos o
+        dejarlo solo en el derecho. Esos son muy útiles con fines de calibración, podemos ver en tiempo real cómo
+        se coordinan los ojos en distintos escenarios.
+      </p>
+
+      <div class="glow-headline">
+        <h3>Que te sigan la mirada</h3>
+      </div>
+
+      <p>
+        Apunto una webcam a mí y los ojos siguen mi cara. No es más elaborado de lo que toca: un detector de caras
+        clásico por fotograma, un poquito de suavizado para que la mirada no tiemble, y la máquina de parpadeos por
+        encima. En cuanto me salgo del encuadre el tiempo suficiente, se relajan de vuelta a la neutral, como si
+        hubieran dejado de intentarlo y se hubieran ido a descansar.
+      </p>
+
+
+      <img src="/src/project_posts/project15/tracker.gif" alt="Los ojos robóticos siguiendo una cara a través de la webcam">
+
+      <div class="glow-headline">
+        <h3>Por su cuenta</h3>
+      </div>
+
+      <p>
+        La demo de "deambulación" es mi patio de juegos. En cada paso mezcla tres motores independientes en una única
+        pose: uno que deambula la mirada por ahí, otro que se deja llevar lentamente hacia una expresión nueva, y otro
+        que se encarga de los parpadeos. Los parpadeos solo suman cierre (nunca fuerzan los párpados a abrirse más de
+        donde la expresión ya los puso), así que una cara dormida no se abre de golpe por un descuido.
+      </p>
+
+      <img src="/src/project_posts/project15/results.gif" alt="Los ojos robóticos de silicona deambulando, parpadeando y sosteniendo una expresión">
+
+      <div class="glow-headline">
+        <h3>Hacia dónde va</h3>
+      </div>
+
+      <p>
+        Puestos los ojos y la boca juntos, tienes una cara. Es ahí donde quiero que esto llegue: que los ojos y la
+        boca compartan el mismo sentido de "ahora", para que la mirada, el parpadeo y las palabras lleguen como un solo
+        gesto en vez de como tres cosas separadas.
+      </p>
+
+    </div>
+    <div class="division-space-only"></div>
+    <div id="footer-placeholder"></div>
+    <script src="/src/js/navbar_footer.js"></script>
+    <script src="/src/js/waveText.js"></script>
+    <script src="/src/js/glowText.js"></script>
+</body>
+
+</html>
