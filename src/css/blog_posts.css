@@ -2,12 +2,29 @@
    blog_posts.css — detail/article page typography + media
    ========================================================= */
 
+/* Push footer to the bottom of the viewport on short pages.
+   On project/blog pages #hero is the only child of body, and #footer
+   lives inside #hero. Growing both fills the 100vh body column. */
+#hero {
+  flex: 1;
+}
+
 #content-blog {
   font-family: var(--font-body);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
-  background: var(--bg);
-  padding-top: 120px;
+  flex: 1;
+  padding-top: 0;
+}
+
+/* #hero has `padding: 140px 1rem 4rem`, so a footer nested inside it is
+   inset by 1rem on each side and floats 4rem above the page edge. Bleed it
+   out to full width + flush bottom so it matches the landing page. */
+#footer {
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  margin-right: -1rem;
+  margin-bottom: -4rem;
 }
 
 .massiveHeading {
