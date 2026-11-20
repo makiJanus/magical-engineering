@@ -3,8 +3,6 @@
    Single source of truth for the visual system.
    ========================================================= */
 
-@import url(https://fonts.googleapis.com/css?family=Raleway:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
-
 /* ── Design tokens ───────────────────────────────────────── */
 :root {
   /* Brand palette */
@@ -160,6 +158,7 @@ body {
   left: 0;
   right: 0;
   z-index: 20;
+  padding-top: env(safe-area-inset-top);
   background: var(--nav-bg);
   backdrop-filter: blur(var(--nav-blur)) saturate(1.3);
   -webkit-backdrop-filter: blur(var(--nav-blur)) saturate(1.3);
@@ -308,11 +307,12 @@ body {
 }
 
 @media (max-width: 670px) {
-  #hero { padding-top: 120px; }
+  #hero { padding-top: 80px; }
+  .navbar .container { height: 64px; }
 }
 
 .profile-image {
-  width: 250px;
+  width: min(250px, 55vw);
   border-radius: 50%;
   box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--border), 0 18px 50px rgba(0,0,0,0.45);
 }
@@ -422,7 +422,6 @@ body {
   display: block;
   background: var(--surface-2);
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
 }
 
 .card:hover .card-img-top {
@@ -680,13 +679,13 @@ h3[data-cursor]::after {
   .navbar .nav-menu {
     position: fixed;
     right: -100vw;
-    top: 4.5rem;
+    top: 64px;
     flex-direction: column;
-    width: calc(80% - 30px);
+    width: 100%;
     transition: 0.3s;
     box-shadow: var(--shadow);
-    padding: 2rem;
-    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem 1.5rem;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
     background: var(--surface);
     align-items: flex-start;
     gap: 0.5rem;
@@ -697,8 +696,8 @@ h3[data-cursor]::after {
     margin-top: 1rem;
   }
 
-  .nav-menu.active { right: 20px; }
-  .nav-menu .nav-link { font-size: 0.9rem; margin: 0.25rem 0.2rem; }
+  .nav-menu.active { right: 0; }
+  .nav-menu .nav-link { font-size: 0.95rem; margin: 0.25rem 0.2rem; padding: 0.75rem 1rem; }
   .nav-menu li { margin-bottom: 0.5rem; width: 100%; }
   .nav-menu .btn { width: 100%; text-align: center; margin-top: 0.5rem; }
 
@@ -708,6 +707,10 @@ h3[data-cursor]::after {
     padding: 0.2rem 0.4rem;
   }
 
+  .badge { font-size: 0.78rem; }
+
+  .division, .division-blog, .division-space-only { margin: 2.5rem 0; }
+
   .hamburger.active { border: 1px dotted gray; }
   .hamburger.active .bar:nth-child(2) { opacity: 0; }
   .hamburger.active .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -715,7 +718,7 @@ h3[data-cursor]::after {
 }
 
 @media (max-width: 600px) {
-  .project { grid-template-columns: 1fr; }
+  .project { grid-template-columns: 1fr; grid-auto-rows: auto; }
   .header-container .btn {
     border-radius: var(--radius-md);
     width: 80%;
@@ -735,4 +738,16 @@ h3[data-cursor]::after {
     font-size: 1rem;
     letter-spacing: 0.03em;
   }
+}
+
+/* ── Mobile performance & touch polish ───────────────────── */
+.btn,
+.card,
+.nav-link {
+  touch-action: manipulation;
+}
+
+@media (max-width: 768px) {
+  body { background-attachment: scroll, scroll, scroll, scroll; }
+  .navbar { backdrop-filter: blur(8px) saturate(1.1); -webkit-backdrop-filter: blur(8px) saturate(1.1); }
 }

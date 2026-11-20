@@ -132,9 +132,15 @@
 
 table {
   width: 80%;
+  max-width: 100%;
   border-collapse: collapse;
   margin: 0 auto 3em;
   color: var(--text-2);
+}
+
+th,
+td {
+  overflow-wrap: break-word;
 }
 
 th,
@@ -256,6 +262,9 @@ td {
     height: auto;
     padding: 0 1rem;
   }
+
+  table { font-size: 0.85rem; }
+  th, td { padding: 6px; }
 }
 
 /* ── Card background aliases (kept for legacy class names) ─ */

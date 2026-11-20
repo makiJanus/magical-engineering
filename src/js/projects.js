@@ -325,7 +325,7 @@ function cardHTML(p, lang) {
   const tags = p.tags[lang].map((t) => `<span class="badge badge-${t.c}">${_esc(t.l)}</span>`).join("");
   return `
     <div class="card" data-href="${p.href[lang]}" role="link" tabindex="0" aria-label="${_esc(p.title[lang])}">
-      <img class="card-img-top" src="${p.img}" alt="${_esc(p.alt[lang])}" loading="lazy">
+      <img class="card-img-top" src="${p.img}" alt="${_esc(p.alt[lang])}" width="450" height="250" loading="lazy">
       <div class="project-info">
         <div class="project-bio">
           <h3>${_esc(p.title[lang])}</h3>

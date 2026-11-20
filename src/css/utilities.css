@@ -165,6 +165,8 @@ h3::selection {
 
   .content-text h2 { font-size: 1.5rem; }
 
+  .cycling-text h3 { font-size: 1.25rem; }
+
   .container {
     max-width: 100%;
     margin: 0;
