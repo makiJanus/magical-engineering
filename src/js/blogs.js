@@ -64,14 +64,15 @@ const _pageLang = () => (document.documentElement.lang === "es" ? "es" : "en");
 
 function blogCardHTML(b, lang) {
   const tags = b.tags[lang].map((t) => `<span class="badge badge-${t.c}">${_esc(t.l)}</span>`).join("");
+  const href = b.href[lang];
   return `
-    <div class="card" data-href="${b.href[lang]}" role="link" tabindex="0" aria-label="${_esc(b.title[lang])}">
+    <a class="card" href="${href}" data-href="${href}" aria-label="${_esc(b.title[lang])}">
       <img class="card-img-top" src="${b.img}" alt="${_esc(b.alt[lang])}" loading="lazy">
       <div class="project-info">
         <div class="project-bio"><h3>${_esc(b.title[lang])}</h3><p>${_esc(b.desc[lang])}</p></div>
         <div class="card-tags">${tags}</div>
       </div>
-    </div>`;
+    </a>`;
 }
 
 function renderBlogs() {
@@ -92,10 +93,6 @@ function renderBlogs() {
 
 if (!window.__cardNavAttached) {
   window.__cardNavAttached = true;
-  document.addEventListener("click", (e) => {
-    const card = e.target.closest(".card[data-href]");
-    if (card) window.location.href = card.dataset.href;
-  });
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const card = e.target.closest && e.target.closest(".card[data-href]");

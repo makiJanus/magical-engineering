@@ -407,6 +407,8 @@ body {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  color: inherit;
+  text-decoration: none;
 }
 
 .card:hover {

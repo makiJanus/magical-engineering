@@ -323,8 +323,9 @@ const _pageLang = () => (document.documentElement.lang === "es" ? "es" : "en");
 
 function cardHTML(p, lang) {
   const tags = p.tags[lang].map((t) => `<span class="badge badge-${t.c}">${_esc(t.l)}</span>`).join("");
+  const href = p.href[lang];
   return `
-    <div class="card" data-href="${p.href[lang]}" role="link" tabindex="0" aria-label="${_esc(p.title[lang])}">
+    <a class="card" href="${href}" data-href="${href}" aria-label="${_esc(p.title[lang])}">
       <img class="card-img-top" src="${p.img}" alt="${_esc(p.alt[lang])}" width="450" height="250" loading="lazy">
       <div class="project-info">
         <div class="project-bio">
@@ -333,7 +334,7 @@ function cardHTML(p, lang) {
         </div>
         <div class="card-tags">${tags}</div>
       </div>
-    </div>`;
+    </a>`;
 }
 
 function renderProjects() {
@@ -371,13 +372,9 @@ function renderProjects() {
   }
 }
 
-/* ── delegated card navigation (registered once) ─────────── */
+/* ── keyboard navigation (Enter/Space); mouse handled by the native <a> ── */
 if (!window.__cardNavAttached) {
   window.__cardNavAttached = true;
-  document.addEventListener("click", (e) => {
-    const card = e.target.closest(".card[data-href]");
-    if (card) window.location.href = card.dataset.href;
-  });
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" && e.key !== " ") return;
     const card = e.target.closest && e.target.closest(".card[data-href]");
